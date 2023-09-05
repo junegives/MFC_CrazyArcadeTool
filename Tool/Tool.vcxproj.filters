@@ -49,12 +49,6 @@
     <Filter Include="04. Etc\01. Dialog">
       <UniqueIdentifier>{7494446c-0dd9-484f-8045-678aeb73c1c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Etc\01. Dialog\00. UnitTool">
-      <UniqueIdentifier>{0062ed12-efde-460d-ba7a-535cad721f20}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Etc\01. Dialog\01. MapTool">
-      <UniqueIdentifier>{a20c4c7b-6ee5-4e6c-9b24-52ef78aa7030}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Etc\02. FileInfo">
       <UniqueIdentifier>{92cbde88-29de-4a85-89aa-e929fd9bc323}</UniqueIdentifier>
     </Filter>
@@ -64,16 +58,19 @@
     <Filter Include="01. View\00. ToolView">
       <UniqueIdentifier>{671a2635-c282-451d-a4ef-4ddec3832dd7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Etc\01. Dialog\02. ObjectTool">
-      <UniqueIdentifier>{5bb9ed81-ce77-47df-89bf-0b1b9aa605d5}</UniqueIdentifier>
+    <Filter Include="04. Etc\01. Dialog\00. MapTool">
+      <UniqueIdentifier>{0062ed12-efde-460d-ba7a-535cad721f20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Etc\01. Dialog\03. MonsterTool">
+    <Filter Include="04. Etc\01. Dialog\01. ObjectTool">
+      <UniqueIdentifier>{a20c4c7b-6ee5-4e6c-9b24-52ef78aa7030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Etc\01. Dialog\02. MonsterTool">
       <UniqueIdentifier>{6615080c-887c-485b-8d07-634444d855f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Etc\01. Dialog\04. PlayerTool">
+    <Filter Include="04. Etc\01. Dialog\03. PlayerTool">
       <UniqueIdentifier>{08a18b82-25cd-4e9c-9c20-c9a179167bfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Etc\01. Dialog\05. RoomTool">
+    <Filter Include="04. Etc\01. Dialog\04. RoomTool">
       <UniqueIdentifier>{8650fab9-c661-465c-9060-291782f72a3a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -120,17 +117,17 @@
     <ClInclude Include="Myform.h">
       <Filter>01. View\01. MyForm</Filter>
     </ClInclude>
-    <ClInclude Include="UnitTool.h">
-      <Filter>04. Etc\01. Dialog\00. UnitTool</Filter>
-    </ClInclude>
-    <ClInclude Include="MapTool.h">
-      <Filter>04. Etc\01. Dialog\01. MapTool</Filter>
-    </ClInclude>
     <ClInclude Include="FileInfo.h">
       <Filter>04. Etc\02. FileInfo</Filter>
     </ClInclude>
     <ClInclude Include="ToolView.h">
       <Filter>01. View\00. ToolView</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTool.h">
+      <Filter>04. Etc\01. Dialog\03. PlayerTool</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>04. Etc\01. Dialog\00. MapTool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,17 +164,17 @@
     <ClCompile Include="Myform.cpp">
       <Filter>01. View\01. MyForm</Filter>
     </ClCompile>
-    <ClCompile Include="UnitTool.cpp">
-      <Filter>04. Etc\01. Dialog\00. UnitTool</Filter>
-    </ClCompile>
-    <ClCompile Include="MapTool.cpp">
-      <Filter>04. Etc\01. Dialog\01. MapTool</Filter>
-    </ClCompile>
     <ClCompile Include="FileInfo.cpp">
       <Filter>04. Etc\02. FileInfo</Filter>
     </ClCompile>
     <ClCompile Include="ToolView.cpp">
       <Filter>01. View\00. ToolView</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTool.cpp">
+      <Filter>04. Etc\01. Dialog\03. PlayerTool</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>04. Etc\01. Dialog\00. MapTool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

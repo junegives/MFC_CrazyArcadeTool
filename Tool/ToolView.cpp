@@ -238,13 +238,13 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		// AfxGetApp : 메인 스레드를 갖고 있는 현재 메인 app을 반환
 		CMainFrame*	pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
-		CMyform*	pMyForm = dynamic_cast<CMyform*>(pMain->m_SecondSplitter.GetPane(1, 0));
+		//CMyform*	pMyForm = dynamic_cast<CMyform*>(pMain->m_SecondSplitter.GetPane(1, 0));
 
-		CMapTool*	pMapTool = &(pMyForm->m_MapTool);
+		//CMapTool*	pMapTool = &(pMyForm->m_MapTool);
 
-		m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
+		/*m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
 											  point.y, 
-											  0.f), pMapTool->m_iDrawID);
+											  0.f), pMapTool->m_iDrawID);*/
 
 		// Invalidate : 호출 시 윈도우에 WM_PAINT와 WM_ERASEBKGND 메세지를 발생 시킴, 이때 OnDraw 함수를 다시 한 번 호출
 
