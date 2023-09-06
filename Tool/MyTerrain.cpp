@@ -142,7 +142,8 @@ bool CMyTerrain::Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex)
 
 HRESULT CMyTerrain::Initialize()
 {
-	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Texture/Stage/Terrain/Tile/Tile%d.png", L"Terrain", L"Tile", 36)))
+
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_SINGLE, L"../Texture/Stage/Tile/test.png", L"Terrain", L"Tile", 1)))
 	{
 		AfxMessageBox(L"Tile Texture Insert Failed");
 		return E_FAIL;
@@ -154,8 +155,8 @@ HRESULT CMyTerrain::Initialize()
 		{
 			TILE*	pTile = new TILE;
 
-			float	fX = (TILECX * j) + (i % 2) * (TILECX / 2.f);
-			float	fY = (TILECY / 2.f) * i;
+			float	fX = TILECX * j + TILECX / 2;
+			float	fY = TILECY * i + TILECY / 2;
 
 			pTile->vPos = {fX, fY, 0.f};
 			pTile->vSize = { TILECX, TILECY, 0.f };
@@ -187,8 +188,8 @@ void CMyTerrain::Render()
 		D3DXMatrixIdentity(&matWorld);
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 		D3DXMatrixTranslation(&matTrans, 
-			iter->vPos.x - m_pMainView->GetScrollPos(0), 
-			iter->vPos.y - m_pMainView->GetScrollPos(1), 
+			iter->vPos.x, 
+			iter->vPos.y, 
 			iter->vPos.z);
 
 		matWorld = matScale  * matTrans;
@@ -204,11 +205,13 @@ void CMyTerrain::Render()
 			
 		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", iter->byDrawID);
 
-		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
-		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
+		float	fCenterX = TILECX / 2.f;
+		float	fCenterY = TILECY / 2.f;
+
+		RECT rectTile = { (float)iter->byDrawID * TILECX, 0, (float)iter->byDrawID * TILECX + TILECX, TILECY };
 
 		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
-			nullptr,
+			&rectTile,
 			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
 			nullptr,
 			D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -220,7 +223,7 @@ void CMyTerrain::Render()
 														lstrlen(szBuf), // 문자열의 길이
 														nullptr, //출력학 렉트의 주소
 														0, // 정렬 옵션
-														D3DCOLOR_ARGB(255, 0, 255, 255)); // 출력할 폰트 색상
+														D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 폰트 색상
 		++iIndex;
 	}		
 }

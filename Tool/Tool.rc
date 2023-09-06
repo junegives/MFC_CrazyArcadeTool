@@ -109,11 +109,11 @@ END
 
 IDR_MAINFRAME MENU
 BEGIN
-    MENUITEM "맵 툴(&M)",                     ID_32771
-    MENUITEM "오브젝트 툴(&O)",                  ID_32772
-    MENUITEM "플레이어 툴(&P)",                  ID_32775
-    MENUITEM "몬스터 툴(&T)",                   ID_32774
-    MENUITEM "룸 툴(&R)",                     ID_32773
+    MENUITEM "맵 툴(&M)",                     ID_MENUMAP
+    MENUITEM "오브젝트 툴(&O)",                  ID_MENUOBJECT
+    MENUITEM "플레이어 툴(&P)",                  ID_MENUPLAYER
+    MENUITEM "몬스터 툴(&T)",                   ID_MENUMONSTER
+    MENUITEM "룸 툴(&R)",                     ID_MENUROOM
 END
 
 

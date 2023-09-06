@@ -21,11 +21,11 @@ const UINT uiLastUserToolBarId = uiFirstUserToolBarId + iMaxUserToolbars - 1;
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
-	ON_COMMAND(ID_32771, &CMainFrame::OnMapTool)
-	ON_COMMAND(ID_32772, &CMainFrame::OnObjectTool)
-	ON_COMMAND(ID_32774, &CMainFrame::OnMonsterTool)
-	ON_COMMAND(ID_32773, &CMainFrame::OnRoomTool)
-	ON_COMMAND(ID_32775, &CMainFrame::OnPlayerTool)
+	ON_COMMAND(ID_MENUMAP, &CMainFrame::OnMapTool)
+	ON_COMMAND(ID_MENUOBJECT, &CMainFrame::OnObjectTool)
+	ON_COMMAND(ID_MENUPLAYER, & CMainFrame::OnPlayerTool)
+	ON_COMMAND(ID_MENUMONSTER, &CMainFrame::OnMonsterTool)
+	ON_COMMAND(ID_MENUROOM, &CMainFrame::OnRoomTool)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -104,22 +104,18 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	return TRUE;
 }
 
-
 void CMainFrame::OnMapTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	CMapTool mapToolDlg;
-	mapToolDlg.DoModal();
+	m_MapTool.DoModal();
 }
 
 
 void CMainFrame::OnObjectTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	CUnitTool unitToolDlg;
-	unitToolDlg.DoModal();
+	m_UnitTool.DoModal();
 }
-
 
 void CMainFrame::OnMonsterTool()
 {
