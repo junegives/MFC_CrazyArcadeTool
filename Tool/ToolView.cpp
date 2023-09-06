@@ -198,7 +198,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	// AfxGetApp : 메인 스레드를 갖고 있는 현재 메인 app을 반환
 	CMainFrame*	pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 
-	CMapTool*	pMapTool = &(pMain->m_MapTool);
+	CMapTool*	pMapTool = pMain->m_MapTool;
 
 	m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x, 
 											point.y,
@@ -215,9 +215,6 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	// GetParentFrame : 현재 view창을 둘러싸고 있는 상위 FrameWnd를 반환
 	// CMainFrame*	pMain = dynamic_cast<CMainFrame*>(GetParentFrame());
 	
-
-	
-
 }
 
 // 직선의 방정식을 이용하여 클릭한 타일의 이미지를 교체하라
@@ -238,7 +235,7 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 		// AfxGetApp : 메인 스레드를 갖고 있는 현재 메인 app을 반환
 		CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 
-		CMapTool* pMapTool = &(pMain->m_MapTool);
+		CMapTool* pMapTool = pMain->m_MapTool;
 
 		m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
 												point.y,

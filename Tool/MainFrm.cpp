@@ -52,6 +52,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
+	m_MapTool = new CMapTool;
+	m_MapTool->Create(IDD_MAPTOOL, this);
 	
 	return 0;
 }
@@ -107,14 +109,14 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 void CMainFrame::OnMapTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	m_MapTool.DoModal();
+	m_MapTool->ShowWindow(SW_SHOW);
 }
 
 
 void CMainFrame::OnObjectTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	m_UnitTool.DoModal();
+	//m_UnitTool.DoModal();
 }
 
 void CMainFrame::OnMonsterTool()

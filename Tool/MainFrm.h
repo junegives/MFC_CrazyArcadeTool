@@ -49,8 +49,8 @@ public:
 	CSplitterWnd			m_MainSplitter;
 	CSplitterWnd			m_SecondSplitter;
 
-	CUnitTool	m_UnitTool;
-	CMapTool	m_MapTool;
+	CUnitTool*	m_UnitTool;
+	CMapTool*	m_MapTool;
 
 	afx_msg void OnMapTool();
 	afx_msg void OnObjectTool();

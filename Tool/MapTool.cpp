@@ -1,5 +1,4 @@
 // MapTool.cpp : 구현 파일입니다.
-//
 
 #include "stdafx.h"
 #include "Tool.h"
@@ -122,9 +121,13 @@ void CMapTool::OnDropFiles(HDROP hDropInfo)
 			CImage*		pPngImg = new CImage;
 
 			pPngImg->Load(strRelative);
+			
 
-			m_MapPngImg.insert({ strFileName, pPngImg });
-			m_ListBox.AddString(szFileName);
+			for (int i = 0; i < pPngImg->GetWidth() / TILECX; ++i)
+			{
+				m_MapPngImg.insert({ strFileName, pPngImg });
+				m_ListBox.AddString(szFileName);
+			}
 		}		
 	}	
 
