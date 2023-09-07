@@ -45,6 +45,11 @@ CMainFrame::CMainFrame()
 
 CMainFrame::~CMainFrame()
 {
+	m_MapTool->DestroyWindow();
+	m_BlockTool->DestroyWindow();
+
+	Safe_Delete(m_MapTool);
+	Safe_Delete(m_BlockTool);
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -59,6 +64,10 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_BlockTool->Create(IDD_CBLOCKTOOL, this);
 	
 	return 0;
+}
+
+void CMainFrame::OnDestroy()
+{
 }
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)

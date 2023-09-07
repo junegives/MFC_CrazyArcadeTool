@@ -15,13 +15,14 @@ CMyTerrain::~CMyTerrain()
 	Release();
 }
 
-void CMyTerrain::Tile_Change(const D3DXVECTOR3 & vPos, const int & iDrawID)
+void CMyTerrain::Tile_Change(const D3DXVECTOR3 & vPos, const TCHAR* pObjKey, const int & iDrawID)
 {
 	int	iIndex = Get_TileIndex(vPos);
 
 	if (-1 == iIndex)
 		return;
 
+	m_vecTile[iIndex]->wstrStateKey = pObjKey;
 	m_vecTile[iIndex]->byDrawID = iDrawID;
 	m_vecTile[iIndex]->byOption = 1;
 }
@@ -142,10 +143,15 @@ bool CMyTerrain::Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex)
 
 HRESULT CMyTerrain::Initialize()
 {
+	//if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Tile/Cemetory05.png", L"Tile", L"Cemetory", 51)))
+	//{
+	//	AfxMessageBox(L"Tile Texture Insert Failed");
+	//	return E_FAIL;
+	//}
 
-	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_SINGLE, L"../Texture/Stage/Tile/test.png", L"Terrain", L"Tile", 1)))
+	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt")))
 	{
-		AfxMessageBox(L"Tile Texture Insert Failed");
+		AfxMessageBox(L"Error");
 		return E_FAIL;
 	}
 
@@ -160,8 +166,9 @@ HRESULT CMyTerrain::Initialize()
 
 			pTile->vPos = {fX, fY, 0.f};
 			pTile->vSize = { TILECX, TILECY, 0.f };
+			pTile->wstrStateKey = L"Cemetory";
 			pTile->byOption = 0;
-			pTile->byDrawID = 3;
+			pTile->byDrawID = 5;
 
 			m_vecTile.push_back(pTile);
 		}
@@ -203,15 +210,15 @@ void CMyTerrain::Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 			
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", iter->byDrawID);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", iter->wstrStateKey, iter->byDrawID);
 
 		float	fCenterX = TILECX / 2.f;
 		float	fCenterY = TILECY / 2.f;
 
-		RECT rectTile = { (float)iter->byDrawID * TILECX, 0, (float)iter->byDrawID * TILECX + TILECX, TILECY };
+		//RECT rectTile = { (float)iter->byDrawID * TILECX, 0, (float)iter->byDrawID * TILECX + TILECX, TILECY };
 
 		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
-			&rectTile,
+			nullptr,
 			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
 			nullptr,
 			D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -249,7 +256,7 @@ void CMyTerrain::Mini_Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", iter->byDrawID);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", iter->wstrStateKey, iter->byDrawID);
 
 		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
 		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;

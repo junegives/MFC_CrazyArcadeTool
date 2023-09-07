@@ -216,15 +216,19 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CView::OnLButtonDown(nFlags, point);
 
+
 	// AfxGetApp : 메인 스레드를 갖고 있는 현재 메인 app을 반환
 	CMainFrame*	pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 
 	CMapTool*	pMapTool = pMain->m_MapTool;
-
-	//m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x, 
-	//										point.y,
-	//										0.f),
-	//										pMapTool->m_iDrawID);
+	if (pMapTool->IsWindowVisible())
+	{
+		m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
+			point.y,
+			0.f),
+			pMapTool->m_strStateKey,
+			pMapTool->m_iDrawID);
+	}
 
 	// Invalidate : 호출 시 윈도우에 WM_PAINT와 WM_ERASEBKGND 메세지를 발생 시킴, 이때 OnDraw 함수를 다시 한 번 호출
 
@@ -265,6 +269,7 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 			m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
 				point.y,
 				0.f),
+				pMapTool->m_strStateKey,
 				pMapTool->m_iDrawID);
 		}
 
@@ -285,7 +290,6 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 					, pBlockTool->m_iDrawID);
 			}
 		}
-
 
 		// Invalidate : 호출 시 윈도우에 WM_PAINT와 WM_ERASEBKGND 메세지를 발생 시킴, 이때 OnDraw 함수를 다시 한 번 호출
 

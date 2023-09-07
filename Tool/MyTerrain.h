@@ -15,7 +15,7 @@ public:
 public:
 	void		Set_MainView(CToolView* pMainView) { m_pMainView = pMainView; }
 
-	void		Tile_Change(const D3DXVECTOR3& vPos, const int& iDrawID);
+	void		Tile_Change(const D3DXVECTOR3& vPos, const TCHAR* pObjKey, const int& iDrawID);
 	int			Get_TileIndex(const D3DXVECTOR3& vPos);
 	bool		Picking(const D3DXVECTOR3& vPos, const int& iIndex);
 	bool		Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex);

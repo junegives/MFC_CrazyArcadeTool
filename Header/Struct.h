@@ -33,6 +33,9 @@ typedef struct tagTile
 	BYTE		byOption;		// 0, 1번(장애물)
 	BYTE		byDrawID;		// 몇 번 타일 이미지
 
+	// 추가
+	CString		wstrStateKey = L"";	// 타일 키 (맵별로 구별)
+
 	//추가한 부분
 	BYTE		byOption_Move;   //움직이는지 안움직이는지
 	BYTE        byOption_Burst;  //터지는지 안터지는지

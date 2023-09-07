@@ -48,6 +48,7 @@ void CMapTool::OnListBox()
 	UpdateData(TRUE);
 
 	CString		strFindName;
+	CString		strFindNameCopy;
 
 	int	iIndex = m_ListBox.GetCurSel();
 
@@ -73,11 +74,16 @@ void CMapTool::OnListBox()
 			break;
 	}
 
+	strFindNameCopy = strFindName;
+	
+	strFindName.Delete(i, i + 2);
+	m_strStateKey = strFindName;
+
 	// Delete(index, count) : index 위치로부터 카운트 만큼 문자를 삭제하는 함수
-	strFindName.Delete(0, i);
+	strFindNameCopy.Delete(0, i);
 
 	// _tstoi : 문자를 정수형으로 변환하는 함수
-	m_iDrawID = _tstoi(strFindName);
+	m_iDrawID = _tstoi(strFindNameCopy);
 
 
 	UpdateData(FALSE);
@@ -191,14 +197,14 @@ void CMapTool::OnSaveData()
 	TCHAR	szPath[MAX_PATH] = L"";
 
 	GetCurrentDirectory(MAX_PATH, szPath);
-	// szPath = 0x003fe74c L"D:\\유준환\\140기\\4개월차\\Frame140\\Tool"
+	// szPath = 0x012fe070 L"C:\\GitHub\\CrazyArcadeTool\\Tool"
 
 	// PathRemoveFileSpec : 전체 경로 중 맨 마지막 경로를 잘라냄
 	PathRemoveFileSpec(szPath);
-	// (szPath) = 0x003fe74c L"D:\\유준환\\140기\\4개월차\\Frame140"
+	// szPath = 0x012fe070 L"C:\\GitHub\\CrazyArcadeTool"
 
 	lstrcat(szPath, L"\\Data");
-	// szPath = 0x003fe74c L"D:\\유준환\\140기\\4개월차\\Frame140\\Data"
+	// szPath = 0x012fe070 L"C:\\GitHub\\CrazyArcadeTool\\Data"
 
 	Dlg.m_ofn.lpstrInitialDir = szPath;
 
@@ -206,16 +212,18 @@ void CMapTool::OnSaveData()
 	if (IDOK == Dlg.DoModal())
 	{
 		CString		str = Dlg.GetPathName().GetString();
+		// str = L"C:\\GitHub\\CrazyArcadeTool\\Data\\Test.dat"
 
 		const TCHAR*	pGetPath = str.GetString();
+		// pGetPath = 0x0e7eda10 L"C:\\GitHub\\CrazyArcadeTool\\Data\\Test.dat"
 
 		HANDLE	hFile = CreateFile(pGetPath, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 
 		if (INVALID_HANDLE_VALUE == hFile)
 			return;
 
-		CMainFrame*	pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
-		CToolView*	pMainView = dynamic_cast<CToolView*>(pMain->m_MainSplitter.GetPane(0, 1));
+		CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+		CToolView*	pMainView = dynamic_cast<CToolView*>(pMain->m_MainSplitter.GetPane(0, 0));
 		CMyTerrain*	pMyTerrain = pMainView->m_pMyTerrain;
 
 		vector<TILE*>&	vecTile = pMyTerrain->Get_VecTile();

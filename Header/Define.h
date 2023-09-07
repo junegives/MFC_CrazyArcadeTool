@@ -9,8 +9,8 @@
 
 #define		VK_MAX			0xff
 
-#define		TILECX			60
-#define		TILECY			60
+#define		TILECX			40
+#define		TILECY			40
 
 #define		TILEX			15
 #define		TILEY			13

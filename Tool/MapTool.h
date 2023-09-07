@@ -3,23 +3,23 @@
 #include <atlimage.h>
 
 
-// CMapTool ´ëÈ­ »óÀÚÀÔ´Ï´Ù.
+// CMapTool ëŒ€í™” ìƒìì…ë‹ˆë‹¤.
 
 class CMapTool : public CDialog
 {
 	DECLARE_DYNAMIC(CMapTool)
 
 public:
-	CMapTool(CWnd* pParent = NULL);   // Ç¥ÁØ »ı¼ºÀÚÀÔ´Ï´Ù.
+	CMapTool(CWnd* pParent = NULL);   // í‘œì¤€ ìƒì„±ìì…ë‹ˆë‹¤.
 	virtual ~CMapTool();
 
-// ´ëÈ­ »óÀÚ µ¥ÀÌÅÍÀÔ´Ï´Ù.
+// ëŒ€í™” ìƒì ë°ì´í„°ì…ë‹ˆë‹¤.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MAPTOOL };
 #endif
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Áö¿øÀÔ´Ï´Ù.
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ì§€ì›ì…ë‹ˆë‹¤.
 
 	DECLARE_MESSAGE_MAP()
 
@@ -34,6 +34,7 @@ public:
 	CStatic m_Picture;
 
 	map<CString, CImage*>		m_MapPngImg;
-	int							m_iDrawID = 0;
+	CString						m_strStateKey = L"Cemetory";
+	int							m_iDrawID = 5;
 	afx_msg void OnSaveData();
 };

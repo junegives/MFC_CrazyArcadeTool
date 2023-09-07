@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Header", "02. Header", 
 		Header\Struct.h = Header\Struct.h
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcxproj", "{B1641CFA-F1EB-42B9-A699-C56D942D3356}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -30,6 +32,14 @@ Global
 		{93C331AA-FAB9-4364-B3F0-CE2DC97203AD}.Release|x64.Build.0 = Release|x64
 		{93C331AA-FAB9-4364-B3F0-CE2DC97203AD}.Release|x86.ActiveCfg = Release|Win32
 		{93C331AA-FAB9-4364-B3F0-CE2DC97203AD}.Release|x86.Build.0 = Release|Win32
+		{B1641CFA-F1EB-42B9-A699-C56D942D3356}.Debug|x64.ActiveCfg = Debug|x64
+		{B1641CFA-F1EB-42B9-A699-C56D942D3356}.Debug|x64.Build.0 = Debug|x64
+		{B1641CFA-F1EB-42B9-A699-C56D942D3356}.Debug|x86.ActiveCfg = Debug|Win32
+		{B1641CFA-F1EB-42B9-A699-C56D942D3356}.Debug|x86.Build.0 = Debug|Win32
+		{B1641CFA-F1EB-42B9-A699-C56D942D3356}.Release|x64.ActiveCfg = Release|x64
+		{B1641CFA-F1EB-42B9-A699-C56D942D3356}.Release|x64.Build.0 = Release|x64
+		{B1641CFA-F1EB-42B9-A699-C56D942D3356}.Release|x86.ActiveCfg = Release|Win32
+		{B1641CFA-F1EB-42B9-A699-C56D942D3356}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
