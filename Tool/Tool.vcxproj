@@ -199,6 +199,7 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="MultiTexture.h" />
+    <ClInclude Include="MyBlockTerrain.h" />
     <ClInclude Include="Myform.h" />
     <ClInclude Include="MyTerrain.h" />
     <ClInclude Include="Resource.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="MultiTexture.cpp" />
+    <ClCompile Include="MyBlockTerrain.cpp" />
     <ClCompile Include="Myform.cpp" />
     <ClCompile Include="MyTerrain.cpp" />
     <ClCompile Include="SingleTexture.cpp" />

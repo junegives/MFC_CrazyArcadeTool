@@ -38,7 +38,7 @@ END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
 
-CToolView::CToolView() : m_pMyTerrain(nullptr)
+CToolView::CToolView() : m_pMyTerrain(nullptr), m_pMyBlockTerrain(nullptr)
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
 
@@ -102,6 +102,16 @@ void CToolView::OnInitialUpdate()
 
 	m_pMyTerrain->Set_MainView(this);
 
+	m_pMyBlockTerrain = new CMyBlockTerrain;
+
+	if (FAILED(m_pMyBlockTerrain->Initialize()))
+	{
+		AfxMessageBox(L"Block Terrain Initialize Failed");
+		return;
+	}
+
+	m_pMyBlockTerrain->Set_MainView(this);
+
 }
 
 // CToolView 그리기
@@ -116,6 +126,16 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	CDevice::Get_Instance()->Render_Begin();
 
 	m_pMyTerrain->Render();
+
+	m_pMyBlockTerrain->Render();
+
+	CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+	CBlockTool* pBlockTool = pMain->m_BlockTool;
+	if (pBlockTool->IsWindowVisible())
+	{
+		m_pMyBlockTerrain->Mouse_Render();
+	}
+
 
 	CDevice::Get_Instance()->Render_End();
 }
@@ -183,6 +203,7 @@ void CToolView::OnDestroy()
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 
 	Safe_Delete(m_pMyTerrain);
+	Safe_Delete(m_pMyBlockTerrain);
 
 	CTextureMgr::Get_Instance()->Destroy_Instance();
 	CDevice::Get_Instance()->Destroy_Instance();
@@ -200,10 +221,10 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CMapTool*	pMapTool = pMain->m_MapTool;
 
-	m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x, 
-											point.y,
-											0.f),
-											pMapTool->m_iDrawID);
+	//m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x, 
+	//										point.y,
+	//										0.f),
+	//										pMapTool->m_iDrawID);
 
 	// Invalidate : 호출 시 윈도우에 WM_PAINT와 WM_ERASEBKGND 메세지를 발생 시킴, 이때 OnDraw 함수를 다시 한 번 호출
 
@@ -236,16 +257,59 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 		CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 
 		CMapTool* pMapTool = pMain->m_MapTool;
+		CBlockTool* pBlockTool = pMain->m_BlockTool;
 
-		m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
-												point.y,
-												0.f),
-												pMapTool->m_iDrawID);
+		
+		if (pMapTool->IsWindowVisible())
+		{
+			m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
+				point.y,
+				0.f),
+				pMapTool->m_iDrawID);
+		}
+
+
+		if (pBlockTool->IsWindowVisible())
+		{
+
+			m_pMyBlockTerrain->Tile_Change(D3DXVECTOR3(point.x + GetScrollPos(0),
+				point.y + GetScrollPos(1), 0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+				, pBlockTool->m_Option_Move, pBlockTool->m_Option_Burst,
+				pBlockTool->m_iDrawID);
+
+			if (pBlockTool->m_bFirst)
+			{
+				m_pMyBlockTerrain->Tile_Move(D3DXVECTOR3(point.x,
+					point.y,
+					0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+					, pBlockTool->m_iDrawID);
+			}
+		}
+
 
 		// Invalidate : 호출 시 윈도우에 WM_PAINT와 WM_ERASEBKGND 메세지를 발생 시킴, 이때 OnDraw 함수를 다시 한 번 호출
 
 		// TRUE : WM_PAINT와 WM_ERASEBKGND가 둘 다 발생
 		// FALSE : WM_PAINT와 메시지만 발생
+
+		Invalidate(FALSE);
+	}
+	else
+	{
+		CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+
+		CBlockTool* pBlockTool = pMain->m_BlockTool;
+
+		if (pBlockTool->IsWindowVisible())
+		{
+			if (pBlockTool->m_bFirst)
+			{
+				m_pMyBlockTerrain->Tile_Move(D3DXVECTOR3(point.x,
+					point.y,
+					0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+					, pBlockTool->m_iDrawID);
+			}
+		}
 
 		Invalidate(FALSE);
 	}

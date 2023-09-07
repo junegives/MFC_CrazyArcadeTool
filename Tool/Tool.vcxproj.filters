@@ -76,6 +76,9 @@
     <Filter Include="04. Etc\01. Dialog\01. ObjectTool\01.BlockTool">
       <UniqueIdentifier>{009dbe65-130b-4a49-92c2-6b08b271ef56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Etc\00. MyTerrain\00.MyBlockTerrain">
+      <UniqueIdentifier>{8064c17e-1fdb-4fe0-ac66-07b52058b8a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -135,6 +138,9 @@
     <ClInclude Include="BlockTool.h">
       <Filter>04. Etc\01. Dialog\01. ObjectTool\01.BlockTool</Filter>
     </ClInclude>
+    <ClInclude Include="MyBlockTerrain.h">
+      <Filter>04. Etc\00. MyTerrain\00.MyBlockTerrain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tool.cpp">
@@ -184,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="BlockTool.cpp">
       <Filter>04. Etc\01. Dialog\01. ObjectTool\01.BlockTool</Filter>
+    </ClCompile>
+    <ClCompile Include="MyBlockTerrain.cpp">
+      <Filter>04. Etc\00. MyTerrain\00.MyBlockTerrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

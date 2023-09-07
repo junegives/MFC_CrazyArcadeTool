@@ -33,4 +33,13 @@ public:
 	CButton m_Radio_Burst[2];
 
 	map<CString, CImage*>		m_MapPngImg;
+
+	int m_iDrawID = 0;
+	bool m_bFirst = false;
+
+	float m_ImageWidth = 0;
+	float m_ImageHeight = 0;
+
+	BYTE  m_Option_Move = 0;
+	BYTE  m_Option_Burst = 0;
 };

@@ -8,6 +8,7 @@
 #include "TextureMgr.h"
 
 #include "MyTerrain.h"
+#include "MyBlockTerrain.h"
 
 class CToolDoc;
 class CToolView : public CView
@@ -51,6 +52,7 @@ public:
 
 public:
 	CMyTerrain*			m_pMyTerrain;
+	CMyBlockTerrain*    m_pMyBlockTerrain;
 
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);

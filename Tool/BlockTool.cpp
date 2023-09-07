@@ -64,6 +64,45 @@ void CBlockTool::OnListBox()
 
 	m_Picture.SetBitmap(*(iter->second));
 
+	//이미지의 가로 세로 사이즈를 가져오는 함수
+	m_ImageWidth = iter->second->GetWidth();
+	m_ImageHeight = iter->second->GetHeight();
+
+	int i = 0;
+
+	for (; i < strFindName.GetLength(); ++i)
+	{
+		// isdigit : 매개 변수로 전달받은 문자가 글자 형태의 문자인지 숫자 형태의 문자인지 판별하는 함수
+			//       만약 숫자 형태의 글자라 판명되면 0이 아닌 값을 리턴
+		if (0 != isdigit(strFindName[i]))
+			break;
+	}
+
+	// Delete(index, count) : index 위치로부터 카운트 만큼 문자를 삭제하는 함수
+	strFindName.Delete(0, i);
+
+	m_iDrawID = _tstoi(strFindName);
+
+	m_bFirst = true;
+
+	for (size_t i = 0; i < 2; i++)
+	{
+		if (m_Radio_Move[i].GetCheck())
+		{
+			m_Option_Move = i;
+			break;
+		}
+	}
+
+	for (size_t i = 0; i < 2; i++)
+	{
+		if (m_Radio_Burst[i].GetCheck())
+		{
+			m_Option_Burst = i;
+			break;
+		}
+	}
+
 	UpdateData(FALSE);
 }
 
