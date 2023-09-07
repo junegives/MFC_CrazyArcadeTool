@@ -3,14 +3,14 @@
 #include "UnitTool.h"
 #include "MapTool.h"
 
-// CMyform Æû ºäÀÔ´Ï´Ù.
+// CMyform í¼ ë·°ì…ë‹ˆë‹¤.
 
 class CMyform : public CFormView
 {
 	DECLARE_DYNCREATE(CMyform)
 
 protected:
-	CMyform();           // µ¿Àû ¸¸µé±â¿¡ »ç¿ëµÇ´Â protected »ı¼ºÀÚÀÔ´Ï´Ù.
+	CMyform();           // ë™ì  ë§Œë“¤ê¸°ì— ì‚¬ìš©ë˜ëŠ” protected ìƒì„±ìì…ë‹ˆë‹¤.
 	virtual ~CMyform();
 
 public:
@@ -25,7 +25,7 @@ public:
 #endif
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Áö¿øÀÔ´Ï´Ù.
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ì§€ì›ì…ë‹ˆë‹¤.
 
 	DECLARE_MESSAGE_MAP()
 public:

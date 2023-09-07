@@ -1,4 +1,4 @@
-// MapTool.cpp : ±¸Çö ÆÄÀÏÀÔ´Ï´Ù.
+// MapTool.cpp : êµ¬í˜„ íŒŒì¼ìž…ë‹ˆë‹¤.
 
 #include "stdafx.h"
 #include "Tool.h"
@@ -9,7 +9,7 @@
 #include "ToolView.h"
 
 
-// CMapTool ´ëÈ­ »óÀÚÀÔ´Ï´Ù.
+// CMapTool ëŒ€í™” ìƒìžìž…ë‹ˆë‹¤.
 
 IMPLEMENT_DYNAMIC(CMapTool, CDialog)
 
@@ -39,12 +39,12 @@ BEGIN_MESSAGE_MAP(CMapTool, CDialog)
 END_MESSAGE_MAP()
 
 
-// CMapTool ¸Þ½ÃÁö Ã³¸®±âÀÔ´Ï´Ù.
+// CMapTool ë©”ì‹œì§€ ì²˜ë¦¬ê¸°ìž…ë‹ˆë‹¤.
 
 
 void CMapTool::OnListBox()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	UpdateData(TRUE);
 
 	CString		strFindName;
@@ -67,16 +67,16 @@ void CMapTool::OnListBox()
 
 	for (; i < strFindName.GetLength(); ++i)
 	{
-		// isdigit : ¸Å°³ º¯¼ö·Î Àü´Þ¹ÞÀº ¹®ÀÚ°¡ ±ÛÀÚ ÇüÅÂÀÇ ¹®ÀÚÀÎÁö ¼ýÀÚ ÇüÅÂÀÇ ¹®ÀÚÀÎÁö ÆÇº°ÇÏ´Â ÇÔ¼ö
-			//       ¸¸¾à ¼ýÀÚ ÇüÅÂÀÇ ±ÛÀÚ¶ó ÆÇ¸íµÇ¸é 0ÀÌ ¾Æ´Ñ °ªÀ» ¸®ÅÏ
+		// isdigit : ë§¤ê°œ ë³€ìˆ˜ë¡œ ì „ë‹¬ë°›ì€ ë¬¸ìžê°€ ê¸€ìž í˜•íƒœì˜ ë¬¸ìžì¸ì§€ ìˆ«ìž í˜•íƒœì˜ ë¬¸ìžì¸ì§€ íŒë³„í•˜ëŠ” í•¨ìˆ˜
+			//       ë§Œì•½ ìˆ«ìž í˜•íƒœì˜ ê¸€ìžë¼ íŒëª…ë˜ë©´ 0ì´ ì•„ë‹Œ ê°’ì„ ë¦¬í„´
 		if (0 != isdigit(strFindName[i]))
 			break;
 	}
 
-	// Delete(index, count) : index À§Ä¡·ÎºÎÅÍ Ä«¿îÆ® ¸¸Å­ ¹®ÀÚ¸¦ »èÁ¦ÇÏ´Â ÇÔ¼ö
+	// Delete(index, count) : index ìœ„ì¹˜ë¡œë¶€í„° ì¹´ìš´íŠ¸ ë§Œí¼ ë¬¸ìžë¥¼ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜
 	strFindName.Delete(0, i);
 
-	// _tstoi : ¹®ÀÚ¸¦ Á¤¼öÇüÀ¸·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+	// _tstoi : ë¬¸ìžë¥¼ ì •ìˆ˜í˜•ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
 	m_iDrawID = _tstoi(strFindName);
 
 
@@ -86,7 +86,7 @@ void CMapTool::OnListBox()
 
 void CMapTool::OnDropFiles(HDROP hDropInfo)
 {
-	// TODO: ¿©±â¿¡ ¸Þ½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ ¹×/¶Ç´Â ±âº»°ªÀ» È£ÃâÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€ ë°/ë˜ëŠ” ê¸°ë³¸ê°’ì„ í˜¸ì¶œí•©ë‹ˆë‹¤.
 	UpdateData(TRUE);
 	
 	CDialog::OnDropFiles(hDropInfo);
@@ -94,9 +94,9 @@ void CMapTool::OnDropFiles(HDROP hDropInfo)
 	TCHAR		szFilePath[MAX_PATH] = L"";
 	TCHAR		szFileName[MIN_STR] = L"";
 
-	// DragQueryFile : µå·ÓµÈ ÆÄÀÏÀÇ Á¤º¸¸¦ ¾ò¾î¿À´Â ÇÔ¼ö
+	// DragQueryFile : ë“œë¡­ëœ íŒŒì¼ì˜ ì •ë³´ë¥¼ ì–»ì–´ì˜¤ëŠ” í•¨ìˆ˜
 
-	// µÎ ¹øÂ° ¸Å°³ º¯¼ö : 0xffffffff(-1)À» ÁöÁ¤ÇÏ¸é µå·ÓµÈ ÆÄÀÏÀÇ °³¼ö¸¦ ¹ÝÈ¯ 
+	// ë‘ ë²ˆì§¸ ë§¤ê°œ ë³€ìˆ˜ : 0xffffffff(-1)ì„ ì§€ì •í•˜ë©´ ë“œë¡­ëœ íŒŒì¼ì˜ ê°œìˆ˜ë¥¼ ë°˜í™˜ 
 
 	int	iFileCnt = DragQueryFile(hDropInfo, 0xffffffff, nullptr, 0);
 
@@ -109,7 +109,7 @@ void CMapTool::OnDropFiles(HDROP hDropInfo)
 
 		lstrcpy(szFileName, strFileName.GetString());
 
-		// ÆÄÀÏÀÇ È®ÀåÀÚ ¸íÀ» Á¦°ÅÇÏ´Â ÇÔ¼ö
+		// íŒŒì¼ì˜ í™•ìž¥ìž ëª…ì„ ì œê±°í•˜ëŠ” í•¨ìˆ˜
 		PathRemoveExtension(szFileName);
 
 		strFileName = szFileName;
@@ -141,12 +141,12 @@ void CMapTool::Horizontal_Scroll()
 
 	CDC*		pDC = m_ListBox.GetDC();
 
-	// GetCount : ÇöÀç ¸®½ºÆ® ¹Ú½º¿¡ ÀÖ´Â ¸ñ·ÏÀÇ °³¼ö¸¦ ¹ÝÈ¯
+	// GetCount : í˜„ìž¬ ë¦¬ìŠ¤íŠ¸ ë°•ìŠ¤ì— ìžˆëŠ” ëª©ë¡ì˜ ê°œìˆ˜ë¥¼ ë°˜í™˜
 	for (int i = 0; i < m_ListBox.GetCount(); ++i)
 	{
 		m_ListBox.GetText(i, strFineName);
 
-		// GetTextExtent : ÇöÀç ¹®ÀÚ¿­ÀÇ ±æÀÌ¸¦ ÇÈ¼¿´ÜÀ§·Î º¯È¯
+		// GetTextExtent : í˜„ìž¬ ë¬¸ìžì—´ì˜ ê¸¸ì´ë¥¼ í”½ì…€ë‹¨ìœ„ë¡œ ë³€í™˜
 		size = pDC->GetTextExtent(strFineName);
 
 		if (size.cx > iWidth)
@@ -155,9 +155,9 @@ void CMapTool::Horizontal_Scroll()
 
 	m_ListBox.ReleaseDC(pDC);
 
-	// GetHorizontalExtent : ¸®½ºÆ® ¹Ú½º°¡ °¡·Î·Î ½ºÅ©·Ñ ÇÒ ¼ö ÀÖ´Â ÃÖ´ë ±æÀÌ¸¦ ¾ò¾î¿À´Â ÇÔ¼ö
+	// GetHorizontalExtent : ë¦¬ìŠ¤íŠ¸ ë°•ìŠ¤ê°€ ê°€ë¡œë¡œ ìŠ¤í¬ë¡¤ í•  ìˆ˜ ìžˆëŠ” ìµœëŒ€ ê¸¸ì´ë¥¼ ì–»ì–´ì˜¤ëŠ” í•¨ìˆ˜
 	if (iWidth > m_ListBox.GetHorizontalExtent())
-		m_ListBox.SetHorizontalExtent(iWidth);	// °¡Àå ±æ ¹®ÀÚ¿­ ±æÀÌ´ë·Î ½ºÅ©·Ñ ¹üÀ§ È®Àå
+		m_ListBox.SetHorizontalExtent(iWidth);	// ê°€ìž¥ ê¸¸ ë¬¸ìžì—´ ê¸¸ì´ëŒ€ë¡œ ìŠ¤í¬ë¡¤ ë²”ìœ„ í™•ìž¥
 
 }
 
@@ -174,35 +174,35 @@ void CMapTool::OnDestroy()
 
 	CDialog::OnDestroy();
 
-	// TODO: ¿©±â¿¡ ¸Þ½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 }
 
 
 void CMapTool::OnSaveData()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
-	CFileDialog		Dlg(FALSE,	// ¸ðµå ÁöÁ¤(true ¿­±â, false ´Ù¸¥ ÀÌ¸§À¸·Î ÀúÀå)
-		L"dat",	// ±âº» È®ÀåÀÚ¸í
-		L"*.dat", // ´ëÈ­ »óÀÚ¿¡ Ç¥½ÃµÉ ÃÖÃÊ ÆÄÀÏ¸í
-		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,	//  OFN_HIDEREADONLY : ÀÐ±â Àü¿ë Ã¼Å©¹Ú½º ¼û±è, OFN_OVERWRITEPROMPT : Áßº¹ÆÄÀÏ ÀúÀå ½Ã °æ°í ¸Þ¼¼Áö ¶ç¿ò
-		L"Data File(*.dat) | *.dat ||", // ´ëÈ­ »óÀÚ¿¡ Ç¥½ÃµÉ ÆÄÀÏ Çü½Ä, ÄÞº¸ ¹Ú½º¿¡ Ãâ·ÂµÉ ¹®ÀÚ¿­ | ½ÇÁ¦ »ç¿ëÇÒ ÇÊÅÍ¸µ ¹®ÀÚ¿­
-		this);	// ºÎ¸ð À©µµ¿ì ÁÖ¼Ò
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
+	CFileDialog		Dlg(FALSE,	// ëª¨ë“œ ì§€ì •(true ì—´ê¸°, false ë‹¤ë¥¸ ì´ë¦„ìœ¼ë¡œ ì €ìž¥)
+		L"dat",	// ê¸°ë³¸ í™•ìž¥ìžëª…
+		L"*.dat", // ëŒ€í™” ìƒìžì— í‘œì‹œë  ìµœì´ˆ íŒŒì¼ëª…
+		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,	//  OFN_HIDEREADONLY : ì½ê¸° ì „ìš© ì²´í¬ë°•ìŠ¤ ìˆ¨ê¹€, OFN_OVERWRITEPROMPT : ì¤‘ë³µíŒŒì¼ ì €ìž¥ ì‹œ ê²½ê³  ë©”ì„¸ì§€ ë„ì›€
+		L"Data File(*.dat) | *.dat ||", // ëŒ€í™” ìƒìžì— í‘œì‹œë  íŒŒì¼ í˜•ì‹, ì½¤ë³´ ë°•ìŠ¤ì— ì¶œë ¥ë  ë¬¸ìžì—´ | ì‹¤ì œ ì‚¬ìš©í•  í•„í„°ë§ ë¬¸ìžì—´
+		this);	// ë¶€ëª¨ ìœˆë„ìš° ì£¼ì†Œ
 
 	TCHAR	szPath[MAX_PATH] = L"";
 
 	GetCurrentDirectory(MAX_PATH, szPath);
-	// szPath = 0x003fe74c L"D:\\À¯ÁØÈ¯\\140±â\\4°³¿ùÂ÷\\Frame140\\Tool"
+	// szPath = 0x003fe74c L"D:\\ìœ ì¤€í™˜\\140ê¸°\\4ê°œì›”ì°¨\\Frame140\\Tool"
 
-	// PathRemoveFileSpec : ÀüÃ¼ °æ·Î Áß ¸Ç ¸¶Áö¸· °æ·Î¸¦ Àß¶ó³¿
+	// PathRemoveFileSpec : ì „ì²´ ê²½ë¡œ ì¤‘ ë§¨ ë§ˆì§€ë§‰ ê²½ë¡œë¥¼ ìž˜ë¼ëƒ„
 	PathRemoveFileSpec(szPath);
-	// (szPath) = 0x003fe74c L"D:\\À¯ÁØÈ¯\\140±â\\4°³¿ùÂ÷\\Frame140"
+	// (szPath) = 0x003fe74c L"D:\\ìœ ì¤€í™˜\\140ê¸°\\4ê°œì›”ì°¨\\Frame140"
 
 	lstrcat(szPath, L"\\Data");
-	// szPath = 0x003fe74c L"D:\\À¯ÁØÈ¯\\140±â\\4°³¿ùÂ÷\\Frame140\\Data"
+	// szPath = 0x003fe74c L"D:\\ìœ ì¤€í™˜\\140ê¸°\\4ê°œì›”ì°¨\\Frame140\\Data"
 
 	Dlg.m_ofn.lpstrInitialDir = szPath;
 
-	// DoModal : ´ëÈ­ »óÀÚ¸¦ ½ÇÇà
+	// DoModal : ëŒ€í™” ìƒìžë¥¼ ì‹¤í–‰
 	if (IDOK == Dlg.DoModal())
 	{
 		CString		str = Dlg.GetPathName().GetString();

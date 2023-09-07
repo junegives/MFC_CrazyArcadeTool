@@ -52,7 +52,7 @@ HRESULT CMultiTexture::Insert_Texture(const TCHAR * pFilePath, const TCHAR * pSt
 			pTexInfo->tImgInfo.Width,
 			pTexInfo->tImgInfo.Height,
 			pTexInfo->tImgInfo.MipLevels,
-			0,			// ¹öÆÛÀÇ »ç¿ë ¹æ½Ä(D3DUSAGE_RENDERTARGET : È­¸é Ãâ·Â¿ë ÅØ½ºÃ³)
+			0,			// ë²„í¼ì˜ ì‚¬ìš© ë°©ì‹(D3DUSAGE_RENDERTARGET : í™”ë©´ ì¶œë ¥ìš© í…ìŠ¤ì²˜)
 			pTexInfo->tImgInfo.Format,
 			D3DPOOL_MANAGED,
 			D3DX_DEFAULT,

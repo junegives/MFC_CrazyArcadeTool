@@ -19,7 +19,7 @@ HRESULT CSingleTexture::Insert_Texture(const TCHAR* pFilePath,
 	m_pTexInfo = new TEXINFO;
 	ZeroMemory(m_pTexInfo, sizeof(TEXINFO));
 
-	// D3DXGetImageInfoFromFile : ÀÌ¹ÌÁö ÆÄÀÏ¿¡ ±â¹ÝÇÏ¿© ÀÌ¹ÌÁö ±¸Á¶Ã¼ Á¤º¸¸¦ Ã¤¿öÁÖ´Â ÇÔ¼ö
+	// D3DXGetImageInfoFromFile : ì´ë¯¸ì§€ íŒŒì¼ì— ê¸°ë°˜í•˜ì—¬ ì´ë¯¸ì§€ êµ¬ì¡°ì²´ ì •ë³´ë¥¼ ì±„ì›Œì£¼ëŠ” í•¨ìˆ˜
 	if (FAILED(D3DXGetImageInfoFromFile(pFilePath, &(m_pTexInfo->tImgInfo))))
 	{
 		Safe_Release(m_pTexInfo->pTexture);
@@ -29,17 +29,17 @@ HRESULT CSingleTexture::Insert_Texture(const TCHAR* pFilePath,
 	}
 
 
-	//D3DPOOL_DEFAULT = 0,	// °¡Àå ÀûÇÕÇÑ ¸Þ¸ð¸®, º¸Åë ±×·¡ÇÈ Ä«µå ¸Þ¸ð¸®¸¦ ¸»ÇÔ
-	//D3DPOOL_MANAGED = 1,	// DX 3D¿¡ ÀÇÇØ ÀÚ¿øÀ» °ü¸®, ±×·¡ÇÈ ¸Þ¸ð¸®¸¦ »ç¿ëÇÏÁö¸¸ RAM¿¡ ¹é¾÷
-	//D3DPOOL_SYSTEMMEM = 2,	// ½Ã½ºÅÛ ¸Þ¸ð¸®(RAM)¸¦ »ç¿ë
-	//D3DPOOL_SCRATCH = 3,	// ½Ã½ºÅÛ ¸Þ¸ð¸®¸¦ »ç¿ëÇÏÁö¸¸ DX ÀåÄ¡·Î Á¢±Ù ºÒ°¡
+	//D3DPOOL_DEFAULT = 0,	// ê°€ìž¥ ì í•©í•œ ë©”ëª¨ë¦¬, ë³´í†µ ê·¸ëž˜í”½ ì¹´ë“œ ë©”ëª¨ë¦¬ë¥¼ ë§í•¨
+	//D3DPOOL_MANAGED = 1,	// DX 3Dì— ì˜í•´ ìžì›ì„ ê´€ë¦¬, ê·¸ëž˜í”½ ë©”ëª¨ë¦¬ë¥¼ ì‚¬ìš©í•˜ì§€ë§Œ RAMì— ë°±ì—…
+	//D3DPOOL_SYSTEMMEM = 2,	// ì‹œìŠ¤í…œ ë©”ëª¨ë¦¬(RAM)ë¥¼ ì‚¬ìš©
+	//D3DPOOL_SCRATCH = 3,	// ì‹œìŠ¤í…œ ë©”ëª¨ë¦¬ë¥¼ ì‚¬ìš©í•˜ì§€ë§Œ DX ìž¥ì¹˜ë¡œ ì ‘ê·¼ ë¶ˆê°€
 	
 	if (FAILED(D3DXCreateTextureFromFileEx(CDevice::Get_Instance()->Get_Device(),
 											pFilePath,
 											m_pTexInfo->tImgInfo.Width,
 											m_pTexInfo->tImgInfo.Height,
 											m_pTexInfo->tImgInfo.MipLevels,
-											0,			// ¹öÆÛÀÇ »ç¿ë ¹æ½Ä(D3DUSAGE_RENDERTARGET : È­¸é Ãâ·Â¿ë ÅØ½ºÃ³)
+											0,			// ë²„í¼ì˜ ì‚¬ìš© ë°©ì‹(D3DUSAGE_RENDERTARGET : í™”ë©´ ì¶œë ¥ìš© í…ìŠ¤ì²˜)
 											m_pTexInfo->tImgInfo.Format,
 											D3DPOOL_MANAGED,
 											D3DX_DEFAULT,

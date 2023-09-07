@@ -2,23 +2,23 @@
 #include "afxwin.h"
 
 #include "Include.h"
-// CUnitTool ´ëÈ­ »óÀÚÀÔ´Ï´Ù.
+// CUnitTool ëŒ€í™” ìƒìì…ë‹ˆë‹¤.
 
 class CUnitTool : public CDialog
 {
 	DECLARE_DYNAMIC(CUnitTool)
 
 public:
-	CUnitTool(CWnd* pParent = NULL);   // Ç¥ÁØ »ı¼ºÀÚÀÔ´Ï´Ù.
+	CUnitTool(CWnd* pParent = NULL);   // í‘œì¤€ ìƒì„±ìì…ë‹ˆë‹¤.
 	virtual ~CUnitTool();
 
-// ´ëÈ­ »óÀÚ µ¥ÀÌÅÍÀÔ´Ï´Ù.
+// ëŒ€í™” ìƒì ë°ì´í„°ì…ë‹ˆë‹¤.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_UNITTOOL };
 #endif
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Áö¿øÀÔ´Ï´Ù.
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ì§€ì›ì…ë‹ˆë‹¤.
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -30,7 +30,7 @@ public:
 	afx_msg void OnSearchData();
 
 public:
-	// ±×³É ÀÖÀ½
+	// ê·¸ëƒ¥ ìˆìŒ
 	CString m_strTest;
 	CString m_strCopy;
 	
@@ -53,5 +53,5 @@ public:
 	afx_msg void OnLoadData();
 };
 
-// 1. ÀúÀåÇÏ±â, ºÒ·¯¿À±â, »èÁ¦ÇÏ±â,  Å½»öÇÏ±â(edit control)
-// 2. ³»°¡ ¿øÇÏ´Â Å¸ÀÏ ÀÌ¹ÌÁö·Î ÇÇÅ· µÇµµ·Ï ¸¸µé±â
+// 1. ì €ì¥í•˜ê¸°, ë¶ˆëŸ¬ì˜¤ê¸°, ì‚­ì œí•˜ê¸°,  íƒìƒ‰í•˜ê¸°(edit control)
+// 2. ë‚´ê°€ ì›í•˜ëŠ” íƒ€ì¼ ì´ë¯¸ì§€ë¡œ í”¼í‚¹ ë˜ë„ë¡ ë§Œë“¤ê¸°

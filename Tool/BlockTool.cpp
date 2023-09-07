@@ -1,4 +1,4 @@
-﻿// BlockTool.cpp: 구현 파일
+// BlockTool.cpp: 구현 파일
 //
 
 #include "stdafx.h"

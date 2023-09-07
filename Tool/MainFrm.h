@@ -1,5 +1,5 @@
 
-// MainFrm.h : CMainFrame Å¬·¡½ºÀÇ ÀÎÅÍÆäÀÌ½º
+// MainFrm.h : CMainFrame í´ë˜ìŠ¤ì˜ ì¸í„°í˜ì´ìŠ¤
 //
 
 #pragma once
@@ -11,21 +11,21 @@
 class CMainFrame : public CFrameWnd
 {
 	
-protected: // serialization¿¡¼­¸¸ ¸¸µé¾îÁı´Ï´Ù.
+protected: // serializationì—ì„œë§Œ ë§Œë“¤ì–´ì§‘ë‹ˆë‹¤.
 	CMainFrame();
 	DECLARE_DYNCREATE(CMainFrame)
 
-// Æ¯¼ºÀÔ´Ï´Ù.
+// íŠ¹ì„±ì…ë‹ˆë‹¤.
 public:
 
-// ÀÛ¾÷ÀÔ´Ï´Ù.
+// ì‘ì—…ì…ë‹ˆë‹¤.
 public:
 
-// ÀçÁ¤ÀÇÀÔ´Ï´Ù.
+// ì¬ì •ì˜ì…ë‹ˆë‹¤.
 public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-// ±¸ÇöÀÔ´Ï´Ù.
+// êµ¬í˜„ì…ë‹ˆë‹¤.
 public:
 	virtual ~CMainFrame();
 #ifdef _DEBUG
@@ -33,11 +33,11 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-protected:  // ÄÁÆ®·Ñ ¸ğÀ½ÀÌ Æ÷ÇÔµÈ ¸â¹öÀÔ´Ï´Ù.
+protected:  // ì»¨íŠ¸ë¡¤ ëª¨ìŒì´ í¬í•¨ëœ ë©¤ë²„ì…ë‹ˆë‹¤.
 	CToolBar          m_wndToolBar;
 	CStatusBar        m_wndStatusBar;
 
-// »ı¼ºµÈ ¸Ş½ÃÁö ¸Ê ÇÔ¼ö
+// ìƒì„±ëœ ë©”ì‹œì§€ ë§µ í•¨ìˆ˜
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	DECLARE_MESSAGE_MAP()
@@ -45,7 +45,7 @@ protected:
 	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
 
 public:
-	// CSplitterWnd : Ã¢ ºĞÇÒÀ» À§ÇÑ Å¬·¡½º
+	// CSplitterWnd : ì°½ ë¶„í• ì„ ìœ„í•œ í´ë˜ìŠ¤
 
 	CSplitterWnd			m_MainSplitter;
 	CSplitterWnd			m_SecondSplitter;

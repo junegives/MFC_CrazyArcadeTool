@@ -74,8 +74,8 @@ bool CMyTerrain::Picking(const D3DXVECTOR3 & vPos, const int & iIndex)
 	};
 
 	// 0 == ax + b - y
-	// 0 > ax + b - y(À§)
-	// 0 < ax + b - y(¾Æ·¡) 
+	// 0 > ax + b - y(ìœ„)
+	// 0 < ax + b - y(ì•„ëž˜) 
 
 	bool	bCheck[4]{ false };
 
@@ -218,12 +218,12 @@ void CMyTerrain::Render()
 
 		swprintf_s(szBuf, L"%d", iIndex);
 
-		CDevice::Get_Instance()->Get_Font()->DrawTextW(CDevice::Get_Instance()->Get_Sprite(), // ½ºÇÁ¶óÀÌÆ® °´Ã¼
-														szBuf,	// Ãâ·ÂÇÒ ¹®ÀÚ¿­
-														lstrlen(szBuf), // ¹®ÀÚ¿­ÀÇ ±æÀÌ
-														nullptr, //Ãâ·ÂÇÐ ·ºÆ®ÀÇ ÁÖ¼Ò
-														0, // Á¤·Ä ¿É¼Ç
-														D3DCOLOR_ARGB(255, 255, 255, 255)); // Ãâ·ÂÇÒ ÆùÆ® »ö»ó
+		CDevice::Get_Instance()->Get_Font()->DrawTextW(CDevice::Get_Instance()->Get_Sprite(), // ìŠ¤í”„ë¼ì´íŠ¸ ê°ì²´
+														szBuf,	// ì¶œë ¥í•  ë¬¸ìžì—´
+														lstrlen(szBuf), // ë¬¸ìžì—´ì˜ ê¸¸ì´
+														nullptr, //ì¶œë ¥í•™ ë ‰íŠ¸ì˜ ì£¼ì†Œ
+														0, // ì •ë ¬ ì˜µì…˜
+														D3DCOLOR_ARGB(255, 255, 255, 255)); // ì¶œë ¥í•  í°íŠ¸ ìƒ‰ìƒ
 		++iIndex;
 	}		
 }

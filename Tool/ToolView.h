@@ -1,5 +1,5 @@
 
-// ToolView.h : CToolView Å¬·¡½ºÀÇ ÀÎÅÍÆäÀÌ½º
+// ToolView.h : CToolView í´ë˜ìŠ¤ì˜ ì¸í„°í˜ì´ìŠ¤
 //
 
 #pragma once
@@ -12,27 +12,27 @@
 class CToolDoc;
 class CToolView : public CView
 {
-protected: // serialization¿¡¼­¸¸ ¸¸µé¾îÁı´Ï´Ù.
+protected: // serializationì—ì„œë§Œ ë§Œë“¤ì–´ì§‘ë‹ˆë‹¤.
 	CToolView();
 	DECLARE_DYNCREATE(CToolView)
 
-// Æ¯¼ºÀÔ´Ï´Ù.
+// íŠ¹ì„±ì…ë‹ˆë‹¤.
 public:
 	CToolDoc* GetDocument() const;
 
-// ÀÛ¾÷ÀÔ´Ï´Ù.
+// ì‘ì—…ì…ë‹ˆë‹¤.
 public:
 
-// ÀçÁ¤ÀÇÀÔ´Ï´Ù.
+// ì¬ì •ì˜ì…ë‹ˆë‹¤.
 public:
-	virtual void OnDraw(CDC* pDC);  // ÀÌ ºä¸¦ ±×¸®±â À§ÇØ ÀçÁ¤ÀÇµÇ¾ú½À´Ï´Ù.
+	virtual void OnDraw(CDC* pDC);  // ì´ ë·°ë¥¼ ê·¸ë¦¬ê¸° ìœ„í•´ ì¬ì •ì˜ë˜ì—ˆìŠµë‹ˆë‹¤.
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 protected:
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
 	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
-// ±¸ÇöÀÔ´Ï´Ù.
+// êµ¬í˜„ì…ë‹ˆë‹¤.
 public:
 	virtual ~CToolView();
 #ifdef _DEBUG
@@ -42,7 +42,7 @@ public:
 
 protected:
 
-// »ı¼ºµÈ ¸Ş½ÃÁö ¸Ê ÇÔ¼ö
+// ìƒì„±ëœ ë©”ì‹œì§€ ë§µ í•¨ìˆ˜
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
@@ -56,7 +56,7 @@ public:
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
-#ifndef _DEBUG  // ToolView.cppÀÇ µğ¹ö±× ¹öÀü
+#ifndef _DEBUG  // ToolView.cppì˜ ë””ë²„ê·¸ ë²„ì „
 inline CToolDoc* CToolView::GetDocument() const
    { return reinterpret_cast<CToolDoc*>(m_pDocument); }
 #endif

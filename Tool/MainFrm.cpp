@@ -1,5 +1,5 @@
 
-// MainFrm.cpp : CMainFrame Ŭ������ ����
+// MainFrm.cpp : CMainFrame 클래스의 구현
 //
 
 #include "stdafx.h"
@@ -30,17 +30,17 @@ END_MESSAGE_MAP()
 
 static UINT indicators[] =
 {
-	ID_SEPARATOR,           // ���� �� ǥ�ñ�
+	ID_SEPARATOR,           // 상태 줄 표시기
 	ID_INDICATOR_CAPS,
 	ID_INDICATOR_NUM,
 	ID_INDICATOR_SCRL,
 };
 
-// CMainFrame ����/�Ҹ�
+// CMainFrame 생성/소멸
 
 CMainFrame::CMainFrame()
 {
-	// TODO: ���⿡ ��� �ʱ�ȭ �ڵ带 �߰��մϴ�.
+	// TODO: 여기에 멤버 초기화 코드를 추가합니다.
 }
 
 CMainFrame::~CMainFrame()
@@ -65,13 +65,13 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
 	if( !CFrameWnd::PreCreateWindow(cs) )
 		return FALSE;
-	// TODO: CREATESTRUCT cs�� �����Ͽ� ���⿡��
-	//  Window Ŭ���� �Ǵ� ��Ÿ���� �����մϴ�.
+	// TODO: CREATESTRUCT cs를 수정하여 여기에서
+	//  Window 클래스 또는 스타일을 수정합니다.
 
 	return TRUE;
 }
 
-// CMainFrame ����
+// CMainFrame 진단
 
 #ifdef _DEBUG
 void CMainFrame::AssertValid() const
@@ -86,24 +86,24 @@ void CMainFrame::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 
-// CMainFrame �޽��� ó����
+// CMainFrame 메시지 처리기
 
 
 
 BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 {
-	// TODO: ���⿡ Ư��ȭ�� �ڵ带 �߰� ��/�Ǵ� �⺻ Ŭ������ ȣ���մϴ�.
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	m_MainSplitter.CreateStatic(this, 1, 2);
 
-	// ���ø��� ���� (���� ȭ��)
+	// 스플리터 왼쪽 (적용 화면)
 	m_MainSplitter.CreateView(0, 0, RUNTIME_CLASS(CToolView), CSize(WINCX, WINCY), pContext);
 	
-	// ���ø��� ������
+	// 스플리터 오른쪽
 	m_MainSplitter.CreateView(0, 1, RUNTIME_CLASS(CMyform), CSize(300, WINCY), pContext);
 
-	// SetColumnInfo(�� ��ȣ, ���� ũ�� ����, ��� ������ �ּ� ũ��)
+	// SetColumnInfo(열 번호, 열의 크기 지정, 허용 가능한 최소 크기)
 	//m_MainSplitter.SetColumnInfo(0, WINCX - 300, WINCX - 300);
-	// SetColumnInfo(�� ��ȣ, ���� ũ�� ����, ��� ������ �ּ� ũ��)
+	// SetColumnInfo(열 번호, 열의 크기 지정, 허용 가능한 최소 크기)
 	m_MainSplitter.SetColumnInfo(1, 300, 300);
 
 	return TRUE;
@@ -111,14 +111,14 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 
 void CMainFrame::OnMapTool()
 {
-	// TODO: ���⿡ ���� ó���� �ڵ带 �߰��մϴ�.
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	m_MapTool->ShowWindow(SW_SHOW);
 }
 
 
 void CMainFrame::OnObjectTool()
 {
-	// TODO: ���⿡ ���� ó���� �ڵ带 �߰��մϴ�.
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	//m_UnitTool.DoModal();
 	m_BlockTool->ShowWindow(SW_SHOW);
 	
@@ -126,18 +126,18 @@ void CMainFrame::OnObjectTool()
 
 void CMainFrame::OnMonsterTool()
 {
-	// TODO: ���⿡ ���� ó���� �ڵ带 �߰��մϴ�.
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
 
 void CMainFrame::OnRoomTool()
 {
-	// TODO: ���⿡ ���� ó���� �ڵ带 �߰��մϴ�.
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 
 
 void CMainFrame::OnPlayerTool()
 {
-	// TODO: ���⿡ ���� ó���� �ڵ带 �߰��մϴ�.
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
 

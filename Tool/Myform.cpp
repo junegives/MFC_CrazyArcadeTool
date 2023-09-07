@@ -1,4 +1,4 @@
-// Myform.cpp : ���� �����Դϴ�.
+// Myform.cpp : 구현 파일입니다.
 //
 
 #include "stdafx.h"
@@ -33,7 +33,7 @@ BEGIN_MESSAGE_MAP(CMyform, CFormView)
 END_MESSAGE_MAP()
 
 
-// CMyform �����Դϴ�.
+// CMyform 진단입니다.
 
 #ifdef _DEBUG
 void CMyform::AssertValid() const
@@ -50,14 +50,14 @@ void CMyform::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 
-// CMyform �޽��� ó�����Դϴ�.
+// CMyform 메시지 처리기입니다.
 
 
 void CMyform::OnUnitTool()
 {
-	// TODO: ���⿡ ��Ʈ�� �˸� ó���� �ڵ带 �߰��մϴ�.
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
-	// GetSafeHwnd : ���� ���̾�α� ������ �ڵ��� ��ȯ, �ڵ��� null�̸� ���� �������� �ʾ����� �ǹ�
+	// GetSafeHwnd : 현재 다이얼로그 윈도우 핸들을 반환, 핸들이 null이면 아직 생성되지 않았음을 의미
 	if(nullptr == m_UnitTool.GetSafeHwnd())
 		m_UnitTool.Create(IDD_UNITTOOL);
 
@@ -70,18 +70,18 @@ void CMyform::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();
 
-	m_Font.CreatePointFont(180, L"�ü�");
+	m_Font.CreatePointFont(180, L"궁서");
 
 	GetDlgItem(IDC_BUTTON1)->SetFont(&m_Font);
 	GetDlgItem(IDC_BUTTON4)->SetFont(&m_Font);
 
-	// TODO: ���⿡ Ư��ȭ�� �ڵ带 �߰� ��/�Ǵ� �⺻ Ŭ������ ȣ���մϴ�.
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 }
 
 
 void CMyform::OnMapTool()
 {
-	// TODO: ���⿡ ��Ʈ�� �˸� ó���� �ڵ带 �߰��մϴ�.
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	if (nullptr == m_MapTool.GetSafeHwnd())
 		m_MapTool.Create(IDD_MAPTOOL);
 

@@ -1,10 +1,10 @@
 
-// ToolView.cpp : CToolView Å¬·¡½ºÀÇ ±¸Çö
+// ToolView.cpp : CToolView í´ëž˜ìŠ¤ì˜ êµ¬í˜„
 //
 
 #include "stdafx.h"
-// SHARED_HANDLERS´Â ¹Ì¸® º¸±â, Ãà¼ÒÆÇ ±×¸² ¹× °Ë»ö ÇÊÅÍ Ã³¸®±â¸¦ ±¸ÇöÇÏ´Â ATL ÇÁ·ÎÁ§Æ®¿¡¼­ Á¤ÀÇÇÒ ¼ö ÀÖÀ¸¸ç
-// ÇØ´ç ÇÁ·ÎÁ§Æ®¿Í ¹®¼­ ÄÚµå¸¦ °øÀ¯ÇÏµµ·Ï ÇØ ÁÝ´Ï´Ù.
+// SHARED_HANDLERSëŠ” ë¯¸ë¦¬ ë³´ê¸°, ì¶•ì†ŒíŒ ê·¸ë¦¼ ë° ê²€ìƒ‰ í•„í„° ì²˜ë¦¬ê¸°ë¥¼ êµ¬í˜„í•˜ëŠ” ATL í”„ë¡œì íŠ¸ì—ì„œ ì •ì˜í•  ìˆ˜ ìžˆìœ¼ë©°
+// í•´ë‹¹ í”„ë¡œì íŠ¸ì™€ ë¬¸ì„œ ì½”ë“œë¥¼ ê³µìœ í•˜ë„ë¡ í•´ ì¤ë‹ˆë‹¤.
 #ifndef SHARED_HANDLERS
 #include "Tool.h"
 #endif
@@ -26,7 +26,7 @@ IMPLEMENT_DYNCREATE(CToolView, CView)
 
 BEGIN_MESSAGE_MAP(CToolView, CView)
 
-	// Ç¥ÁØ ÀÎ¼â ¸í·ÉÀÔ´Ï´Ù.
+	// í‘œì¤€ ì¸ì‡„ ëª…ë ¹ìž…ë‹ˆë‹¤.
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
@@ -36,11 +36,11 @@ BEGIN_MESSAGE_MAP(CToolView, CView)
 	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
-// CToolView »ý¼º/¼Ò¸ê
+// CToolView ìƒì„±/ì†Œë©¸
 
 CToolView::CToolView() : m_pMyTerrain(nullptr)
 {
-	// TODO: ¿©±â¿¡ »ý¼º ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ìƒì„± ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 
 }
 
@@ -52,29 +52,29 @@ void CToolView::OnInitialUpdate()
 {
 	CView::OnInitialUpdate();
 
-	// AfxGetMainWnd : ÇöÀçÀÇ ¸ÞÀÎ À©µµ¿ì¸¦ ¹ÝÈ¯ÇÏ´Â Àü¿ª ÇÔ¼ö
+	// AfxGetMainWnd : í˜„ìž¬ì˜ ë©”ì¸ ìœˆë„ìš°ë¥¼ ë°˜í™˜í•˜ëŠ” ì „ì—­ í•¨ìˆ˜
 	CMainFrame*		pMainFrm = (CMainFrame*)AfxGetMainWnd();
 
 	RECT	rcWnd{};
 
-	// GetWindowRect : ÇöÀç À©µµ¿ìÀÇ Á¤º¸¸¦ ¾ò¾î¿Í rect¿¡ Ã¤¿öÁÜ
+	// GetWindowRect : í˜„ìž¬ ìœˆë„ìš°ì˜ ì •ë³´ë¥¼ ì–»ì–´ì™€ rectì— ì±„ì›Œì¤Œ
 	pMainFrm->GetWindowRect(&rcWnd);
 
 
-	// SetRect : ·ºÆ®ÀÇ Á¤º¸¸¦ ±â·ÏÇÏ´Â ÇÔ¼ö
+	// SetRect : ë ‰íŠ¸ì˜ ì •ë³´ë¥¼ ê¸°ë¡í•˜ëŠ” í•¨ìˆ˜
 
 	SetRect(&rcWnd, 0, 0, rcWnd.right - rcWnd.left, rcWnd.bottom - rcWnd.top);
 
 	RECT	rcMainView{};
 
-	// GetClientRect : ÇöÀç view Ã¢ÀÇ ·ºÆ® Á¤º¸¸¦ ¾ò¾î¿À´Â ÇÔ¼ö
+	// GetClientRect : í˜„ìž¬ view ì°½ì˜ ë ‰íŠ¸ ì •ë³´ë¥¼ ì–»ì–´ì˜¤ëŠ” í•¨ìˆ˜
 	GetClientRect(&rcMainView);
 
 	float	fRowFrm = float(rcWnd.right - rcMainView.right);
 	float	fColFrm = float(rcWnd.bottom - rcMainView.bottom);
 
-	// SetWindowPos : ¸Å°³ º¯¼ö´ë·Î À©µµ¿ìÀÇ À§Ä¡¿Í Å©±â¸¦ Á¶Á¤ÇÏ´Â ÇÔ¼ö
-	// SetWindowPos(¹èÄ¡ÇÒ À©µµ¿ìÀÇ Z¼ø¼­¿¡ ´ëÇÑ Æ÷ÀÎÅÍ, X, Y ÁÂÇ¥, °¡·Î Å©±â, ¼¼·Î Å©±â, ¹èÄ¡ÇÒ À©µµ¿ìÀÇ Å©±â ¹× À§Ä¡ ÁöÁ¤ ¿É¼Ç)
+	// SetWindowPos : ë§¤ê°œ ë³€ìˆ˜ëŒ€ë¡œ ìœˆë„ìš°ì˜ ìœ„ì¹˜ì™€ í¬ê¸°ë¥¼ ì¡°ì •í•˜ëŠ” í•¨ìˆ˜
+	// SetWindowPos(ë°°ì¹˜í•  ìœˆë„ìš°ì˜ Zìˆœì„œì— ëŒ€í•œ í¬ì¸í„°, X, Y ì¢Œí‘œ, ê°€ë¡œ í¬ê¸°, ì„¸ë¡œ í¬ê¸°, ë°°ì¹˜í•  ìœˆë„ìš°ì˜ í¬ê¸° ë° ìœ„ì¹˜ ì§€ì • ì˜µì…˜)
 	pMainFrm->SetWindowPos(nullptr, 0, 0, int(WINCX + fRowFrm), int(WINCY + fColFrm), SWP_NOZORDER);
 
 
@@ -104,7 +104,7 @@ void CToolView::OnInitialUpdate()
 
 }
 
-// CToolView ±×¸®±â
+// CToolView ê·¸ë¦¬ê¸°
 
 void CToolView::OnDraw(CDC* /*pDC*/)
 {
@@ -120,35 +120,35 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	CDevice::Get_Instance()->Render_End();
 }
 
-#pragma region ¼û±è
+#pragma region ìˆ¨ê¹€
 
 BOOL CToolView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: CREATESTRUCT cs¸¦ ¼öÁ¤ÇÏ¿© ¿©±â¿¡¼­
-	//  Window Å¬·¡½º ¶Ç´Â ½ºÅ¸ÀÏÀ» ¼öÁ¤ÇÕ´Ï´Ù.
+	// TODO: CREATESTRUCT csë¥¼ ìˆ˜ì •í•˜ì—¬ ì—¬ê¸°ì—ì„œ
+	//  Window í´ëž˜ìŠ¤ ë˜ëŠ” ìŠ¤íƒ€ì¼ì„ ìˆ˜ì •í•©ë‹ˆë‹¤.
 
 	return CView::PreCreateWindow(cs);
 }
-// CToolView ÀÎ¼â
+// CToolView ì¸ì‡„
 
 BOOL CToolView::OnPreparePrinting(CPrintInfo* pInfo)
 {
-	// ±âº»ÀûÀÎ ÁØºñ
+	// ê¸°ë³¸ì ì¸ ì¤€ë¹„
 	return DoPreparePrinting(pInfo);
 }
 
 void CToolView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO: ÀÎ¼âÇÏ±â Àü¿¡ Ãß°¡ ÃÊ±âÈ­ ÀÛ¾÷À» Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì¸ì‡„í•˜ê¸° ì „ì— ì¶”ê°€ ì´ˆê¸°í™” ìž‘ì—…ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
 }
 
 void CToolView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO: ÀÎ¼â ÈÄ Á¤¸® ÀÛ¾÷À» Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì¸ì‡„ í›„ ì •ë¦¬ ìž‘ì—…ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
 }
 
 
-// CToolView Áø´Ü
+// CToolView ì§„ë‹¨
 
 #ifdef _DEBUG
 void CToolView::AssertValid() const
@@ -161,7 +161,7 @@ void CToolView::Dump(CDumpContext& dc) const
 	CView::Dump(dc);
 }
 
-CToolDoc* CToolView::GetDocument() const // µð¹ö±×µÇÁö ¾ÊÀº ¹öÀüÀº ÀÎ¶óÀÎÀ¸·Î ÁöÁ¤µË´Ï´Ù.
+CToolDoc* CToolView::GetDocument() const // ë””ë²„ê·¸ë˜ì§€ ì•Šì€ ë²„ì „ì€ ì¸ë¼ì¸ìœ¼ë¡œ ì§€ì •ë©ë‹ˆë‹¤.
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CToolDoc)));
 	return (CToolDoc*)m_pDocument;
@@ -169,10 +169,10 @@ CToolDoc* CToolView::GetDocument() const // µð¹ö±×µÇÁö ¾ÊÀº ¹öÀüÀº ÀÎ¶óÀÎÀ¸·Î Áö
 #endif //_DEBUG
 
 
-// CToolView ¸Þ½ÃÁö Ã³¸®±â
+// CToolView ë©”ì‹œì§€ ì²˜ë¦¬ê¸°
 
 
-#pragma endregion ¼û±è
+#pragma endregion ìˆ¨ê¹€
 
 
 
@@ -180,7 +180,7 @@ void CToolView::OnDestroy()
 {
 	CView::OnDestroy();
 
-	// TODO: ¿©±â¿¡ ¸Þ½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 
 	Safe_Delete(m_pMyTerrain);
 
@@ -191,11 +191,11 @@ void CToolView::OnDestroy()
 
 void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO : ¿©±â¿¡ ¸Þ½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ ¹×/¶Ç´Â ±âº»°ªÀ» È£ÃâÇÕ´Ï´Ù.
+	// TODO : ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€ ë°/ë˜ëŠ” ê¸°ë³¸ê°’ì„ í˜¸ì¶œí•©ë‹ˆë‹¤.
 
 	CView::OnLButtonDown(nFlags, point);
 
-	// AfxGetApp : ¸ÞÀÎ ½º·¹µå¸¦ °®°í ÀÖ´Â ÇöÀç ¸ÞÀÎ appÀ» ¹ÝÈ¯
+	// AfxGetApp : ë©”ì¸ ìŠ¤ë ˆë“œë¥¼ ê°–ê³  ìžˆëŠ” í˜„ìž¬ ë©”ì¸ appì„ ë°˜í™˜
 	CMainFrame*	pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 
 	CMapTool*	pMapTool = pMain->m_MapTool;
@@ -205,34 +205,34 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 											0.f),
 											pMapTool->m_iDrawID);
 
-	// Invalidate : È£Ãâ ½Ã À©µµ¿ì¿¡ WM_PAINT¿Í WM_ERASEBKGND ¸Þ¼¼Áö¸¦ ¹ß»ý ½ÃÅ´, ÀÌ¶§ OnDraw ÇÔ¼ö¸¦ ´Ù½Ã ÇÑ ¹ø È£Ãâ
+	// Invalidate : í˜¸ì¶œ ì‹œ ìœˆë„ìš°ì— WM_PAINTì™€ WM_ERASEBKGND ë©”ì„¸ì§€ë¥¼ ë°œìƒ ì‹œí‚´, ì´ë•Œ OnDraw í•¨ìˆ˜ë¥¼ ë‹¤ì‹œ í•œ ë²ˆ í˜¸ì¶œ
 
-	// TRUE : WM_PAINT¿Í WM_ERASEBKGND°¡ µÑ ´Ù ¹ß»ý
-	// FALSE : WM_PAINT¿Í ¸Þ½ÃÁö¸¸ ¹ß»ý
+	// TRUE : WM_PAINTì™€ WM_ERASEBKGNDê°€ ë‘˜ ë‹¤ ë°œìƒ
+	// FALSE : WM_PAINTì™€ ë©”ì‹œì§€ë§Œ ë°œìƒ
 
 	Invalidate(FALSE);
 
-	// GetParentFrame : ÇöÀç viewÃ¢À» µÑ·¯½Î°í ÀÖ´Â »óÀ§ FrameWnd¸¦ ¹ÝÈ¯
+	// GetParentFrame : í˜„ìž¬ viewì°½ì„ ë‘˜ëŸ¬ì‹¸ê³  ìžˆëŠ” ìƒìœ„ FrameWndë¥¼ ë°˜í™˜
 	// CMainFrame*	pMain = dynamic_cast<CMainFrame*>(GetParentFrame());
 	
 }
 
-// Á÷¼±ÀÇ ¹æÁ¤½ÄÀ» ÀÌ¿ëÇÏ¿© Å¬¸¯ÇÑ Å¸ÀÏÀÇ ÀÌ¹ÌÁö¸¦ ±³Ã¼ÇÏ¶ó
+// ì§ì„ ì˜ ë°©ì •ì‹ì„ ì´ìš©í•˜ì—¬ í´ë¦­í•œ íƒ€ì¼ì˜ ì´ë¯¸ì§€ë¥¼ êµì²´í•˜ë¼
 
 // y = ax + b
 
-// a : ±â¿ï±â
-// b : yÀýÆí
+// a : ê¸°ìš¸ê¸°
+// b : yì ˆíŽ¸
 
 void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 {
-	// TODO: ¿©±â¿¡ ¸Þ½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ ¹×/¶Ç´Â ±âº»°ªÀ» È£ÃâÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€ ë°/ë˜ëŠ” ê¸°ë³¸ê°’ì„ í˜¸ì¶œí•©ë‹ˆë‹¤.
 
 	CView::OnMouseMove(nFlags, point);
 
 	if (GetAsyncKeyState(VK_LBUTTON))
 	{
-		// AfxGetApp : ¸ÞÀÎ ½º·¹µå¸¦ °®°í ÀÖ´Â ÇöÀç ¸ÞÀÎ appÀ» ¹ÝÈ¯
+		// AfxGetApp : ë©”ì¸ ìŠ¤ë ˆë“œë¥¼ ê°–ê³  ìžˆëŠ” í˜„ìž¬ ë©”ì¸ appì„ ë°˜í™˜
 		CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 
 		CMapTool* pMapTool = pMain->m_MapTool;
@@ -242,10 +242,10 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 												0.f),
 												pMapTool->m_iDrawID);
 
-		// Invalidate : È£Ãâ ½Ã À©µµ¿ì¿¡ WM_PAINT¿Í WM_ERASEBKGND ¸Þ¼¼Áö¸¦ ¹ß»ý ½ÃÅ´, ÀÌ¶§ OnDraw ÇÔ¼ö¸¦ ´Ù½Ã ÇÑ ¹ø È£Ãâ
+		// Invalidate : í˜¸ì¶œ ì‹œ ìœˆë„ìš°ì— WM_PAINTì™€ WM_ERASEBKGND ë©”ì„¸ì§€ë¥¼ ë°œìƒ ì‹œí‚´, ì´ë•Œ OnDraw í•¨ìˆ˜ë¥¼ ë‹¤ì‹œ í•œ ë²ˆ í˜¸ì¶œ
 
-		// TRUE : WM_PAINT¿Í WM_ERASEBKGND°¡ µÑ ´Ù ¹ß»ý
-		// FALSE : WM_PAINT¿Í ¸Þ½ÃÁö¸¸ ¹ß»ý
+		// TRUE : WM_PAINTì™€ WM_ERASEBKGNDê°€ ë‘˜ ë‹¤ ë°œìƒ
+		// FALSE : WM_PAINTì™€ ë©”ì‹œì§€ë§Œ ë°œìƒ
 
 		Invalidate(FALSE);
 	}

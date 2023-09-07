@@ -12,26 +12,26 @@ typedef struct tagInfo
 
 typedef	struct tagFrame
 {
-	float		fFrame; // ÇÁ·¹ÀÓÀ» ¼¼±â À§ÇÑ º¯¼ö
-	float		fMax;	// ÃÖ´ë ÀÌ¹ÌÁöÀÇ ÇÁ·¹ÀÓ ¼ö
+	float		fFrame; // í”„ë ˆìž„ì„ ì„¸ê¸° ìœ„í•œ ë³€ìˆ˜
+	float		fMax;	// ìµœëŒ€ ì´ë¯¸ì§€ì˜ í”„ë ˆìž„ ìˆ˜
 
 }FRAME;
 
 typedef struct tagTexture
 {
-	LPDIRECT3DTEXTURE9		pTexture;   // ÄÄ °´Ã¼
+	LPDIRECT3DTEXTURE9		pTexture;   // ì»´ ê°ì²´
 
-	D3DXIMAGE_INFO			tImgInfo;	// ±¸Á¶Ã¼
+	D3DXIMAGE_INFO			tImgInfo;	// êµ¬ì¡°ì²´
 
 }TEXINFO;
 
 typedef struct tagTile
 {
-	D3DXVECTOR3	vPos;			// Å¸ÀÏÀÇ ÁßÁ¡ ÁÂÇ¥
-	D3DXVECTOR3 vSize;			// Å¸ÀÏÀÇ °¡·Î, ¼¼·Î »çÀÌÁî
+	D3DXVECTOR3	vPos;			// íƒ€ì¼ì˜ ì¤‘ì  ì¢Œí‘œ
+	D3DXVECTOR3 vSize;			// íƒ€ì¼ì˜ ê°€ë¡œ, ì„¸ë¡œ ì‚¬ì´ì¦ˆ
 
-	BYTE		byOption;		// 0, 1¹ø(Àå¾Ö¹°)
-	BYTE		byDrawID;		// ¸î ¹ø Å¸ÀÏ ÀÌ¹ÌÁö
+	BYTE		byOption;		// 0, 1ë²ˆ(ìž¥ì• ë¬¼)
+	BYTE		byDrawID;		// ëª‡ ë²ˆ íƒ€ì¼ ì´ë¯¸ì§€
 
 }TILE;
 

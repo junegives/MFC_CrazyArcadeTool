@@ -1,4 +1,4 @@
-// UnitTool.cpp : ±¸Çö ÆÄÀÏÀÔ´Ï´Ù.
+// UnitTool.cpp : êµ¬í˜„ íŒŒì¼ì…ë‹ˆë‹¤.
 //
 
 #include "stdafx.h"
@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 
 
-// CUnitTool ´ëÈ­ »óÀÚÀÔ´Ï´Ù.
+// CUnitTool ëŒ€í™” ìƒìì…ë‹ˆë‹¤.
 
 IMPLEMENT_DYNAMIC(CUnitTool, CDialog)
 
@@ -59,25 +59,25 @@ BEGIN_MESSAGE_MAP(CUnitTool, CDialog)
 END_MESSAGE_MAP()
 
 
-// CUnitTool ¸Ş½ÃÁö Ã³¸®±âÀÔ´Ï´Ù.
+// CUnitTool ë©”ì‹œì§€ ì²˜ë¦¬ê¸°ì…ë‹ˆë‹¤.
 
 
 void CUnitTool::OnBnClickedButton1()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 
-	// UpdateData(TRUE) : ´ÙÀÌ¾ó·Î±× ¹Ú½º·ÎºÎÅÍ ÀÔ·ÂµÈ °ªµéÀ» ¾ò¾î¿È
+	// UpdateData(TRUE) : ë‹¤ì´ì–¼ë¡œê·¸ ë°•ìŠ¤ë¡œë¶€í„° ì…ë ¥ëœ ê°’ë“¤ì„ ì–»ì–´ì˜´
 	UpdateData(TRUE);
 
 	m_strCopy = m_strTest;
 
-	// UpdateData(FALSE) : º¯¼ö¿¡ ÀúÀåµÈ °ªµéÀ» ´ÙÀÌ¾ó·Î±× ¹Ú½º¿¡ ¹İ¿µ
+	// UpdateData(FALSE) : ë³€ìˆ˜ì— ì €ì¥ëœ ê°’ë“¤ì„ ë‹¤ì´ì–¼ë¡œê·¸ ë°•ìŠ¤ì— ë°˜ì˜
 	UpdateData(FALSE);
 }
 
 void CUnitTool::OnAddPlayer()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	UpdateData(TRUE);
 
 	UNITDATA*		pUnit = new UNITDATA;
@@ -121,13 +121,13 @@ void CUnitTool::OnListBox()
 
 	CString		strFindName;
 
-	// GetCurSel : ¼±ÅÃµÈ ¼¿ÀÇ ÀÎµ¦½º °ªÀ» ¹İÈ¯
+	// GetCurSel : ì„ íƒëœ ì…€ì˜ ì¸ë±ìŠ¤ ê°’ì„ ë°˜í™˜
 	int	iIndex = m_ListBox.GetCurSel();
 
 	if (LB_ERR == iIndex)
 		return;
 
-	// GetText : ÇöÀç ÀÎµ¦½º¿¡ ÇØ´çÇÏ´Â ¹®ÀÚ¿­À» ¸®½ºÆ® ¹Ú½º·ÎºÎÅÍ ¾ò¾î¿È
+	// GetText : í˜„ì¬ ì¸ë±ìŠ¤ì— í•´ë‹¹í•˜ëŠ” ë¬¸ìì—´ì„ ë¦¬ìŠ¤íŠ¸ ë°•ìŠ¤ë¡œë¶€í„° ì–»ì–´ì˜´
 	m_ListBox.GetText(iIndex, strFindName);
 
 	auto	iter = m_mapUnitData.find(strFindName);
@@ -165,7 +165,7 @@ void CUnitTool::OnDestroy()
 {
 	CDialog::OnDestroy();
 
-	// TODO: ¿©±â¿¡ ¸Ş½ÃÁö Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ë©”ì‹œì§€ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	for_each(m_mapUnitData.begin(), m_mapUnitData.end(), CDeleteMap());
 	m_mapUnitData.clear();
 }
@@ -192,7 +192,7 @@ void CUnitTool::OnSearchData()
 	if (iter == m_mapUnitData.end())
 		return;
 
-	// FindString : ÀÔ·ÂµÈ ¹®ÀÚ¿­°ú ÀÏÄ¡ÇÏ´Â ¸®½ºÆ® ¹Ú½º ÀÎµ¦½º¸¦ ¾ò¾î¿È
+	// FindString : ì…ë ¥ëœ ë¬¸ìì—´ê³¼ ì¼ì¹˜í•˜ëŠ” ë¦¬ìŠ¤íŠ¸ ë°•ìŠ¤ ì¸ë±ìŠ¤ë¥¼ ì–»ì–´ì˜´
 	int	iIndex = m_ListBox.FindString(0, m_strFindName);
 
 	if (LB_ERR == iIndex)
@@ -228,7 +228,7 @@ void CUnitTool::OnSearchData()
 
 void CUnitTool::OnDeleteData()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	UpdateData(TRUE);
 
 	CString		strFindName = L"";
@@ -238,7 +238,7 @@ void CUnitTool::OnDeleteData()
 	if (LB_ERR == iIndex)
 		return;
 
-	// GetText : ¾ò¾î¿Â ÀÎµ¦½º Á¤º¸¸¦ °¡Áö°í ±×¿¡ ÇØ´çÇÏ´Â ¹®ÀÚ¿­À» ¾ò¾î¿È
+	// GetText : ì–»ì–´ì˜¨ ì¸ë±ìŠ¤ ì •ë³´ë¥¼ ê°€ì§€ê³  ê·¸ì— í•´ë‹¹í•˜ëŠ” ë¬¸ìì—´ì„ ì–»ì–´ì˜´
 	m_ListBox.GetText(iIndex, strFindName);
 
 	auto&	iter = m_mapUnitData.find(strFindName);
@@ -249,7 +249,7 @@ void CUnitTool::OnDeleteData()
 	Safe_Delete(iter->second);
 	m_mapUnitData.erase(strFindName);
 
-	// ÇØ´ç ÀÎµ¦½º¿¡ ¸®½ºÆ® ¸ñ·ÏÀ» »èÁ¦
+	// í•´ë‹¹ ì¸ë±ìŠ¤ì— ë¦¬ìŠ¤íŠ¸ ëª©ë¡ì„ ì‚­ì œ
 	m_ListBox.DeleteString(iIndex);
 
 
@@ -258,30 +258,30 @@ void CUnitTool::OnDeleteData()
 
 void CUnitTool::OnSaveData()
 {
-	// CFileDialog : ÆÄÀÏ ¿­±â È¤Àº ÀúÀå ÀÛ¾÷¿¡ ÇÊ¿äÇÑ ´ëÈ­»óÀÚ¸¦ »ı¼ºÇÏ´Â °´Ã¼
+	// CFileDialog : íŒŒì¼ ì—´ê¸° í˜¹ì€ ì €ì¥ ì‘ì—…ì— í•„ìš”í•œ ëŒ€í™”ìƒìë¥¼ ìƒì„±í•˜ëŠ” ê°ì²´
 
-	CFileDialog		Dlg(FALSE,	// ¸ğµå ÁöÁ¤(true ¿­±â, false ´Ù¸¥ ÀÌ¸§À¸·Î ÀúÀå)
-						L"dat",	// ±âº» È®ÀåÀÚ¸í
-						L"*.dat", // ´ëÈ­ »óÀÚ¿¡ Ç¥½ÃµÉ ÃÖÃÊ ÆÄÀÏ¸í
-						OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,	//  OFN_HIDEREADONLY : ÀĞ±â Àü¿ë Ã¼Å©¹Ú½º ¼û±è, OFN_OVERWRITEPROMPT : Áßº¹ÆÄÀÏ ÀúÀå ½Ã °æ°í ¸Ş¼¼Áö ¶ç¿ò
-						L"Data File(*.dat) | *.dat ||", // ´ëÈ­ »óÀÚ¿¡ Ç¥½ÃµÉ ÆÄÀÏ Çü½Ä, ÄŞº¸ ¹Ú½º¿¡ Ãâ·ÂµÉ ¹®ÀÚ¿­ | ½ÇÁ¦ »ç¿ëÇÒ ÇÊÅÍ¸µ ¹®ÀÚ¿­
-						this);	// ºÎ¸ğ À©µµ¿ì ÁÖ¼Ò
+	CFileDialog		Dlg(FALSE,	// ëª¨ë“œ ì§€ì •(true ì—´ê¸°, false ë‹¤ë¥¸ ì´ë¦„ìœ¼ë¡œ ì €ì¥)
+						L"dat",	// ê¸°ë³¸ í™•ì¥ìëª…
+						L"*.dat", // ëŒ€í™” ìƒìì— í‘œì‹œë  ìµœì´ˆ íŒŒì¼ëª…
+						OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,	//  OFN_HIDEREADONLY : ì½ê¸° ì „ìš© ì²´í¬ë°•ìŠ¤ ìˆ¨ê¹€, OFN_OVERWRITEPROMPT : ì¤‘ë³µíŒŒì¼ ì €ì¥ ì‹œ ê²½ê³  ë©”ì„¸ì§€ ë„ì›€
+						L"Data File(*.dat) | *.dat ||", // ëŒ€í™” ìƒìì— í‘œì‹œë  íŒŒì¼ í˜•ì‹, ì½¤ë³´ ë°•ìŠ¤ì— ì¶œë ¥ë  ë¬¸ìì—´ | ì‹¤ì œ ì‚¬ìš©í•  í•„í„°ë§ ë¬¸ìì—´
+						this);	// ë¶€ëª¨ ìœˆë„ìš° ì£¼ì†Œ
 
 	TCHAR	szPath[MAX_PATH] = L"";
 
 	GetCurrentDirectory(MAX_PATH, szPath);
-	// szPath = 0x003fe74c L"D:\\À¯ÁØÈ¯\\140±â\\4°³¿ùÂ÷\\Frame140\\Tool"
+	// szPath = 0x003fe74c L"D:\\ìœ ì¤€í™˜\\140ê¸°\\4ê°œì›”ì°¨\\Frame140\\Tool"
 
-	// PathRemoveFileSpec : ÀüÃ¼ °æ·Î Áß ¸Ç ¸¶Áö¸· °æ·Î¸¦ Àß¶ó³¿
+	// PathRemoveFileSpec : ì „ì²´ ê²½ë¡œ ì¤‘ ë§¨ ë§ˆì§€ë§‰ ê²½ë¡œë¥¼ ì˜ë¼ëƒ„
 	PathRemoveFileSpec(szPath);
-	// (szPath) = 0x003fe74c L"D:\\À¯ÁØÈ¯\\140±â\\4°³¿ùÂ÷\\Frame140"
+	// (szPath) = 0x003fe74c L"D:\\ìœ ì¤€í™˜\\140ê¸°\\4ê°œì›”ì°¨\\Frame140"
 
 	lstrcat(szPath, L"\\Data");
-	// szPath = 0x003fe74c L"D:\\À¯ÁØÈ¯\\140±â\\4°³¿ùÂ÷\\Frame140\\Data"
+	// szPath = 0x003fe74c L"D:\\ìœ ì¤€í™˜\\140ê¸°\\4ê°œì›”ì°¨\\Frame140\\Data"
 
 	Dlg.m_ofn.lpstrInitialDir = szPath;
 
-	// DoModal : ´ëÈ­ »óÀÚ¸¦ ½ÇÇà
+	// DoModal : ëŒ€í™” ìƒìë¥¼ ì‹¤í–‰
 	if (IDOK == Dlg.DoModal())
 	{
 		CString		str = Dlg.GetPathName().GetString();
@@ -297,14 +297,14 @@ void CUnitTool::OnSaveData()
 
 		for (auto& MyPair : m_mapUnitData)
 		{
-			// key °ª ÀúÀå
+			// key ê°’ ì €ì¥
 
 			dwStrByte = sizeof(TCHAR) * (MyPair.first.GetLength() + 1);
 
 			WriteFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
 			WriteFile(hFile, MyPair.first.GetString(), dwStrByte, &dwByte, nullptr);
 
-			// value °ª ÀúÀå
+			// value ê°’ ì €ì¥
 
 			WriteFile(hFile, &(MyPair.second->byItem), sizeof(BYTE), &dwByte, nullptr);
 			WriteFile(hFile, &(MyPair.second->byJobIndex), sizeof(BYTE), &dwByte, nullptr);
@@ -320,12 +320,12 @@ void CUnitTool::OnLoadData()
 {
 	UpdateData(TRUE);
 
-	CFileDialog		Dlg(TRUE,	// ¸ğµå ÁöÁ¤(true ¿­±â, false ´Ù¸¥ ÀÌ¸§À¸·Î ÀúÀå)
-		L"dat",	// ±âº» È®ÀåÀÚ¸í
-		L"*.dat", // ´ëÈ­ »óÀÚ¿¡ Ç¥½ÃµÉ ÃÖÃÊ ÆÄÀÏ¸í
-		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,	//  OFN_HIDEREADONLY : ÀĞ±â Àü¿ë Ã¼Å©¹Ú½º ¼û±è, OFN_OVERWRITEPROMPT : Áßº¹ÆÄÀÏ ÀúÀå ½Ã °æ°í ¸Ş¼¼Áö ¶ç¿ò
-		L"Data File(*.dat) | *.dat ||", // ´ëÈ­ »óÀÚ¿¡ Ç¥½ÃµÉ ÆÄÀÏ Çü½Ä, ÄŞº¸ ¹Ú½º¿¡ Ãâ·ÂµÉ ¹®ÀÚ¿­ | ½ÇÁ¦ »ç¿ëÇÒ ÇÊÅÍ¸µ ¹®ÀÚ¿­
-		this);	// ºÎ¸ğ À©µµ¿ì ÁÖ¼Ò
+	CFileDialog		Dlg(TRUE,	// ëª¨ë“œ ì§€ì •(true ì—´ê¸°, false ë‹¤ë¥¸ ì´ë¦„ìœ¼ë¡œ ì €ì¥)
+		L"dat",	// ê¸°ë³¸ í™•ì¥ìëª…
+		L"*.dat", // ëŒ€í™” ìƒìì— í‘œì‹œë  ìµœì´ˆ íŒŒì¼ëª…
+		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,	//  OFN_HIDEREADONLY : ì½ê¸° ì „ìš© ì²´í¬ë°•ìŠ¤ ìˆ¨ê¹€, OFN_OVERWRITEPROMPT : ì¤‘ë³µíŒŒì¼ ì €ì¥ ì‹œ ê²½ê³  ë©”ì„¸ì§€ ë„ì›€
+		L"Data File(*.dat) | *.dat ||", // ëŒ€í™” ìƒìì— í‘œì‹œë  íŒŒì¼ í˜•ì‹, ì½¤ë³´ ë°•ìŠ¤ì— ì¶œë ¥ë  ë¬¸ìì—´ | ì‹¤ì œ ì‚¬ìš©í•  í•„í„°ë§ ë¬¸ìì—´
+		this);	// ë¶€ëª¨ ìœˆë„ìš° ì£¼ì†Œ
 
 	TCHAR	szPath[MAX_PATH] = L"";
 
@@ -341,7 +341,7 @@ void CUnitTool::OnLoadData()
 
 		m_mapUnitData.clear();
 
-		// ResetContent : ¸®½ºÆ® ¹Ú½º ¸ñ·ÏÀ» ÃÊ±âÈ­
+		// ResetContent : ë¦¬ìŠ¤íŠ¸ ë°•ìŠ¤ ëª©ë¡ì„ ì´ˆê¸°í™”
 		m_ListBox.ResetContent();
 
 		CString		str = Dlg.GetPathName().GetString();
@@ -357,13 +357,13 @@ void CUnitTool::OnLoadData()
 
 		while (true)
 		{
-			// key °ª ·Îµå
+			// key ê°’ ë¡œë“œ
 			ReadFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
 
 			TCHAR*	pName = new TCHAR[dwStrByte];
 			ReadFile(hFile, pName, dwStrByte, &dwByte, nullptr);
 
-			// value °ª ·Îµå
+			// value ê°’ ë¡œë“œ
 			ReadFile(hFile, &(tData.byItem), sizeof(BYTE), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.byJobIndex), sizeof(BYTE), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.iAttack), sizeof(int), &dwByte, nullptr);

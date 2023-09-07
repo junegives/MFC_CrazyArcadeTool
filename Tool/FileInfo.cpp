@@ -13,13 +13,13 @@ CFileInfo::~CFileInfo()
 
 CString CFileInfo::ConvertRelativePath(CString strFullPath)
 {
-	TCHAR		szRelativePath[MAX_PATH] = L"";		// »ó´ë °æ·Î¸¦ ÀúÀåÇÒ ¹®ÀÚ¿­
-	TCHAR		szCurDirPath[MAX_PATH] = L"";		// ÇöÀç Àý´ë °æ·Î¸¦ ÀúÀåÇÒ ¹®ÀÚ¿­
+	TCHAR		szRelativePath[MAX_PATH] = L"";		// ìƒëŒ€ ê²½ë¡œë¥¼ ì €ìž¥í•  ë¬¸ìžì—´
+	TCHAR		szCurDirPath[MAX_PATH] = L"";		// í˜„ìž¬ ì ˆëŒ€ ê²½ë¡œë¥¼ ì €ìž¥í•  ë¬¸ìžì—´
 
-	GetCurrentDirectory(MAX_PATH, szCurDirPath);	// ÇöÀç ÇÁ·ÎÁ§Æ®°¡ ÀÖ´Â µð·ºÅä¸® °æ·Î¸¦ ¾ò¾î¿È
+	GetCurrentDirectory(MAX_PATH, szCurDirPath);	// í˜„ìž¬ í”„ë¡œì íŠ¸ê°€ ìžˆëŠ” ë””ë ‰í† ë¦¬ ê²½ë¡œë¥¼ ì–»ì–´ì˜´
 
-	// PathRelativePathTo : szCurDirPath¿¡¼­ strFullPath·Î °¡´Â »ó´ë°æ·Î¸¦ ±¸ÇØ¼­ szRelativePath¿¡ ÀúÀåÇÏ´Â ÇÔ¼ö
-	// ´Ü, °°Àº µå¶óÀÌºê ³»¿¡¼­¸¸ º¯°æ °¡´É
+	// PathRelativePathTo : szCurDirPathì—ì„œ strFullPathë¡œ ê°€ëŠ” ìƒëŒ€ê²½ë¡œë¥¼ êµ¬í•´ì„œ szRelativePathì— ì €ìž¥í•˜ëŠ” í•¨ìˆ˜
+	// ë‹¨, ê°™ì€ ë“œë¼ì´ë¸Œ ë‚´ì—ì„œë§Œ ë³€ê²½ ê°€ëŠ¥
 
 	PathRelativePathTo(szRelativePath, 
 						szCurDirPath, 
