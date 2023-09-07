@@ -221,6 +221,9 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	CMainFrame*	pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 
 	CMapTool*	pMapTool = pMain->m_MapTool;
+
+	CBlockTool* pBlockTool = pMain->m_BlockTool;
+
 	if (pMapTool->IsWindowVisible())
 	{
 		m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
@@ -228,6 +231,14 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 			0.f),
 			pMapTool->m_strStateKey,
 			pMapTool->m_iDrawID);
+	}
+
+	if (pBlockTool->IsWindowVisible())
+	{
+		m_pMyBlockTerrain->Tile_Change(D3DXVECTOR3(point.x + GetScrollPos(0),
+			point.y + GetScrollPos(1), 0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+			, pBlockTool->m_Option_Move, pBlockTool->m_Option_Burst,
+			pBlockTool->m_iDrawID);
 	}
 
 	// Invalidate : 호출 시 윈도우에 WM_PAINT와 WM_ERASEBKGND 메세지를 발생 시킴, 이때 OnDraw 함수를 다시 한 번 호출

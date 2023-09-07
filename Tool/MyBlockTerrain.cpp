@@ -22,6 +22,8 @@ void CMyBlockTerrain::Tile_Move(const D3DXVECTOR3& vPos, const D3DXVECTOR3& vSiz
 	m_Tile->vSize = { vSize.x, vSize.y, 0.f };
 	m_Tile->byOption = 0;
 	m_Tile->byDrawID = iDrawID;
+
+	//vImageSize = vSize;
 }
 
 void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, const BYTE& byMove, const BYTE& byBurst, const int& iDrawID)
@@ -34,6 +36,8 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 	//이미지의 칸 갯수 파악을 위함
 	int iBlockX = vSize.x / TILECX;
 	int iBlockY = vSize.y / TILECY;
+
+	
 
 	//int iTherestX = vSize.x % TILECX;
 
@@ -59,11 +63,11 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 	}
 	else
 	{
-		//for (size_t i = 0; i <= iBlockX; i++)
+		//for (size_t i = 0; i <= iBlockY; i++)
 		//{
-		//	for (size_t j = 0; j <= iBlockY; j++)
+		//	for (size_t j = 0; j <= iBlockX; j++)
 		//	{
-		//		int iImageIndex = iIndex + j + (i * 15);
+		//		int iImageIndex = iIndex + j - (i * 15);
 
 		//		if (iImageIndex < m_vecTile.size())
 		//		{
@@ -73,20 +77,21 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 		//			}
 		//		}
 		//	}
-
 		//}
 
 		if (m_vecTile[iIndex]->bPick == false)
 		{
-			for (size_t i = 0; i <= iBlockX; i++)
+			for (size_t i = 0; i <= iBlockY; i++)
 			{
-				for (size_t j = 0; j <= iBlockY; j++)
+				for (size_t j = 0; j <= iBlockX; j++)
 				{
 					if (i == 0 && j == 0)
 					{
 						m_vecTile[iIndex]->byDrawID = iDrawID;
 					}
 
+					//만약 센터의 중점을 아래로 설정했을 시 -를 해주어야 위에 공간을 막아줌
+					//좌측 상단일 시 +15를 해주어야 함
 					int iImageIndex = iIndex + j + (i * 15);
 
 					if (iImageIndex < m_vecTile.size())
@@ -153,57 +158,78 @@ int CMyBlockTerrain::Get_TileIndex(const D3DXVECTOR3& vPos)
 
 bool CMyBlockTerrain::Picking(const D3DXVECTOR3& vPos, const int& iIndex)
 {
-	// y = ax + b
-	// 12 -> 3 -> 6 - > 9
+	bool bCheck[4]{ false };
 
-	float	fGradient[4]{
-
-		(TILECY / 2.f) / (TILECX / 2.f) * -1.f,
-		(TILECY / 2.f) / (TILECX / 2.f),
-		(TILECY / 2.f) / (TILECX / 2.f) * -1.f,
-		(TILECY / 2.f) / (TILECX / 2.f)
-
-	};
-
-	D3DXVECTOR3		vPoint[4]
+	if ((m_vecTile[iIndex]->vPos.x - TILECX / 2.f) <= vPos.x)
 	{
-		{ m_vecTile[iIndex]->vPos.x, m_vecTile[iIndex]->vPos.y + (TILECY / 2.f), 0.f },
-		{ m_vecTile[iIndex]->vPos.x + (TILECX / 2.f), m_vecTile[iIndex]->vPos.y , 0.f },
-		{ m_vecTile[iIndex]->vPos.x, m_vecTile[iIndex]->vPos.y - (TILECY / 2.f), 0.f },
-		{ m_vecTile[iIndex]->vPos.x - (TILECX / 2.f), m_vecTile[iIndex]->vPos.y, 0.f }
-	};
-
-	// y = ax + b
-	// -b = ax - y
-	// b = y - ax
-
-	float	fB[4]
-	{
-		vPoint[0].y - fGradient[0] * vPoint[0].x,
-		vPoint[1].y - fGradient[1] * vPoint[1].x,
-		vPoint[2].y - fGradient[2] * vPoint[2].x,
-		vPoint[3].y - fGradient[3] * vPoint[3].x
-	};
-
-	// 0 == ax + b - y
-	// 0 > ax + b - y(위)
-	// 0 < ax + b - y(아래) 
-
-	bool	bCheck[4]{ false };
-
-	if (0 < fGradient[0] * vPos.x + fB[0] - vPos.y)
 		bCheck[0] = true;
-
-	if (0 >= fGradient[1] * vPos.x + fB[1] - vPos.y)
+	}
+	if ((m_vecTile[iIndex]->vPos.x + TILECX / 2.f) > vPos.x)
+	{
 		bCheck[1] = true;
-
-	if (0 >= fGradient[2] * vPos.x + fB[2] - vPos.y)
+	}
+	if ((m_vecTile[iIndex]->vPos.y - TILECY / 2.f) <= vPos.y)
+	{
 		bCheck[2] = true;
-
-	if (0 < fGradient[3] * vPos.x + fB[3] - vPos.y)
+	}
+	if ((m_vecTile[iIndex]->vPos.y + TILECY / 2.f) > vPos.y)
+	{
 		bCheck[3] = true;
+	}
 
 	return bCheck[0] && bCheck[1] && bCheck[2] && bCheck[3];
+
+	//// y = ax + b
+	//// 12 -> 3 -> 6 - > 9
+	//
+	//float	fGradient[4]{
+	//
+	//	(TILECY / 2.f) / (TILECX / 2.f) * -1.f,
+	//	(TILECY / 2.f) / (TILECX / 2.f),
+	//	(TILECY / 2.f) / (TILECX / 2.f) * -1.f,
+	//	(TILECY / 2.f) / (TILECX / 2.f)
+	//
+	//};
+	//
+	//D3DXVECTOR3		vPoint[4]
+	//{
+	//	{ m_vecTile[iIndex]->vPos.x, m_vecTile[iIndex]->vPos.y + (TILECY / 2.f), 0.f },
+	//	{ m_vecTile[iIndex]->vPos.x + (TILECX / 2.f), m_vecTile[iIndex]->vPos.y , 0.f },
+	//	{ m_vecTile[iIndex]->vPos.x, m_vecTile[iIndex]->vPos.y - (TILECY / 2.f), 0.f },
+	//	{ m_vecTile[iIndex]->vPos.x - (TILECX / 2.f), m_vecTile[iIndex]->vPos.y, 0.f }
+	//};
+	//
+	//// y = ax + b
+	//// -b = ax - y
+	//// b = y - ax
+	//
+	//float	fB[4]
+	//{
+	//	vPoint[0].y - fGradient[0] * vPoint[0].x,
+	//	vPoint[1].y - fGradient[1] * vPoint[1].x,
+	//	vPoint[2].y - fGradient[2] * vPoint[2].x,
+	//	vPoint[3].y - fGradient[3] * vPoint[3].x
+	//};
+	//
+	//// 0 == ax + b - y
+	//// 0 > ax + b - y(위)
+	//// 0 < ax + b - y(아래) 
+	//
+	//bool	bCheck[4]{ false };
+	//
+	//if (0 < fGradient[0] * vPos.x + fB[0] - vPos.y)
+	//	bCheck[0] = true;
+	//
+	//if (0 >= fGradient[1] * vPos.x + fB[1] - vPos.y)
+	//	bCheck[1] = true;
+	//
+	//if (0 >= fGradient[2] * vPos.x + fB[2] - vPos.y)
+	//	bCheck[2] = true;
+	//
+	//if (0 < fGradient[3] * vPos.x + fB[3] - vPos.y)
+	//	bCheck[3] = true;
+	//
+	//return bCheck[0] && bCheck[1] && bCheck[2] && bCheck[3];
 }
 
 bool CMyBlockTerrain::Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex)
@@ -279,6 +305,7 @@ HRESULT CMyBlockTerrain::Initialize()
 
 			pTile->bPick = false;
 
+			//vImageSize = { TILECX, TILECY, 0.f };
 
 			m_vecTile.push_back(pTile);
 		}
@@ -328,6 +355,11 @@ void CMyBlockTerrain::Render()
 		float	fCenterX = TILECX / 2.f;
 		float	fCenterY = TILECY / 2.f;
 
+		//float	fCenterX = (TILECX / 2.f);
+		//float	fCenterY = vImageSize.y - (TILECY / 2.f);
+
+
+
 		RECT rectTile = { (float)iter->byDrawID * iter->vSize.x, 0, (float)iter->byDrawID * iter->vSize.x + iter->vSize.x, iter->vSize.y };
 
 		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
@@ -347,15 +379,15 @@ void CMyBlockTerrain::Render()
 
 
 
-		swprintf_s(szBuf, L"%d", iIndex);
+		//swprintf_s(szBuf, L"%d", iIndex);
 
-		CDevice::Get_Instance()->Get_Font()->DrawTextW(CDevice::Get_Instance()->Get_Sprite(), // 스프라이트 객체
-			szBuf,	// 출력할 문자열
-			lstrlen(szBuf), // 문자열의 길이
-			nullptr, //출력학 렉트의 주소
-			0, // 정렬 옵션
-			D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 폰트 색상
-		++iIndex;
+		//CDevice::Get_Instance()->Get_Font()->DrawTextW(CDevice::Get_Instance()->Get_Sprite(), // 스프라이트 객체
+		//	szBuf,	// 출력할 문자열
+		//	lstrlen(szBuf), // 문자열의 길이
+		//	nullptr, //출력학 렉트의 주소
+		//	0, // 정렬 옵션
+		//	D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 폰트 색상
+		//++iIndex;
 	}
 }
 
@@ -428,6 +460,10 @@ void CMyBlockTerrain::Mouse_Render()
 
 		float	fCenterX = TILECX / 2.f;
 		float	fCenterY = TILECY / 2.f;
+
+
+		//float	fCenterX = (TILECX / 2.f);
+		//float	fCenterY = vImageSize.y - (TILECY / 2.f);
 
 		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
 			nullptr,

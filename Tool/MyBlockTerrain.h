@@ -42,5 +42,8 @@ private:
 
 	//마우스를 따라다니는 불투명이미지를 만들기 위해서
 	TILE* m_Tile = nullptr;
+
+	//들어온 이미지 정보를 저장하기 위해서
+	D3DXVECTOR3 vImageSize;
 };
 
