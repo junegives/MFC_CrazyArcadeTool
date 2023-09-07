@@ -122,12 +122,8 @@ void CMapTool::OnDropFiles(HDROP hDropInfo)
 
 			pPngImg->Load(strRelative);
 			
-
-			for (int i = 0; i < pPngImg->GetWidth() / TILECX; ++i)
-			{
-				m_MapPngImg.insert({ strFileName, pPngImg });
-				m_ListBox.AddString(szFileName);
-			}
+			m_MapPngImg.insert({ strFileName, pPngImg });
+			m_ListBox.AddString(szFileName);
 		}		
 	}	
 
