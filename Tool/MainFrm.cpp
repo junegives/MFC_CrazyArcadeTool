@@ -120,8 +120,8 @@ void CMainFrame::OnObjectTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	//m_UnitTool.DoModal();
-
 	m_BlockTool->ShowWindow(SW_SHOW);
+	
 }
 
 void CMainFrame::OnMonsterTool()
@@ -140,3 +140,4 @@ void CMainFrame::OnPlayerTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
+
