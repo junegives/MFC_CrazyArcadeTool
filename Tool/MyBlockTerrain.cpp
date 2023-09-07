@@ -23,7 +23,7 @@ void CMyBlockTerrain::Tile_Move(const D3DXVECTOR3& vPos, const D3DXVECTOR3& vSiz
 	m_Tile->byOption = 0;
 	m_Tile->byDrawID = iDrawID;
 
-	//vImageSize = vSize;
+	m_vImageSize = vSize;
 }
 
 void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, const BYTE& byMove, const BYTE& byBurst, const int& iDrawID)
@@ -32,6 +32,24 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 
 	if (-1 == iIndex)
 		return;
+
+
+	if (m_vecTile[iIndex]->bPick == false)
+	{
+		m_vecTile[iIndex]->byDrawID = iDrawID;
+		m_vecTile[iIndex]->byOption_Move = byMove;
+		m_vecTile[iIndex]->byOption_Burst = byBurst;
+
+		//m_vImageSize = vSize;
+		float	fCenterX = (TILECX / 2.f);
+		float	fCenterY = vSize.y - (TILECY / 2.f);
+		m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
+
+		m_vecTile[iIndex]->bPick = true;
+
+	}
+
+	
 
 	//이미지의 칸 갯수 파악을 위함
 	int iBlockX = vSize.x / TILECX;
@@ -55,10 +73,10 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 	{
 		if (m_vecTile[iIndex]->bPick == false)
 		{
-			m_vecTile[iIndex]->byDrawID = iDrawID;
-			m_vecTile[iIndex]->byOption_Move = byMove;
-			m_vecTile[iIndex]->byOption_Burst = byBurst;
-			m_vecTile[iIndex]->bPick = true;
+			//m_vecTile[iIndex]->byDrawID = iDrawID;
+			//m_vecTile[iIndex]->byOption_Move = byMove;
+			//m_vecTile[iIndex]->byOption_Burst = byBurst;
+			//m_vecTile[iIndex]->bPick = true;
 		}
 	}
 	else
@@ -79,7 +97,7 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 		//	}
 		//}
 
-		if (m_vecTile[iIndex]->bPick == false)
+		/*if (m_vecTile[iIndex]->bPick == false)
 		{
 			for (size_t i = 0; i <= iBlockY; i++)
 			{
@@ -107,7 +125,7 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 				}
 
 			}
-		}
+		}*/
 
 	}
 
@@ -305,6 +323,8 @@ HRESULT CMyBlockTerrain::Initialize()
 
 			pTile->bPick = false;
 
+			pTile->vImageCenter = { 0.f, 0.f, 0.f };
+
 			//vImageSize = { TILECX, TILECY, 0.f };
 
 			m_vecTile.push_back(pTile);
@@ -352,11 +372,17 @@ void CMyBlockTerrain::Render()
 		//iter->vSize.x
 		//iter->vSize.y
 
-		float	fCenterX = TILECX / 2.f;
-		float	fCenterY = TILECY / 2.f;
+		//float	fCenterX = TILECX / 2.f;
+		//float	fCenterY = TILECY / 2.f;
 
-		//float	fCenterX = (TILECX / 2.f);
-		//float	fCenterY = vImageSize.y - (TILECY / 2.f);
+		//if (iter->vImageCenter.x == 0)
+		//{
+		//	float	fCenterX = (TILECX / 2.f);
+		//	float	fCenterY = m_vImageSize.y - (TILECY / 2.f);
+
+		//	iter->vImageCenter.x = fCenterX;
+		//	iter->vImageCenter.y = fCenterY;
+		//}
 
 
 
@@ -364,7 +390,7 @@ void CMyBlockTerrain::Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
 			nullptr,
-			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
+			&D3DXVECTOR3(iter->vImageCenter.x, iter->vImageCenter.y, 0.f),
 			nullptr,
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 
@@ -458,12 +484,12 @@ void CMyBlockTerrain::Mouse_Render()
 		//float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
 		//float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
 
-		float	fCenterX = TILECX / 2.f;
-		float	fCenterY = TILECY / 2.f;
+		//float	fCenterX = TILECX / 2.f;
+		//float	fCenterY = TILECY / 2.f;
 
 
-		//float	fCenterX = (TILECX / 2.f);
-		//float	fCenterY = vImageSize.y - (TILECY / 2.f);
+		float	fCenterX = (TILECX / 2.f);
+		float	fCenterY = m_vImageSize.y - (TILECY / 2.f);
 
 		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
 			nullptr,

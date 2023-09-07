@@ -40,6 +40,8 @@ typedef struct tagTile
 	BYTE		byOption_Move;   //움직이는지 안움직이는지
 	BYTE        byOption_Burst;  //터지는지 안터지는지
 
+	D3DXVECTOR3 vImageCenter;
+
 	bool        bPick;
 
 }TILE;

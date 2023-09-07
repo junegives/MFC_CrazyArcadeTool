@@ -44,6 +44,6 @@ private:
 	TILE* m_Tile = nullptr;
 
 	//들어온 이미지 정보를 저장하기 위해서
-	D3DXVECTOR3 vImageSize;
+	D3DXVECTOR3 m_vImageSize;
 };
 
