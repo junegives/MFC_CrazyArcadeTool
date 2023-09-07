@@ -65,11 +65,11 @@ HRESULT CDevice::Init_Device(void)
 	D3DXFONT_DESCW			tFontInfo;
 	ZeroMemory(&tFontInfo, sizeof(D3DXFONT_DESCW));
 
-	tFontInfo.Height = 20;
-	tFontInfo.Width = 10;
+	tFontInfo.Height = 16;
+	tFontInfo.Width = 8;
 	tFontInfo.Weight = FW_HEAVY;
 	tFontInfo.CharSet = HANGEUL_CHARSET;
-	lstrcpy(tFontInfo.FaceName, L"궁서");
+	lstrcpy(tFontInfo.FaceName, L"돋움");
 
 	if (FAILED(D3DXCreateFontIndirect(m_pDevice, &tFontInfo, &m_pFont)))
 	{

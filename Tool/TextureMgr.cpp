@@ -16,7 +16,7 @@ const TEXINFO * CTextureMgr::Get_Texture(const TCHAR * pObjKey, const TCHAR * pS
 {
 	auto		iter = find_if(m_mapTex.begin(), m_mapTex.end(), [&](auto& MyPair)->bool
 	{
-		if (pObjKey == MyPair.first)
+		if (pStateKey == MyPair.first)
 			return true;
 
 		return false;
@@ -68,7 +68,7 @@ HRESULT CTextureMgr::ReadImgPath(const wstring& wstrPath)
 
 HRESULT CTextureMgr::Insert_Texture(TEXTYPE eType, const TCHAR * pFilePath, const TCHAR * pObjKey, const TCHAR * pStateKey, const int & iCnt)
 {
-	/*auto		iter = find_if(m_mapTex.begin(), m_mapTex.end(), [&](auto& MyPair)->bool
+	auto		iter = find_if(m_mapTex.begin(), m_mapTex.end(), [&](auto& MyPair)->bool
 	{
 		if (pObjKey == MyPair.first)
 			return true;
@@ -77,7 +77,7 @@ HRESULT CTextureMgr::Insert_Texture(TEXTYPE eType, const TCHAR * pFilePath, cons
 	});
 
 	if (m_mapTex.end() == iter)
-	{*/
+	{
 		CTexture*	pTexture = nullptr;
 
 		switch (eType)
@@ -98,11 +98,11 @@ HRESULT CTextureMgr::Insert_Texture(TEXTYPE eType, const TCHAR * pFilePath, cons
 			return E_FAIL;
 		}
 		
-		m_mapTex.insert({pObjKey, pTexture});
+		m_mapTex.insert({ pStateKey, pTexture});
 
 		wstring s = m_mapTex.begin()->first;
 		//wstring r = m_mapTex.end()->first;
-	//}
+	}
 	
 	return S_OK;
 }

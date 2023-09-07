@@ -143,11 +143,11 @@ bool CMyTerrain::Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex)
 
 HRESULT CMyTerrain::Initialize()
 {
-	//if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Tile/Cemetory05.png", L"Tile", L"Cemetory", 51)))
-	//{
-	//	AfxMessageBox(L"Tile Texture Insert Failed");
-	//	return E_FAIL;
-	//}
+	/*if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Tile/Debug0.png", L"Tile", L"Debug", 1)))
+	{
+		AfxMessageBox(L"Tile Texture Insert Failed");
+		return E_FAIL;
+	}*/
 
 	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt")))
 	{
@@ -211,6 +211,7 @@ void CMyTerrain::Render()
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 			
 		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", iter->wstrStateKey, iter->byDrawID);
+		const TEXINFO* pDebugTex = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", L"Debug", 0);
 
 		float	fCenterX = TILECX / 2.f;
 		float	fCenterY = TILECY / 2.f;
@@ -223,6 +224,12 @@ void CMyTerrain::Render()
 			nullptr,
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 
+		CDevice::Get_Instance()->Get_Sprite()->Draw(pDebugTex->pTexture,
+			nullptr,
+			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
+			nullptr,
+			D3DCOLOR_ARGB(100, 255, 255, 255));
+
 		swprintf_s(szBuf, L"%d", iIndex);
 
 		CDevice::Get_Instance()->Get_Font()->DrawTextW(CDevice::Get_Instance()->Get_Sprite(), // 스프라이트 객체
@@ -231,8 +238,9 @@ void CMyTerrain::Render()
 														nullptr, //출력학 렉트의 주소
 														0, // 정렬 옵션
 														D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 폰트 색상
+
 		++iIndex;
-	}		
+	}
 }
 
 void CMyTerrain::Mini_Render()
