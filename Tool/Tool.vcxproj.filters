@@ -73,6 +73,9 @@
     <Filter Include="04. Etc\01. Dialog\04. RoomTool">
       <UniqueIdentifier>{8650fab9-c661-465c-9060-291782f72a3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Etc\01. Dialog\01. ObjectTool\01.BlockTool">
+      <UniqueIdentifier>{009dbe65-130b-4a49-92c2-6b08b271ef56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -129,6 +132,9 @@
     <ClInclude Include="MapTool.h">
       <Filter>04. Etc\01. Dialog\00. MapTool</Filter>
     </ClInclude>
+    <ClInclude Include="BlockTool.h">
+      <Filter>04. Etc\01. Dialog\01. ObjectTool\01.BlockTool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tool.cpp">
@@ -175,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="MapTool.cpp">
       <Filter>04. Etc\01. Dialog\00. MapTool</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockTool.cpp">
+      <Filter>04. Etc\01. Dialog\01. ObjectTool\01.BlockTool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

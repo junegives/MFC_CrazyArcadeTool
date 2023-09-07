@@ -54,6 +54,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	m_MapTool = new CMapTool;
 	m_MapTool->Create(IDD_MAPTOOL, this);
+
+	m_BlockTool = new CBlockTool;
+	m_BlockTool->Create(IDD_CBLOCKTOOL, this);
 	
 	return 0;
 }
@@ -117,6 +120,8 @@ void CMainFrame::OnObjectTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	//m_UnitTool.DoModal();
+
+	m_BlockTool->ShowWindow(SW_SHOW);
 }
 
 void CMainFrame::OnMonsterTool()
