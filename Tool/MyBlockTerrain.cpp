@@ -71,13 +71,18 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 
 	if (iBlockX <= 1 && iBlockY <= 1)
 	{
-		if (m_vecTile[iIndex]->bPick == false)
-		{
-			//m_vecTile[iIndex]->byDrawID = iDrawID;
-			//m_vecTile[iIndex]->byOption_Move = byMove;
-			//m_vecTile[iIndex]->byOption_Burst = byBurst;
-			//m_vecTile[iIndex]->bPick = true;
-		}
+		//if (m_vecTile[iIndex]->bPick == false)
+		//{
+		//	m_vecTile[iIndex]->byDrawID = iDrawID;
+		//	m_vecTile[iIndex]->byOption_Move = byMove;
+		//	m_vecTile[iIndex]->byOption_Burst = byBurst;
+
+		//	float	fCenterX = (TILECX / 2.f);
+		//	float	fCenterY = vSize.y - (TILECY / 2.f);
+		//	m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
+
+		//	m_vecTile[iIndex]->bPick = true;
+		//}
 	}
 	else
 	{
@@ -106,11 +111,15 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 					if (i == 0 && j == 0)
 					{
 						m_vecTile[iIndex]->byDrawID = iDrawID;
+
+						float	fCenterX = (TILECX / 2.f);
+						float	fCenterY = vSize.y - (TILECY / 2.f);
+						m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
 					}
 
 					//만약 센터의 중점을 아래로 설정했을 시 -를 해주어야 위에 공간을 막아줌
 					//좌측 상단일 시 +15를 해주어야 함
-					int iImageIndex = iIndex + j + (i * 15);
+					int iImageIndex = iIndex + j - (i * 15);
 
 					if (iImageIndex < m_vecTile.size())
 					{
@@ -125,9 +134,9 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 				}
 
 			}
-		}*/
+		}
 
-	}
+	}*/
 
 	//if (m_vecTile[iIndex]->bPick == false)
 	//{
@@ -148,6 +157,7 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 	//m_vecTile[iIndex]->byDrawID = iDrawID;
 	//m_vecTile[iIndex]->byOption_Move = byMove;
 	//m_vecTile[iIndex]->byOption_Burst = byBurst;
+	}
 }
 
 void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, const int& iDrawID)
