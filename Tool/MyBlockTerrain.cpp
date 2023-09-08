@@ -33,31 +33,12 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 	if (-1 == iIndex)
 		return;
 
-
-	if (m_vecTile[iIndex]->bPick == false)
-	{
-		m_vecTile[iIndex]->byDrawID = iDrawID;
-		m_vecTile[iIndex]->byOption_Move = byMove;
-		m_vecTile[iIndex]->byOption_Burst = byBurst;
-
-		//m_vImageSize = vSize;
-		float	fCenterX = (TILECX / 2.f);
-		float	fCenterY = vSize.y - (TILECY / 2.f);
-		m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
-
-		m_vecTile[iIndex]->bPick = true;
-
-	}
-
-	
+	float	fCenterX = (TILECX / 2.f);
+	float	fCenterY = vSize.y - (TILECY / 2.f);
 
 	//이미지의 칸 갯수 파악을 위함
 	int iBlockX = vSize.x / TILECX;
 	int iBlockY = vSize.y / TILECY;
-
-	
-
-	//int iTherestX = vSize.x % TILECX;
 
 
 	if (0 != (int)vSize.x % TILECX)
@@ -69,94 +50,35 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 		iBlockY = iBlockY + 1;
 	}
 
-	if (iBlockX <= 1 && iBlockY <= 1)
+	if (CanSelect(iIndex, iBlockX, iBlockY))
 	{
-		//if (m_vecTile[iIndex]->bPick == false)
-		//{
-		//	m_vecTile[iIndex]->byDrawID = iDrawID;
-		//	m_vecTile[iIndex]->byOption_Move = byMove;
-		//	m_vecTile[iIndex]->byOption_Burst = byBurst;
-
-		//	float	fCenterX = (TILECX / 2.f);
-		//	float	fCenterY = vSize.y - (TILECY / 2.f);
-		//	m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
-
-		//	m_vecTile[iIndex]->bPick = true;
-		//}
-	}
-	else
-	{
-		//for (size_t i = 0; i <= iBlockY; i++)
-		//{
-		//	for (size_t j = 0; j <= iBlockX; j++)
-		//	{
-		//		int iImageIndex = iIndex + j - (i * 15);
-
-		//		if (iImageIndex < m_vecTile.size())
-		//		{
-		//			if (true == m_vecTile[iImageIndex]->bPick)
-		//			{
-		//				return;
-		//			}
-		//		}
-		//	}
-		//}
-
-		/*if (m_vecTile[iIndex]->bPick == false)
+		if (iBlockX <= 1 && iBlockY <= 1)
 		{
-			for (size_t i = 0; i <= iBlockY; i++)
+			m_vecTile[iIndex]->byDrawID = iDrawID;
+			m_vecTile[iIndex]->byOption_Move = byMove;
+			m_vecTile[iIndex]->byOption_Burst = byBurst;
+
+			m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
+			m_vecTile[iIndex]->bPick = true;
+		}
+		else
+		{
+			m_vecTile[iIndex]->byDrawID = iDrawID;
+
+			for (size_t i = 0; i < iBlockY; i++)
 			{
-				for (size_t j = 0; j <= iBlockX; j++)
+				for (size_t j = 0; j < iBlockX; j++)
 				{
-					if (i == 0 && j == 0)
-					{
-						m_vecTile[iIndex]->byDrawID = iDrawID;
-
-						float	fCenterX = (TILECX / 2.f);
-						float	fCenterY = vSize.y - (TILECY / 2.f);
-						m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
-					}
-
-					//만약 센터의 중점을 아래로 설정했을 시 -를 해주어야 위에 공간을 막아줌
-					//좌측 상단일 시 +15를 해주어야 함
 					int iImageIndex = iIndex + j - (i * 15);
 
-					if (iImageIndex < m_vecTile.size())
-					{
-						m_vecTile[iImageIndex]->byOption_Move = byMove;
-						m_vecTile[iImageIndex]->byOption_Burst = byBurst;
-						m_vecTile[iImageIndex]->bPick = true;
-					}
+					m_vecTile[iImageIndex]->byOption_Move = byMove;
+					m_vecTile[iImageIndex]->byOption_Burst = byBurst;
 
-					//m_vecTile[iImageIndex]->byOption_Move = byMove;
-					//m_vecTile[iImageIndex]->byOption_Burst = byBurst;
-					//m_vecTile[iImageIndex]->bPick = true;
+					m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
+					m_vecTile[iImageIndex]->bPick = true;
 				}
-
 			}
 		}
-
-	}*/
-
-	//if (m_vecTile[iIndex]->bPick == false)
-	//{
-	//	m_vecTile[iIndex]->byDrawID = iDrawID;
-	//	m_vecTile[iIndex]->byOption_Move = byMove;
-	//	m_vecTile[iIndex]->byOption_Burst = byBurst;
-	//	m_vecTile[iIndex]->bPick = true;
-	//}
-
-	//if (m_vecTile[iIndex]->bPick == false)
-	//{
-	//	m_vecTile[iIndex]->byDrawID = iDrawID;
-	//	m_vecTile[iIndex]->byOption_Move = byMove;
-	//	m_vecTile[iIndex]->byOption_Burst = byBurst;
-	//	m_vecTile[iIndex]->bPick = true;
-	//}
-
-	//m_vecTile[iIndex]->byDrawID = iDrawID;
-	//m_vecTile[iIndex]->byOption_Move = byMove;
-	//m_vecTile[iIndex]->byOption_Burst = byBurst;
 	}
 }
 
@@ -301,6 +223,29 @@ bool CMyBlockTerrain::Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex)
 
 		if (0.f < D3DXVec3Dot(&vNormal[i], &vMouseDir[i]))
 			return false;
+	}
+
+	return true;
+}
+
+bool CMyBlockTerrain::CanSelect(int _iIdenx, int _iBlockX, int _iBlockY)
+{
+
+	for (size_t i = 0; i < _iBlockY; i++)
+	{
+		for (size_t j = 0; j < _iBlockX; j++)
+		{
+			int iImageIndex = _iIdenx + j - (i * 15);
+
+			if (j != 0)
+			{
+				if (iImageIndex % TILEX == 0) return false;
+			}
+
+			if (iImageIndex < 0 || iImageIndex >= m_vecTile.size()) return false;
+
+			if (m_vecTile[iImageIndex]->bPick) return false;
+		}
 	}
 
 	return true;
@@ -468,8 +413,28 @@ void CMyBlockTerrain::Mouse_Render()
 		D3DXMATRIX		matWorld, matScale, matTrans;
 
 		TCHAR		szBuf[MIN_STR] = L"";
-		int			iIndex = 0;
 		RECT		rc{};
+
+		int	iIndex = Get_TileIndex(Get_Mouse());
+		
+		if (iIndex == -1) return;
+
+		m_Tile->vPos.x = m_vecTile[iIndex]->vPos.x;
+		m_Tile->vPos.y = m_vecTile[iIndex]->vPos.y;
+		m_Tile->vPos.z = m_vecTile[iIndex]->vPos.z;
+
+		//이미지의 칸 갯수 파악을 위함
+		int iBlockX = m_Tile->vSize.x / TILECX;
+		int iBlockY = m_Tile->vSize.y / TILECY;
+
+		if (0 != (int)m_Tile->vSize.x % TILECX)
+		{
+			iBlockX = iBlockX + 1;
+		}
+		if ((int)m_Tile->vSize.y % TILECY != 0)
+		{
+			iBlockY = iBlockY + 1;
+		}
 
 		D3DXMatrixIdentity(&matWorld);
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
@@ -491,21 +456,27 @@ void CMyBlockTerrain::Mouse_Render()
 
 		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Image", L"Block", m_Tile->byDrawID);
 
-		//float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
-		//float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
-
-		//float	fCenterX = TILECX / 2.f;
-		//float	fCenterY = TILECY / 2.f;
-
-
 		float	fCenterX = (TILECX / 2.f);
 		float	fCenterY = m_vImageSize.y - (TILECY / 2.f);
 
-		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
-			nullptr,
-			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
-			nullptr,
-			D3DCOLOR_ARGB(150, 255, 255, 255));
+		if (CanSelect(iIndex, iBlockX, iBlockY))
+		{
+			CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
+				nullptr,
+				&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
+				nullptr,
+				D3DCOLOR_ARGB(150, 0, 255, 0));
+		}
+
+		else
+		{
+			CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
+				nullptr,
+				&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
+				nullptr,
+				D3DCOLOR_ARGB(150, 255, 0, 0));
+		}
+
 	}
 }
 
