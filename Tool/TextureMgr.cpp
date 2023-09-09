@@ -66,6 +66,52 @@ HRESULT CTextureMgr::ReadImgPath(const wstring& wstrPath)
 	return S_OK;
 }
 
+vector<CString> CTextureMgr::GetImgPath(const wstring& wstrPath, const wstring& pObjKey)
+{
+	wifstream		fin;
+
+	vector<CString> vecImgPath;
+
+	fin.open(wstrPath, ios::in);
+
+	if (!fin.fail())
+	{
+		TCHAR		szObjKey[MAX_STR] = L"";
+		TCHAR		szStateKey[MAX_STR] = L"";
+		TCHAR		szCount[MAX_STR] = L"";
+		TCHAR		szPath[MAX_PATH] = L"";
+
+		while (true)
+		{
+			fin.getline(szObjKey, MAX_STR, '|');
+			fin.getline(szStateKey, MAX_STR, '|');
+			fin.getline(szCount, MAX_STR, '|');
+			fin.getline(szPath, MAX_PATH);
+
+			if (fin.eof())
+				break;
+
+			if (szObjKey == pObjKey)
+			{
+				int	iCount = _ttoi(szCount);
+
+				TCHAR	szTempPath[MAX_PATH] = L"";
+
+
+				for (int i = 0; i < iCount; ++i)
+				{
+					swprintf_s(szTempPath, szPath, i);
+					vecImgPath.push_back(szTempPath);
+				}
+			}
+		}
+
+		fin.close();
+	}
+
+	return vecImgPath;
+}
+
 HRESULT CTextureMgr::Insert_Texture(TEXTYPE eType, const TCHAR * pFilePath, const TCHAR * pObjKey, const TCHAR * pStateKey, const int & iCnt)
 {
 	auto		iter = find_if(m_mapTex.begin(), m_mapTex.end(), [&](auto& MyPair)->bool
@@ -98,7 +144,7 @@ HRESULT CTextureMgr::Insert_Texture(TEXTYPE eType, const TCHAR * pFilePath, cons
 			return E_FAIL;
 		}
 		
-		m_mapTex.insert({ pStateKey, pTexture});
+		m_mapTex.insert({pStateKey, pTexture});
 
 		wstring s = m_mapTex.begin()->first;
 		//wstring r = m_mapTex.end()->first;

@@ -24,7 +24,7 @@ public:
 	int			Get_TileIndex(const D3DXVECTOR3& vPos);
 	bool		Picking(const D3DXVECTOR3& vPos, const int& iIndex);
 	bool		Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex);
-	bool		CanSelect(int _iIdenx, int _iBlockX, int _iBlockY);
+	bool		CanInstall(int _iIdenx, int _iBlockX, int _iBlockY);
 
 public:
 	HRESULT		Initialize();

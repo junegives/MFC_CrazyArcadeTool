@@ -122,8 +122,9 @@ void CMainFrame::OnMapTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	m_MapTool->ShowWindow(SW_SHOW);
-}
+	m_MapTool->m_bTileSelected = false;
 
+}
 
 void CMainFrame::OnObjectTool()
 {

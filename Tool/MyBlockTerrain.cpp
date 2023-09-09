@@ -52,7 +52,7 @@ void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, c
 		iBlockY = iBlockY + 1;
 	}
 
-	if (CanSelect(iIndex, iBlockX, iBlockY))
+	if (CanInstall(iIndex, iBlockX, iBlockY))
 	{
 		if (iBlockX <= 1 && iBlockY <= 1)
 		{
@@ -230,7 +230,7 @@ bool CMyBlockTerrain::Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex)
 	return true;
 }
 
-bool CMyBlockTerrain::CanSelect(int _iIdenx, int _iBlockX, int _iBlockY)
+bool CMyBlockTerrain::CanInstall(int _iIdenx, int _iBlockX, int _iBlockY)
 {
 
 	for (size_t i = 0; i < _iBlockY; i++)
@@ -461,7 +461,7 @@ void CMyBlockTerrain::Mouse_Render()
 		float	fCenterX = (TILECX / 2.f);
 		float	fCenterY = m_vImageSize.y - (TILECY / 2.f);
 
-		if (CanSelect(iIndex, iBlockX, iBlockY))
+		if (CanInstall(iIndex, iBlockX, iBlockY))
 		{
 			CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
 				nullptr,

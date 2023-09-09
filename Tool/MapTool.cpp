@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CMapTool, CDialog)
 	ON_WM_DROPFILES()
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDC_BUTTON1, &CMapTool::OnSaveData)
+//	ON_WM_CREATE()
 END_MESSAGE_MAP()
 
 
@@ -85,6 +86,7 @@ void CMapTool::OnListBox()
 	// _tstoi : 문자를 정수형으로 변환하는 함수
 	m_iDrawID = _tstoi(strFindNameCopy);
 
+	m_bTileSelected = true;
 
 	UpdateData(FALSE);
 }
@@ -134,6 +136,8 @@ void CMapTool::OnDropFiles(HDROP hDropInfo)
 	}	
 
 	Horizontal_Scroll();
+
+	m_bTileSelected = false;
 
 	UpdateData(FALSE);
 }
@@ -240,4 +244,53 @@ void CMapTool::OnSaveData()
 		CloseHandle(hFile);
 	}
 
+}
+
+BOOL CMapTool::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+
+	vector<CString> vecImgPath;
+
+	// TODO:  여기에 특수화된 작성 코드를 추가합니다.
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", L"Tile");
+	if (vecImgPath.size() == 0)
+		return true;
+
+	for (auto& iter : vecImgPath)
+	{
+		TCHAR		szFileName[MIN_STR] = L"";
+		CString		strFileName = PathFindFileName(iter);
+		CString		strFilePath = iter;
+
+
+		lstrcpy(szFileName, strFileName);
+
+		// 파일의 확장자 명을 제거하는 함수
+		PathRemoveExtension(szFileName);
+
+		strFileName = szFileName;
+
+		auto	iter = m_MapPngImg.find(strFileName);
+
+		if (iter == m_MapPngImg.end())
+		{
+			CImage* pPngImg = new CImage;
+
+			pPngImg->Load(strFilePath);
+
+			m_MapPngImg.insert({ strFileName, pPngImg });
+			m_ListBox.AddString(szFileName);
+		}
+	}
+
+	UpdateData(TRUE);
+
+	Horizontal_Scroll();
+
+	m_bTileSelected = false;
+
+	UpdateData(FALSE);
+
+	return TRUE;
 }

@@ -130,6 +130,15 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	m_pMyBlockTerrain->Render();
 
 	CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+
+
+	CMapTool* pMapTool = pMain->m_MapTool;
+	if (pMapTool->IsWindowVisible() && pMapTool->m_bTileSelected)
+	{
+		m_pMyTerrain->Mouse_Render();
+	}
+	
+
 	CBlockTool* pBlockTool = pMain->m_BlockTool;
 	if (pBlockTool->IsWindowVisible())
 	{
@@ -224,7 +233,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CBlockTool* pBlockTool = pMain->m_BlockTool;
 
-	if (pMapTool->IsWindowVisible())
+	if (pMapTool->IsWindowVisible() && pMapTool->m_bTileSelected)
 	{
 		m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
 			point.y,
@@ -275,8 +284,11 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 		CBlockTool* pBlockTool = pMain->m_BlockTool;
 
 		
-		if (pMapTool->IsWindowVisible())
+		if (pMapTool->IsWindowVisible() && pMapTool->m_bTileSelected)
 		{
+			m_pMyTerrain->Tile_Preview(D3DXVECTOR3(point.x, point.y, 0.f),
+										pMapTool->m_strStateKey, pMapTool->m_iDrawID);
+
 			m_pMyTerrain->Tile_Change(D3DXVECTOR3(point.x,
 				point.y,
 				0.f),
@@ -313,7 +325,14 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 
+		CMapTool* pMapTool = pMain->m_MapTool;
 		CBlockTool* pBlockTool = pMain->m_BlockTool;
+
+		if (pMapTool->IsWindowVisible() && pMapTool->m_bTileSelected)
+		{
+			m_pMyTerrain->Tile_Preview(D3DXVECTOR3(point.x, point.y, 0.f),
+				pMapTool->m_strStateKey, pMapTool->m_iDrawID);
+		}
 
 		if (pBlockTool->IsWindowVisible())
 		{

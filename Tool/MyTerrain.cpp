@@ -141,6 +141,18 @@ bool CMyTerrain::Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex)
 	return true;
 }
 
+void CMyTerrain::Tile_Preview(const D3DXVECTOR3& vPos, const TCHAR* pObjKey, const int& iDrawID)
+{
+	if(!m_pPreviewTile)
+		m_pPreviewTile = new TILE;
+
+	m_pPreviewTile->vPos = { vPos.x, vPos.y, 0.f };
+	m_pPreviewTile->vSize = { TILECX, TILECY, 0.f };
+	m_pPreviewTile->wstrStateKey = pObjKey;
+	m_pPreviewTile->byOption = 0;
+	m_pPreviewTile->byDrawID = iDrawID;
+}
+
 HRESULT CMyTerrain::Initialize()
 {
 	/*if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Tile/Debug0.png", L"Tile", L"Debug", 1)))
@@ -277,11 +289,62 @@ void CMyTerrain::Mini_Render()
 	}
 }
 
+void CMyTerrain::Mouse_Render()
+{
+	if (m_pPreviewTile != nullptr)
+	{
+			D3DXMATRIX		matWorld, matScale, matTrans;
+
+			TCHAR		szBuf[MIN_STR] = L"";
+			RECT		rc{};
+
+			int	iIndex = Get_TileIndex(Get_Mouse());
+
+			if (iIndex == -1) return;
+
+			m_pPreviewTile->vPos.x = m_vecTile[iIndex]->vPos.x;
+			m_pPreviewTile->vPos.y = m_vecTile[iIndex]->vPos.y;
+			m_pPreviewTile->vPos.z = m_vecTile[iIndex]->vPos.z;
+
+			D3DXMatrixIdentity(&matWorld);
+			D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+			D3DXMatrixTranslation(&matTrans,
+				m_pPreviewTile->vPos.x,
+				m_pPreviewTile->vPos.y,
+				m_pPreviewTile->vPos.z);
+
+			matWorld = matScale * matTrans;
+
+			GetClientRect(m_pMainView->m_hWnd, &rc);
+
+			float	fX = WINCX / float(rc.right - rc.left);
+			float	fY = WINCY / float(rc.bottom - rc.top);
+
+			Set_Ratio(&matWorld, fX, fY);
+
+			CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+
+			const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", m_pPreviewTile->wstrStateKey, m_pPreviewTile->byDrawID);
+
+			float	fCenterX = TILECX / 2.f;
+			float	fCenterY = TILECY / 2.f;
+
+				CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
+					nullptr,
+					&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
+					nullptr,
+					D3DCOLOR_ARGB(170, 200, 255, 200));
+
+		}
+}
+
 void CMyTerrain::Release()
 {
 	for_each(m_vecTile.begin(), m_vecTile.end(), CDeleteObj());
 	m_vecTile.clear();
 	m_vecTile.shrink_to_fit();
+
+	Safe_Delete(m_pPreviewTile);
 }
 
 void CMyTerrain::Set_Ratio(D3DXMATRIX * pOut, float fRatioX, float fRatioY)
