@@ -37,6 +37,7 @@ void CBlockTool::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CBlockTool, CDialog)
 	ON_LBN_SELCHANGE(IDC_LIST1, &CBlockTool::OnListBox)
 	ON_WM_DROPFILES()
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 
@@ -152,4 +153,26 @@ void CBlockTool::OnDropFiles(HDROP hDropInfo)
 
 	
 	UpdateData(FALSE);
+}
+
+
+
+
+
+
+
+void CBlockTool::OnDestroy()
+{
+
+	for_each(m_MapPngImg.begin(), m_MapPngImg.end(), [](auto& MyPair)
+		{
+			MyPair.second->Destroy();
+			Safe_Delete(MyPair.second);
+		});
+	m_MapPngImg.clear();
+
+	CDialog::OnDestroy();
+
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 }

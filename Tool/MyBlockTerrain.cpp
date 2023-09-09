@@ -16,8 +16,10 @@ CMyBlockTerrain::~CMyBlockTerrain()
 
 void CMyBlockTerrain::Tile_Move(const D3DXVECTOR3& vPos, const D3DXVECTOR3& vSize, const int& iDrawID)
 {
-	m_Tile = new TILE;
-
+	if (m_Tile == nullptr)
+	{
+		m_Tile = new TILE;
+	}
 	m_Tile->vPos = { vPos.x, vPos.y, 0.f };
 	m_Tile->vSize = { vSize.x, vSize.y, 0.f };
 	m_Tile->byOption = 0;

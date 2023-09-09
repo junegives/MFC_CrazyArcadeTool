@@ -25,6 +25,7 @@ protected:
 public:
 	afx_msg void OnListBox();
 	afx_msg void OnDropFiles(HDROP hDropInfo);
+	afx_msg void OnDestroy();
 
 public:
 	CListBox m_ListBox;
@@ -42,4 +43,5 @@ public:
 
 	BYTE  m_Option_Move = 0;
 	BYTE  m_Option_Burst = 0;
+
 };
