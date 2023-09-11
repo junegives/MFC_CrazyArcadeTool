@@ -3,7 +3,6 @@ Angry|WalkDown|2|..\Image\Monster\Angry\WalkDown\WalkDown%d.png
 Angry|WalkLeft|2|..\Image\Monster\Angry\WalkLeft\WalkLeft%d.png
 Angry|WalkRight|2|..\Image\Monster\Angry\WalkRight\WalkRight%d.png
 Angry|WalkUp|2|..\Image\Monster\Angry\WalkUp\WalkUp%d.png
-Monster|Ghost|19|..\Image\Monster\Ghost\04 (1%d.png
 MummyRed|Die|4|..\Image\Monster\MummyRed\Die\Die%d.png
 MummyRed|WalkDown|1|..\Image\Monster\MummyRed\WalkDown\WalkDown%d.png
 MummyRed|WalkLeft|1|..\Image\Monster\MummyRed\WalkLeft\WalkLeft%d.png
@@ -49,17 +48,13 @@ Tile|Forest|3|..\Image\Tile\Forest\Forest%d.png
 Tile|Kart|10|..\Image\Tile\Kart\Kart%d.png
 Tile|Patrit|15|..\Image\Tile\Patrit\Patrit%d.png
 Tile|Test|12|..\Image\Tile\Test\Test%d.png
-WaterBalloon|Blueblock|3|..\Image\WaterBalloon\Blueblock\Blueblock0%d.png
-WaterBalloon|Bluestreak|3|..\Image\WaterBalloon\Bluestreak\Bluestreak0%d.png
-WaterBalloon|Chicken|3|..\Image\WaterBalloon\Chicken\Chicken0%d.png
-WaterBalloon|Cottoncandy|3|..\Image\WaterBalloon\Cottoncandy\Cotton candy0%d.png
-WaterBalloon|Greenheart|3|..\Image\WaterBalloon\Greenheart\Greenheart0%d.png
-WaterBalloon|Greenstreak|3|..\Image\WaterBalloon\Greenstreak\Greenstreak0%d.png
-WaterBalloon|Orangeblock|3|..\Image\WaterBalloon\Orangeblock\Orangeblock0%d.png
-WaterBalloon|Redblock|3|..\Image\WaterBalloon\Redblock\Redblock0%d.png
-WaterBalloon|Redheart|3|..\Image\WaterBalloon\Redheart\Redheart0%d.png
-WaterBalloon|Redstreak|3|..\Image\WaterBalloon\Redstreak\Redstreak0%d.png
-WaterBomb|Basic|3|..\Image\WaterBomb\Basic\Idle (0%d.png
-WaterBomb|Cloud|1|..\Image\WaterBomb\Cloud\BlueBu%d.png
-WaterBomb|Flow|37|..\Image\WaterBomb\Flow\flow (0%d.png
-WaterBomb|Idle|3|..\Image\WaterBomb\Idle\Idle (0%d.png
+WaterBalloon|Blueblock|3|..\Image\WaterBalloon\Blueblock\Blueblock%d.png
+WaterBalloon|Bluestreak|3|..\Image\WaterBalloon\Bluestreak\Bluestreak%d.png
+WaterBalloon|Chicken|3|..\Image\WaterBalloon\Chicken\Chicken%d.png
+WaterBalloon|Cottoncandy|3|..\Image\WaterBalloon\Cottoncandy\Cottoncandy%d.png
+WaterBalloon|Greenheart|3|..\Image\WaterBalloon\Greenheart\Greenheart%d.png
+WaterBalloon|Greenstreak|3|..\Image\WaterBalloon\Greenstreak\Greenstreak%d.png
+WaterBalloon|Orangeblock|3|..\Image\WaterBalloon\Orangeblock\Orangeblock%d.png
+WaterBalloon|Redblock|3|..\Image\WaterBalloon\Redblock\Redblock%d.png
+WaterBalloon|Redheart|3|..\Image\WaterBalloon\Redheart\Redheart%d.png
+WaterBalloon|Redstreak|3|..\Image\WaterBalloon\Redstreak\Redstreak%d.png

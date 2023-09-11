@@ -16,7 +16,7 @@ const TEXINFO * CTextureMgr::Get_Texture(const TCHAR * pObjKey, const TCHAR * pS
 {
 	auto		iter = find_if(m_mapTex.begin(), m_mapTex.end(), [&](auto& MyPair)->bool
 	{
-		if (pStateKey == MyPair.first)
+		if (pObjKey == MyPair.first)
 			return true;
 
 		return false;
@@ -144,11 +144,10 @@ HRESULT CTextureMgr::Insert_Texture(TEXTYPE eType, const TCHAR * pFilePath, cons
 			return E_FAIL;
 		}
 		
-		m_mapTex.insert({pStateKey, pTexture});
-
-		wstring s = m_mapTex.begin()->first;
-		//wstring r = m_mapTex.end()->first;
+		m_mapTex.insert({ pObjKey, pTexture});
 	}
+	else if (TEX_MULTI == eType)
+		iter->second->Insert_Texture(pFilePath, pStateKey, iCnt);
 	
 	return S_OK;
 }

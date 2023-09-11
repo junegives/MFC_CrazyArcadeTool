@@ -48,7 +48,7 @@ BOOL CCWaterBallonTool::OnInitDialog()
 
 	//CTextureMgr::Get_Instance()->Insert_Texture(TEX_SINGLE, L"../Image/WaterBalloon/Cottoncandy01.png", L"Image", L"Cottoncandy");
 
-	TCHAR szPath[MAX_PATH] = L"../Image/WaterBalloon/Cottoncandy/Cottoncandy01.png";
+	TCHAR szPath[MAX_PATH] = L"../Image/WaterBalloon/Cottoncandy/Cottoncandy0.png";
 
 	CImage pngImage;
 
@@ -65,7 +65,7 @@ BOOL CCWaterBallonTool::OnInitDialog()
 
 	//lstrcpy(L"../Image/WaterBalloon/Blueblock/Blueblock01.png", szPath);
 
-	TCHAR szPath1[MAX_PATH] = L"../Image/WaterBalloon/Blueblock/Blueblock01.png";
+	TCHAR szPath1[MAX_PATH] = L"../Image/WaterBalloon/Blueblock/Blueblock0.png";
 	
 	CImage pngImage1;
 
@@ -79,7 +79,7 @@ BOOL CCWaterBallonTool::OnInitDialog()
 
 	m_ListCtrl.InsertItem(1, L"Blueblock", 1);
 
-	TCHAR szPath2[MAX_PATH] = L"../Image/WaterBalloon/Bluestreak/Bluestreak01.png";
+	TCHAR szPath2[MAX_PATH] = L"../Image/WaterBalloon/Bluestreak/Bluestreak0.png";
 
 	CImage pngImage2;
 
@@ -93,7 +93,7 @@ BOOL CCWaterBallonTool::OnInitDialog()
 
 	m_ListCtrl.InsertItem(2, L"Bluestreak", 2);
 
-	TCHAR szPath3[MAX_PATH] = L"../Image/WaterBalloon/Greenheart/Greenheart01.png";
+	TCHAR szPath3[MAX_PATH] = L"../Image/WaterBalloon/Greenheart/Greenheart0.png";
 
 	CImage pngImage3;
 
@@ -107,7 +107,7 @@ BOOL CCWaterBallonTool::OnInitDialog()
 
 	m_ListCtrl.InsertItem(3, L"Greenheart", 3);
 
-	TCHAR szPath4[MAX_PATH] = L"../Image/WaterBalloon/Greenstreak/Greenstreak01.png";
+	TCHAR szPath4[MAX_PATH] = L"../Image/WaterBalloon/Greenstreak/Greenstreak0.png";
 
 	CImage pngImage4;
 

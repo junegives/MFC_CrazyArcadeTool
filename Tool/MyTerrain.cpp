@@ -155,12 +155,6 @@ void CMyTerrain::Tile_Preview(const D3DXVECTOR3& vPos, const TCHAR* pObjKey, con
 
 HRESULT CMyTerrain::Initialize()
 {
-	/*if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Tile/Debug0.png", L"Tile", L"Debug", 1)))
-	{
-		AfxMessageBox(L"Tile Texture Insert Failed");
-		return E_FAIL;
-	}*/
-
 	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt")))
 	{
 		AfxMessageBox(L"Error");
