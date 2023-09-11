@@ -19,6 +19,12 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
+	virtual BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
+public:
+	CListCtrl m_ListCtrl;
+
+	//추가
+	CImageList m_ImageList;
 };

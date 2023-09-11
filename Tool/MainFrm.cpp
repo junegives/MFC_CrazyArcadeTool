@@ -73,10 +73,11 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	m_CharacterTool = new CCharacterTool;
 	m_CharacterTool->Create(IDD_CHARACTERTOOL, this);
+	
 
 	m_AnimTool = new CAnimTool;
 	m_AnimTool->Create(IDD_ANIMTOOL, this);
-
+	
 	m_PathFinderTool = new CPathFinderTool;
 	m_PathFinderTool->Create(IDD_PATHFINDER, this);
 
