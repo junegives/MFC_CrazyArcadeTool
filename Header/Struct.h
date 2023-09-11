@@ -1,4 +1,5 @@
 #pragma once
+#include "Define.h"
 
 typedef struct tagInfo
 {
@@ -81,3 +82,19 @@ static D3DXVECTOR3		Get_Mouse()
 
 	return D3DXVECTOR3((float)Pt.x, (float)Pt.y, 0.f);
 }
+
+
+//새로 추가
+typedef	struct tagCharacterData
+{
+#ifdef _AFX
+	CString	strName;			//이름
+#else
+	wstring strName;
+#endif
+
+	int		iSpeed;				//스피드
+	int		iWaterLength;		//물풍선 길이
+	int     iWaterCount;		//물풍선 갯수
+
+}CHARACTERDATA;

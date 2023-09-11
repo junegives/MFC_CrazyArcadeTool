@@ -7,6 +7,7 @@
 #include "Myform.h"
 #include "ToolView.h"
 #include "BlockTool.h"
+#include "CharacterTool.h"
 
 class CMainFrame : public CFrameWnd
 {
@@ -54,6 +55,8 @@ public:
 	CUnitTool*	m_UnitTool;
 	CMapTool*	m_MapTool;
 	CBlockTool* m_BlockTool;
+	CCharacterTool* m_CharacterTool;
+	
 
 	afx_msg void OnMapTool();
 	afx_msg void OnObjectTool();

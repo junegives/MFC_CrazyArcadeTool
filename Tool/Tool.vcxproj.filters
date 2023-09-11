@@ -79,6 +79,15 @@
     <Filter Include="04. Etc\00. MyTerrain\00.MyBlockTerrain">
       <UniqueIdentifier>{8064c17e-1fdb-4fe0-ac66-07b52058b8a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool">
+      <UniqueIdentifier>{9d5804e7-8de6-4241-84ae-25603e27ede3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\00.PlayerTool">
+      <UniqueIdentifier>{10cf7e31-151d-4ec7-bf4c-11a7e0d5221e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\01.WaterBalloonTool">
+      <UniqueIdentifier>{26fd5be7-2efc-4544-a431-6c82dec16f5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -141,6 +150,15 @@
     <ClInclude Include="MyBlockTerrain.h">
       <Filter>04. Etc\00. MyTerrain\00.MyBlockTerrain</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterTool.h">
+      <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerTool.h">
+      <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\00.PlayerTool</Filter>
+    </ClInclude>
+    <ClInclude Include="CWaterBallonTool.h">
+      <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\01.WaterBalloonTool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tool.cpp">
@@ -193,6 +211,15 @@
     </ClCompile>
     <ClCompile Include="MyBlockTerrain.cpp">
       <Filter>04. Etc\00. MyTerrain\00.MyBlockTerrain</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterTool.cpp">
+      <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerTool.cpp">
+      <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\00.PlayerTool</Filter>
+    </ClCompile>
+    <ClCompile Include="CWaterBallonTool.cpp">
+      <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\01.WaterBalloonTool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -47,9 +47,11 @@ CMainFrame::~CMainFrame()
 {
 	m_MapTool->DestroyWindow();
 	m_BlockTool->DestroyWindow();
+	m_CharacterTool->DestroyWindow();
 
 	Safe_Delete(m_MapTool);
 	Safe_Delete(m_BlockTool);
+	Safe_Delete(m_CharacterTool);
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -62,6 +64,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	m_BlockTool = new CBlockTool;
 	m_BlockTool->Create(IDD_CBLOCKTOOL, this);
+
+	m_CharacterTool = new CCharacterTool;
+	m_CharacterTool->Create(IDD_CHARACTERTOOL, this);
 	
 	return 0;
 }
@@ -149,5 +154,6 @@ void CMainFrame::OnRoomTool()
 void CMainFrame::OnPlayerTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	m_CharacterTool->ShowWindow(SW_SHOW);
 }
 

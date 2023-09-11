@@ -200,6 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlockTool.h" />
+    <ClInclude Include="CharacterTool.h" />
+    <ClInclude Include="CPlayerTool.h" />
+    <ClInclude Include="CWaterBallonTool.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="FileInfo.h" />
     <ClInclude Include="MainFrm.h" />
@@ -221,6 +224,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlockTool.cpp" />
+    <ClCompile Include="CharacterTool.cpp" />
+    <ClCompile Include="CPlayerTool.cpp" />
+    <ClCompile Include="CWaterBallonTool.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="FileInfo.cpp" />
     <ClCompile Include="MainFrm.cpp" />

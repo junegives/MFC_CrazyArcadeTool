@@ -79,6 +79,7 @@ void CToolView::OnInitialUpdate()
 
 
 	g_hWnd = m_hWnd;
+	
 
 	if (FAILED(CDevice::Get_Instance()->Init_Device()))
 	{
