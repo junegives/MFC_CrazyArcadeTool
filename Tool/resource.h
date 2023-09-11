@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ì—ì„œ ìƒì„±í•œ í¬í•¨ íŒŒì¼ì…ë‹ˆë‹¤.
-// Tool.rcì—ì„œ ì‚¬ìš©ë˜ê³  ìˆìŠµë‹ˆë‹¤.
+// Microsoft Visual C++¿¡¼­ »ı¼ºÇÑ Æ÷ÇÔ ÆÄÀÏÀÔ´Ï´Ù.
+// Tool.rc¿¡¼­ »ç¿ëµÇ°í ÀÖ½À´Ï´Ù.
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -45,6 +45,9 @@
 #define IDC_SLIDER2                     1024
 #define IDC_TAB_MAIN                    1033
 #define IDC_LIST2                       1034
+#define IDC_SPIN_SPEED                  1035
+#define IDC_LIST_CTRLWATER              1039
+#define IDC_BUTTON_WATER                1040
 #define IDC_SPIN_SPEED                  1035
 #define IDC_SLIDERCENTERX1              1050
 #define IDC_SLIDERCENTERY1              1051
@@ -122,7 +125,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        322
 #define _APS_NEXT_COMMAND_VALUE         32785
-#define _APS_NEXT_CONTROL_VALUE         1039
-#define _APS_NEXT_SYMED_VALUE           317
+#define _APS_NEXT_CONTROL_VALUE         1041
+#define _APS_NEXT_SYMED_VALUE           315
 #endif
 #endif

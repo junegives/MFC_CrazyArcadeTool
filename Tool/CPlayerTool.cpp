@@ -270,7 +270,6 @@ void CCPlayerTool::OnAddPlayer()
 	else
 	{
 		MessageBox(_T("Unentered information that is not been entered."), _T("NO"), MB_OK);
-		
 	}
 
 
