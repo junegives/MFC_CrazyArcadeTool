@@ -1,0 +1,7 @@
+Tile|Cemetory|6|..\Image\Tile\Cemetory%d.png
+Tile|Factory|5|..\Image\Tile\Factory%d.png
+Tile|Forest|3|..\Image\Tile\Forest%d.png
+Tile|Kart|10|..\Image\Tile\Kart%d.png
+Tile|Patrit|15|..\Image\Tile\Patrit%d.png
+Tile|Test|12|..\Image\Tile\Test%d.png
+Tile|Debug|1|..\Image\Tile\Debug%d.png
