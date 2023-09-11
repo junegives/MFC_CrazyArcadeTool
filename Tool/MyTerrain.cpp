@@ -161,7 +161,7 @@ HRESULT CMyTerrain::Initialize()
 		return E_FAIL;
 	}*/
 
-	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt")))
+	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/TileImgPath.txt")))
 	{
 		AfxMessageBox(L"Error");
 		return E_FAIL;

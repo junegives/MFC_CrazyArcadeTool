@@ -1,6 +1,7 @@
 #pragma once
 #include "afxdialogex.h"
 
+#include "Include.h"
 
 // CPathFinderTool 대화 상자
 
@@ -24,4 +25,11 @@ protected:
 public:
 	afx_msg void OnSaveData();
 	afx_msg void OnLoadData();
+	afx_msg void OnListBox();
+	afx_msg void OnDropFiles(HDROP hDropInfo);
+	afx_msg void OnDestroy();
+
+public:
+	list<IMGPATH*>		m_PathList;
+	CListBox m_ListBox;
 };

@@ -27,6 +27,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_MENUMONSTER, &CMainFrame::OnMonsterTool)
 	ON_COMMAND(ID_MENUROOM, &CMainFrame::OnRoomTool)
 	ON_COMMAND(ID_MENUANIMATION, &CMainFrame::OnAnimTool)
+	ON_COMMAND(ID_MENUPATHFINDER, &CMainFrame::OnPathFinder)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -50,11 +51,13 @@ CMainFrame::~CMainFrame()
 	m_BlockTool->DestroyWindow();
 	m_CharacterTool->DestroyWindow();
 	m_AnimTool->DestroyWindow();
+	m_PathFinderTool->DestroyWindow();
 
 	Safe_Delete(m_MapTool);
 	Safe_Delete(m_BlockTool);
 	Safe_Delete(m_CharacterTool);
 	Safe_Delete(m_AnimTool);
+	Safe_Delete(m_PathFinderTool);
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -70,11 +73,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	m_CharacterTool = new CCharacterTool;
 	m_CharacterTool->Create(IDD_CHARACTERTOOL, this);
-	
 
 	m_AnimTool = new CAnimTool;
 	m_AnimTool->Create(IDD_ANIMTOOL, this);
-	
+
+	m_PathFinderTool = new CPathFinderTool;
+	m_PathFinderTool->Create(IDD_PATHFINDER, this);
+
 	return 0;
 }
 
@@ -170,4 +175,11 @@ void CMainFrame::OnAnimTool()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	m_AnimTool->ShowWindow(SW_SHOW);
+}
+
+
+void CMainFrame::OnPathFinder()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	m_PathFinderTool->ShowWindow(SW_SHOW);
 }

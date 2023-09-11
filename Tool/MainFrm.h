@@ -9,6 +9,7 @@
 #include "BlockTool.h"
 #include "AnimTool.h"
 #include "CharacterTool.h"
+#include "PathFinderTool.h"
 
 class CMainFrame : public CFrameWnd
 {
@@ -58,6 +59,7 @@ public:
 	CBlockTool* m_BlockTool;
 	CAnimTool*	m_AnimTool;
 	CCharacterTool* m_CharacterTool;
+	CPathFinderTool* m_PathFinderTool;
 	
 
 	afx_msg void OnMapTool();
@@ -66,6 +68,7 @@ public:
 	afx_msg void OnRoomTool();
 	afx_msg void OnPlayerTool();
 	afx_msg void OnAnimTool();
+	afx_msg void OnPathFinder();
 };
 
 

@@ -115,6 +115,7 @@ BEGIN
     MENUITEM "몬스터 툴(&T)",                   ID_MENUMONSTER
     MENUITEM "룸 툴(&R)",                     ID_MENUROOM
     MENUITEM "애니메이션 툴(&A)",                 ID_MENUANIMATION
+    MENUITEM "패쓰파인더(&F)",                   ID_MENUPATHFINDER
 END
 
 
