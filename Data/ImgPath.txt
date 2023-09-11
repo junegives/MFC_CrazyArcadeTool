@@ -1,4 +1,3 @@
-Image|Block|30|..\Image\Block\Obj (0%d.png
 Angry|Die|4|..\Image\Monster\Angry\Die\Die%d.png
 Angry|WalkDown|2|..\Image\Monster\Angry\WalkDown\WalkDown%d.png
 Angry|WalkLeft|2|..\Image\Monster\Angry\WalkLeft\WalkLeft%d.png

@@ -5,6 +5,7 @@
 #include "Tool.h"
 #include "afxdialogex.h"
 #include "AnimTool.h"
+#include "TextureMgr.h"
 
 
 // CAnimTool 대화 상자
@@ -44,6 +45,13 @@ BOOL CAnimTool::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	SetFont();
+
+	GetImg(L"Player", 0);
+	GetImg(L"WaterBallon", 1);
+	GetImg(L"Monster", 2);
+
+	UpdateData(TRUE);
+	UpdateData(FALSE);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -181,4 +189,45 @@ void CAnimTool::SetFont()
 	fontLarge.Detach();
 	fontMedium.Detach();
 	fontSmall.Detach();
+}
+
+void CAnimTool::GetImg(const wstring& pObjKey, int iObjNum)
+{
+	HTREEITEM hLevel1, hLevel2, hLevel3;
+
+	vector<CString> vecImgPath;
+
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", pObjKey);
+	if (vecImgPath.size() == 0)
+		return;
+
+	hLevel1 = m_TreeObjectKey.InsertItem(pObjKey.c_str(), 0, iObjNum);
+
+	for (auto& iter : vecImgPath)
+	{
+		TCHAR		szFileName[MIN_STR] = L"";
+		CString		strFileName = PathFindFileName(iter);
+		CString		strFilePath = iter;
+
+
+		lstrcpy(szFileName, strFileName);
+
+		// 파일의 확장자 명을 제거하는 함수
+		PathRemoveExtension(szFileName);
+
+		strFileName = szFileName;
+
+		auto	iter = m_MapPngImg.find(strFileName);
+
+		if (iter == m_MapPngImg.end())
+		{
+			CImage* pPngImg = new CImage;
+
+			pPngImg->Load(strFilePath);
+
+			m_MapPngImg.insert({ strFileName, pPngImg });
+		}
+	}
+
+	return;
 }

@@ -31,6 +31,8 @@ public:
 
 public:
 	void SetFont();
+	void GetImg(const wstring& pObjKey, int iObjNum);
 
 	CTreeCtrl m_TreeObjectKey;
+	map<CString, CImage*>		m_MapPngImg;
 };
