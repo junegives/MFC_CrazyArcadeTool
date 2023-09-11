@@ -7,6 +7,7 @@
 #include "Myform.h"
 #include "ToolView.h"
 #include "BlockTool.h"
+#include "AnimTool.h"
 #include "CharacterTool.h"
 
 class CMainFrame : public CFrameWnd
@@ -55,6 +56,7 @@ public:
 	CUnitTool*	m_UnitTool;
 	CMapTool*	m_MapTool;
 	CBlockTool* m_BlockTool;
+	CAnimTool*	m_AnimTool;
 	CCharacterTool* m_CharacterTool;
 	
 
@@ -63,6 +65,7 @@ public:
 	afx_msg void OnMonsterTool();
 	afx_msg void OnRoomTool();
 	afx_msg void OnPlayerTool();
+	afx_msg void OnAnimTool();
 };
 
 

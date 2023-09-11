@@ -70,14 +70,17 @@
     <Filter Include="04. Etc\01. Dialog\03. PlayerTool">
       <UniqueIdentifier>{08a18b82-25cd-4e9c-9c20-c9a179167bfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Etc\01. Dialog\04. RoomTool">
-      <UniqueIdentifier>{8650fab9-c661-465c-9060-291782f72a3a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Etc\01. Dialog\01. ObjectTool\01.BlockTool">
       <UniqueIdentifier>{009dbe65-130b-4a49-92c2-6b08b271ef56}</UniqueIdentifier>
     </Filter>
     <Filter Include="04. Etc\00. MyTerrain\00.MyBlockTerrain">
       <UniqueIdentifier>{8064c17e-1fdb-4fe0-ac66-07b52058b8a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Etc\01. Dialog\05. RoomTool">
+      <UniqueIdentifier>{8650fab9-c661-465c-9060-291782f72a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Etc\01. Dialog\04. AnimTool">
+      <UniqueIdentifier>{786fcfcd-6390-47bd-b865-47f4a320069d}</UniqueIdentifier>
     </Filter>
     <Filter Include="04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool">
       <UniqueIdentifier>{9d5804e7-8de6-4241-84ae-25603e27ede3}</UniqueIdentifier>
@@ -87,6 +90,9 @@
     </Filter>
     <Filter Include="04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\01.WaterBalloonTool">
       <UniqueIdentifier>{26fd5be7-2efc-4544-a431-6c82dec16f5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Etc\01. Dialog\06. PathFinder">
+      <UniqueIdentifier>{442cfb38-1f79-454d-9fa7-1a194c868ec5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +156,9 @@
     <ClInclude Include="MyBlockTerrain.h">
       <Filter>04. Etc\00. MyTerrain\00.MyBlockTerrain</Filter>
     </ClInclude>
+    <ClInclude Include="AnimTool.h">
+      <Filter>04. Etc\01. Dialog\04. AnimTool</Filter>
+    </ClInclude>
     <ClInclude Include="CharacterTool.h">
       <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool</Filter>
     </ClInclude>
@@ -158,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="CWaterBallonTool.h">
       <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\01.WaterBalloonTool</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFinderTool.h">
+      <Filter>04. Etc\01. Dialog\06. PathFinder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +224,9 @@
     <ClCompile Include="MyBlockTerrain.cpp">
       <Filter>04. Etc\00. MyTerrain\00.MyBlockTerrain</Filter>
     </ClCompile>
+    <ClCompile Include="AnimTool.cpp">
+      <Filter>04. Etc\01. Dialog\04. AnimTool</Filter>
+    </ClCompile>
     <ClCompile Include="CharacterTool.cpp">
       <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool</Filter>
     </ClCompile>
@@ -220,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="CWaterBallonTool.cpp">
       <Filter>04. Etc\01. Dialog\03. PlayerTool\00.CharacterTool\01.WaterBalloonTool</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFinderTool.cpp">
+      <Filter>04. Etc\01. Dialog\06. PathFinder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
