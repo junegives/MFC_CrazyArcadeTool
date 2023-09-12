@@ -1,6 +1,7 @@
 #pragma once
 #include "afxdialogex.h"
 
+#include "Struct.h"
 
 // CBlockTool 대화 상자
 
@@ -27,6 +28,15 @@ public:
 	afx_msg void OnDropFiles(HDROP hDropInfo);
 	afx_msg void OnDestroy();
 
+	afx_msg void OnChangeEditX();
+	afx_msg void OnChangeEditY();
+
+	afx_msg void OnBlockSave();
+	afx_msg void OnBlockLoad();
+
+public:
+	void Set_VecTile(vector<TILE*>* _vecTile) { m_vecTile = _vecTile; }
+
 public:
 	CListBox m_ListBox;
 	CStatic m_Picture;
@@ -43,5 +53,14 @@ public:
 
 	BYTE  m_Option_Move = 0;
 	BYTE  m_Option_Burst = 0;
+
+	//이미지의 콜라이더를 설정해주기 위한 변수
+	CEdit m_Collider_X;
+	CEdit m_Collider_Y;
+
+	float m_Coll_X = 0.f;
+	float m_Coll_Y = 0.f;
+
+	vector<TILE*>*		m_vecTile;
 
 };

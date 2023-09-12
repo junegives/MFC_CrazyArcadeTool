@@ -113,6 +113,7 @@ void CToolView::OnInitialUpdate()
 
 	m_pMyBlockTerrain->Set_MainView(this);
 
+
 }
 
 // CToolView 그리기
@@ -145,6 +146,7 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	{
 		m_pMyBlockTerrain->Mouse_Render();
 	}
+	pMain->m_BlockTool->Set_VecTile((&m_pMyBlockTerrain->Get_VecTile()));
 
 
 	CDevice::Get_Instance()->Render_End();
@@ -245,8 +247,14 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	if (pBlockTool->IsWindowVisible())
 	{
+		//m_pMyBlockTerrain->Tile_Change(D3DXVECTOR3(point.x + GetScrollPos(0),
+		//	point.y + GetScrollPos(1), 0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+		//	, pBlockTool->m_Option_Move, pBlockTool->m_Option_Burst,
+		//	pBlockTool->m_iDrawID);
+
 		m_pMyBlockTerrain->Tile_Change(D3DXVECTOR3(point.x + GetScrollPos(0),
 			point.y + GetScrollPos(1), 0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+			, D3DXVECTOR3(pBlockTool->m_Coll_X, pBlockTool->m_Coll_Y, 0.f)
 			, pBlockTool->m_Option_Move, pBlockTool->m_Option_Burst,
 			pBlockTool->m_iDrawID);
 	}
@@ -303,14 +311,27 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 
 			if (pBlockTool->m_bFirst)
 			{
+				//전 버전
+				//m_pMyBlockTerrain->Tile_Move(D3DXVECTOR3(point.x,
+				//	point.y,
+				//	0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+				//	, pBlockTool->m_iDrawID);
+
 				m_pMyBlockTerrain->Tile_Move(D3DXVECTOR3(point.x,
 					point.y,
 					0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+					,D3DXVECTOR3(pBlockTool->m_Coll_X, pBlockTool->m_Coll_Y, 0.f)
 					, pBlockTool->m_iDrawID);
 			}
 
+			//m_pMyBlockTerrain->Tile_Change(D3DXVECTOR3(point.x + GetScrollPos(0),
+			//	point.y + GetScrollPos(1), 0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+			//	, pBlockTool->m_Option_Move, pBlockTool->m_Option_Burst,
+			//	pBlockTool->m_iDrawID);
+
 			m_pMyBlockTerrain->Tile_Change(D3DXVECTOR3(point.x + GetScrollPos(0),
 				point.y + GetScrollPos(1), 0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+				, D3DXVECTOR3(pBlockTool->m_Coll_X, pBlockTool->m_Coll_Y, 0.f)
 				, pBlockTool->m_Option_Move, pBlockTool->m_Option_Burst,
 				pBlockTool->m_iDrawID);
 		}
@@ -339,9 +360,16 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 		{
 			if (pBlockTool->m_bFirst)
 			{
+				//m_pMyBlockTerrain->Tile_Move(D3DXVECTOR3(point.x,
+				//	point.y,
+				//	0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+				//	, pBlockTool->m_iDrawID);
+
+
 				m_pMyBlockTerrain->Tile_Move(D3DXVECTOR3(point.x,
 					point.y,
 					0.f), D3DXVECTOR3(pBlockTool->m_ImageWidth, pBlockTool->m_ImageHeight, 0.f)
+					, D3DXVECTOR3(pBlockTool->m_Coll_X, pBlockTool->m_Coll_Y, 0.f)
 					, pBlockTool->m_iDrawID);
 			}
 		}

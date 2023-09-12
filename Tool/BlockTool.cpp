@@ -31,6 +31,8 @@ void CBlockTool::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RADIO2, m_Radio_Move[1]);
 	DDX_Control(pDX, IDC_RADIO3, m_Radio_Burst[0]);
 	DDX_Control(pDX, IDC_RADIO4, m_Radio_Burst[1]);
+	DDX_Control(pDX, IDC_EDIT_X, m_Collider_X);
+	DDX_Control(pDX, IDC_EDIT_Y, m_Collider_Y);
 }
 
 
@@ -38,6 +40,10 @@ BEGIN_MESSAGE_MAP(CBlockTool, CDialog)
 	ON_LBN_SELCHANGE(IDC_LIST1, &CBlockTool::OnListBox)
 	ON_WM_DROPFILES()
 	ON_WM_DESTROY()
+	ON_EN_CHANGE(IDC_EDIT_X, &CBlockTool::OnChangeEditX)
+	ON_EN_CHANGE(IDC_EDIT_Y, &CBlockTool::OnChangeEditY)
+	ON_BN_CLICKED(IDC_BLOCK_SAVE, &CBlockTool::OnBlockSave)
+	ON_BN_CLICKED(IDC_BLOCK_LOAD, &CBlockTool::OnBlockLoad)
 END_MESSAGE_MAP()
 
 
@@ -156,11 +162,6 @@ void CBlockTool::OnDropFiles(HDROP hDropInfo)
 }
 
 
-
-
-
-
-
 void CBlockTool::OnDestroy()
 {
 
@@ -175,4 +176,175 @@ void CBlockTool::OnDestroy()
 
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+}
+
+
+void CBlockTool::OnChangeEditX()
+{
+	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
+	// CDialog::OnInitDialog() 함수를 재지정 
+	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
+	// 이 알림 메시지를 보내지 않습니다.
+
+	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_Coll_X = GetDlgItemInt(IDC_EDIT_X);
+}
+
+
+void CBlockTool::OnChangeEditY()
+{
+	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
+	// CDialog::OnInitDialog() 함수를 재지정 
+	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
+	// 이 알림 메시지를 보내지 않습니다.
+
+	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_Coll_Y = GetDlgItemInt(IDC_EDIT_Y);
+}
+
+
+
+void CBlockTool::OnBlockSave()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CFileDialog Dig(FALSE,
+		L"dat",
+		L"*.dat",
+		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"Data File(*.dat) | *.dat ||",
+		this);
+
+	TCHAR szPath[MAX_PATH] = L"";
+
+	GetCurrentDirectory(MAX_PATH, szPath);
+
+	PathRemoveFileSpec(szPath);
+
+	lstrcat(szPath, L"Data");
+
+	Dig.m_ofn.lpstrInitialDir = szPath;
+
+	if (IDOK == Dig.DoModal())
+	{
+		CString str = Dig.GetPathName().GetString();
+
+		const TCHAR* pGetPath = str.GetString();
+
+		HANDLE hFile = CreateFile(pGetPath, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+
+		if (INVALID_HANDLE_VALUE == hFile)
+			return;
+
+		DWORD dwByte(0), dwStrByte(0);
+
+		for (auto& iter : (*m_vecTile))
+		{
+			//dwStrByte = sizeof(TCHAR) * (Mypair.first.GetLength() + 1);
+			dwStrByte = sizeof(TCHAR) * (iter->wstrStateKey.GetLength() + 1);
+
+			//스테이트 키
+			WriteFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
+			WriteFile(hFile, iter->wstrStateKey.GetString(), dwStrByte, &dwByte, nullptr);
+
+			//선택되었는지
+			WriteFile(hFile, (&iter->bPick), sizeof(bool), &dwByte, nullptr);
+			//출력 이미지
+			WriteFile(hFile, (&iter->byDrawID), sizeof(BYTE), &dwByte, nullptr);
+			//옵션 값
+			WriteFile(hFile, (&iter->byOption), sizeof(BYTE), &dwByte, nullptr);
+			//터지는지 옵션
+			WriteFile(hFile, (&iter->byOption_Burst), sizeof(BYTE), &dwByte, nullptr);
+			//움직이는지
+			WriteFile(hFile, (&iter->byOption_Move), sizeof(BYTE), &dwByte, nullptr);
+			//중점, 사이즈, 이미지의 중점
+			WriteFile(hFile, (&iter->vPos), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+			WriteFile(hFile, (&iter->vSize), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+			WriteFile(hFile, (&iter->vImageCenter), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+		}
+
+		CloseHandle(hFile);
+	}
+}
+
+
+void CBlockTool::OnBlockLoad()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CFileDialog Dig(TRUE,
+		L"dat",
+		L"*.dat",
+		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"Data File(*.dat) | *.dat ||",
+		this);
+
+	TCHAR szPath[MAX_PATH] = L"";
+
+	GetCurrentDirectory(MAX_PATH, szPath);
+	PathRemoveFileSpec(szPath);
+	lstrcat(szPath, L"Data");
+
+	Dig.m_ofn.lpstrInitialDir = szPath;
+
+	if (IDOK == Dig.DoModal())
+	{
+		//먼저 원래 들어있던 맵 데이터 제거
+		for (auto& iter : (*m_vecTile))
+			delete iter;
+
+		(*m_vecTile).clear();
+
+		CString str = Dig.GetPathName().GetString();
+		const TCHAR* pGetPath = str.GetString();
+
+		HANDLE hFile = CreateFile(pGetPath, GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+
+		if (INVALID_HANDLE_VALUE == hFile)
+			return;
+
+		DWORD dwByte(0), dwStrByte(0);
+
+		TILE tTile{};
+
+		while (true)
+		{
+			ReadFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
+
+			TCHAR* pName = new TCHAR[dwStrByte];
+			ReadFile(hFile, pName, dwStrByte, &dwByte, nullptr);
+
+			ReadFile(hFile, &(tTile.bPick), sizeof(bool), & dwByte, nullptr);
+			ReadFile(hFile, &(tTile.byDrawID), sizeof(BYTE), &dwByte, nullptr);
+			ReadFile(hFile, &(tTile.byOption), sizeof(BYTE), &dwByte, nullptr);
+			ReadFile(hFile, &(tTile.byOption_Burst), sizeof(BYTE), &dwByte, nullptr);
+			ReadFile(hFile, &(tTile.byOption_Move), sizeof(BYTE), &dwByte, nullptr);
+			ReadFile(hFile, &(tTile.vPos), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+			ReadFile(hFile, &(tTile.vSize), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+			ReadFile(hFile, &(tTile.vImageCenter), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+
+			if (0 == dwByte)
+			{
+				delete[]pName;
+				break;
+			}
+
+			TILE* pData = new TILE;
+
+			pData->wstrStateKey = pName;
+			delete[]pName;
+
+			pData->bPick = tTile.bPick;
+			pData->byDrawID = tTile.byDrawID;
+			pData->byOption = tTile.byOption;
+			pData->byOption_Burst = tTile.byOption_Burst;
+			pData->byOption_Move = tTile.byOption_Move;
+			pData->vPos = tTile.vPos;
+			pData->vSize = tTile.vSize;
+			pData->vImageCenter = tTile.vImageCenter;
+
+			(*m_vecTile).push_back(pData);
+		}
+
+
+		CloseHandle(hFile);
+	}
 }

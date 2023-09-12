@@ -28,6 +28,82 @@ void CMyBlockTerrain::Tile_Move(const D3DXVECTOR3& vPos, const D3DXVECTOR3& vSiz
 	m_vImageSize = vSize;
 }
 
+void CMyBlockTerrain::Tile_Move(const D3DXVECTOR3& vPos, const D3DXVECTOR3& vSize, const D3DXVECTOR3& vCollider, const int& iDrawID)
+{
+	if (m_Tile == nullptr)
+	{
+		m_Tile = new TILE;
+	}
+	m_Tile->vPos = { vPos.x, vPos.y, 0.f };
+	m_Tile->vSize = { vSize.x, vSize.y, 0.f };
+	m_Tile->byOption = 0;
+	m_Tile->byDrawID = iDrawID;
+
+	m_vImageSize = vSize;
+	m_vCollider = vCollider;
+}
+
+//추가
+void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, D3DXVECTOR3& vCollider, const BYTE& byMove, const BYTE& byBurst, const int& iDrawID)
+{
+	int	iIndex = Get_TileIndex(vPos);
+
+	if (-1 == iIndex)
+		return;
+
+	float	fCenterX = (TILECX / 2.f);
+	float	fCenterY = vSize.y - (TILECY / 2.f);
+
+	////이미지의 칸 갯수 파악을 위함
+	//int iBlockX = vSize.x / TILECX;
+	//int iBlockY = vSize.y / TILECY;
+
+	int iBlockX = vCollider.x;
+	int iBlockY = vCollider.y;
+
+	//if (0 != (int)vSize.x % TILECX)
+	//{
+	//	iBlockX = iBlockX + 1;
+	//}
+	//if ((int)vSize.y % TILECY != 0)
+	//{
+	//	iBlockY = iBlockY + 1;
+	//}
+
+	if (CanInstall(iIndex, iBlockX, iBlockY))
+	{
+		if (iBlockX <= 1 && iBlockY <= 1)
+		{
+			m_vecTile[iIndex]->byDrawID = iDrawID;
+			m_vecTile[iIndex]->byOption_Move = byMove;
+			m_vecTile[iIndex]->byOption_Burst = byBurst;
+
+			m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
+			m_vecTile[iIndex]->bPick = true;
+		}
+		else
+		{
+			m_vecTile[iIndex]->byDrawID = iDrawID;
+
+			for (size_t i = 0; i < iBlockY; i++)
+			{
+				for (size_t j = 0; j < iBlockX; j++)
+				{
+					int iImageIndex = iIndex + j - (i * 15);
+
+					m_vecTile[iImageIndex]->byOption_Move = byMove;
+					m_vecTile[iImageIndex]->byOption_Burst = byBurst;
+
+					m_vecTile[iIndex]->vImageCenter = { fCenterX, fCenterY, 0.f };
+					m_vecTile[iImageIndex]->bPick = true;
+				}
+			}
+		}
+	}
+}
+
+
+
 void CMyBlockTerrain::Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, const BYTE& byMove, const BYTE& byBurst, const int& iDrawID)
 {
 	int	iIndex = Get_TileIndex(vPos);
@@ -255,7 +331,7 @@ bool CMyBlockTerrain::CanInstall(int _iIdenx, int _iBlockX, int _iBlockY)
 
 HRESULT CMyBlockTerrain::Initialize()
 {
-	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Block/Obj (%d).png", L"Image", L"Block", 30)))
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Block/Obj (%d).png", L"Image", L"Block", 31)))
 	{
 		AfxMessageBox(L"Tile Texture Insert Failed");
 		return E_FAIL;
@@ -298,6 +374,17 @@ void CMyBlockTerrain::Update()
 
 void CMyBlockTerrain::Render()
 {
+	if (GetAsyncKeyState('W'))
+	{
+		//if (m_bCollider == false)
+			m_bCollider = true;
+	}
+	else if (GetAsyncKeyState('E'))
+	{
+		//if (m_bCollider == true)
+			m_bCollider = false;
+	}
+
 	D3DXMATRIX		matWorld, matScale, matTrans;
 
 	TCHAR		szBuf[MIN_STR] = L"";
@@ -326,23 +413,6 @@ void CMyBlockTerrain::Render()
 
 		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Image", L"Block", iter->byDrawID);
 
-		//iter->vSize.x
-		//iter->vSize.y
-
-		//float	fCenterX = TILECX / 2.f;
-		//float	fCenterY = TILECY / 2.f;
-
-		//if (iter->vImageCenter.x == 0)
-		//{
-		//	float	fCenterX = (TILECX / 2.f);
-		//	float	fCenterY = m_vImageSize.y - (TILECY / 2.f);
-
-		//	iter->vImageCenter.x = fCenterX;
-		//	iter->vImageCenter.y = fCenterY;
-		//}
-
-
-
 		RECT rectTile = { (float)iter->byDrawID * iter->vSize.x, 0, (float)iter->byDrawID * iter->vSize.x + iter->vSize.x, iter->vSize.y };
 
 		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
@@ -351,6 +421,7 @@ void CMyBlockTerrain::Render()
 			nullptr,
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 
+
 		/*RECT rectTile = { (float)iter->byDrawID * TILECX, 0, (float)iter->byDrawID * TILECX + TILECX, TILECY };*/
 
 		//CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
@@ -358,9 +429,6 @@ void CMyBlockTerrain::Render()
 		//	&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
 		//	nullptr,
 		//	D3DCOLOR_ARGB(255, 255, 255, 255));
-
-
-
 
 		//swprintf_s(szBuf, L"%d", iIndex);
 
@@ -371,6 +439,44 @@ void CMyBlockTerrain::Render()
 		//	0, // 정렬 옵션
 		//	D3DCOLOR_ARGB(255, 255, 255, 255)); // 출력할 폰트 색상
 		//++iIndex;
+	}
+
+	for (auto& iter : m_vecTile)
+	{
+		D3DXMatrixIdentity(&matWorld);
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+		D3DXMatrixTranslation(&matTrans,
+			iter->vPos.x,
+			iter->vPos.y,
+			iter->vPos.z);
+
+		matWorld = matScale * matTrans;
+
+		GetClientRect(m_pMainView->m_hWnd, &rc);
+
+		float	fX = WINCX / float(rc.right - rc.left);
+		float	fY = WINCY / float(rc.bottom - rc.top);
+
+		Set_Ratio(&matWorld, fX, fY);
+
+		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+		
+		if (m_bCollider == true)
+		{
+			if (true == iter->bPick)
+			{
+				float	fCenterX = TILECX / 2.f;
+				float	fCenterY = TILECY / 2.f;
+
+				const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Image", L"Block", 30);
+
+				CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
+					nullptr,
+					&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
+					nullptr,
+					D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+		}
 	}
 }
 
@@ -425,18 +531,21 @@ void CMyBlockTerrain::Mouse_Render()
 		m_Tile->vPos.y = m_vecTile[iIndex]->vPos.y;
 		m_Tile->vPos.z = m_vecTile[iIndex]->vPos.z;
 
-		//이미지의 칸 갯수 파악을 위함
-		int iBlockX = m_Tile->vSize.x / TILECX;
-		int iBlockY = m_Tile->vSize.y / TILECY;
+		////이미지의 칸 갯수 파악을 위함
+		//int iBlockX = m_Tile->vSize.x / TILECX;
+		//int iBlockY = m_Tile->vSize.y / TILECY;
 
-		if (0 != (int)m_Tile->vSize.x % TILECX)
-		{
-			iBlockX = iBlockX + 1;
-		}
-		if ((int)m_Tile->vSize.y % TILECY != 0)
-		{
-			iBlockY = iBlockY + 1;
-		}
+		int iBlockX = m_vCollider.x;
+		int iBlockY = m_vCollider.y;
+
+		//if (0 != (int)m_Tile->vSize.x % TILECX)
+		//{
+		//	iBlockX = iBlockX + 1;
+		//}
+		//if ((int)m_Tile->vSize.y % TILECY != 0)
+		//{
+		//	iBlockY = iBlockY + 1;
+		//}
 
 		D3DXMatrixIdentity(&matWorld);
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);

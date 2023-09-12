@@ -17,6 +17,9 @@ public:
 
 	void		Tile_Move(const D3DXVECTOR3& vPos, const D3DXVECTOR3& vSize, const int& iDrawID);
 
+	void		Tile_Move(const D3DXVECTOR3& vPos, const D3DXVECTOR3& vSize, const D3DXVECTOR3& vCollider, const int& iDrawID);
+	void		Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, D3DXVECTOR3& vCollider, const BYTE& byMove, const BYTE& byBurst, const int& iDrawID);
+
 	void		Tile_Change(const D3DXVECTOR3& vPos, D3DXVECTOR3& vSize, const BYTE& byMove, const BYTE& byBurst, const int& iDrawID);
 
 
@@ -46,5 +49,10 @@ private:
 
 	//들어온 이미지 정보를 저장하기 위해서
 	D3DXVECTOR3 m_vImageSize;
+
+	//들어온 콜라이더 정보 저장 위해서
+	D3DXVECTOR3 m_vCollider;
+
+	bool m_bCollider = false;
 };
 
