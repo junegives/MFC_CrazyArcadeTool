@@ -57,6 +57,7 @@
 #define IDC_SLIDERCENTERX1              1050
 #define IDC_SLIDERCENTERY1              1051
 #define IDC_TREEOBJECT                  1052
+#define IDC_TREELIST                    1052
 #define IDC_SLIDER3                     1053
 #define IDC_SLIDERSIZEX1                1053
 #define IDC_SLIDER4                     1054
@@ -109,6 +110,11 @@
 #define IDC_SIZEY1                      1094
 #define IDC_TEXTCENTER2                 1095
 #define IDC_TEXTSIZE2                   1096
+#define IDC_BTNANIMSAVE                 1100
+#define IDC_BTNANIMLOAD                 1101
+#define IDC_LISTANIM                    1102
+#define IDC_BTNCREATEANIM               1103
+#define IDC_FILEIMAGE                   1104
 #define IDC_ListPath                    1150
 #define IDC_BTNPATHSAVE                 1151
 #define IDC_BTNPATHLOAD                 1152
@@ -132,7 +138,11 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        322
 #define _APS_NEXT_COMMAND_VALUE         32787
+<<<<<<< Updated upstream
 #define _APS_NEXT_CONTROL_VALUE         1047
+=======
+#define _APS_NEXT_CONTROL_VALUE         1046
+>>>>>>> Stashed changes
 #define _APS_NEXT_SYMED_VALUE           315
 #endif
 #endif

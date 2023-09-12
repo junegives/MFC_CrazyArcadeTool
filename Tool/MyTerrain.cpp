@@ -155,7 +155,7 @@ void CMyTerrain::Tile_Preview(const D3DXVECTOR3& vPos, const TCHAR* pObjKey, con
 
 HRESULT CMyTerrain::Initialize()
 {
-	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt")))
+	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/TileImgPath.txt")))
 	{
 		AfxMessageBox(L"Error");
 		return E_FAIL;

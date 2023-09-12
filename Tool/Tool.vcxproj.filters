@@ -97,6 +97,9 @@
     <Filter Include="01. View\02.WaterAniView">
       <UniqueIdentifier>{812cbef6-c0c4-42b1-a218-c398c774d6b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Manager\02. Time">
+      <UniqueIdentifier>{ccf700bd-7be5-4cf7-beab-452c934b582a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -174,6 +177,9 @@
     <ClInclude Include="PathFinderTool.h">
       <Filter>04. Etc\01. Dialog\06. PathFinder</Filter>
     </ClInclude>
+    <ClInclude Include="TimeMgr.h">
+      <Filter>03. Manager\02. Time</Filter>
+    </ClInclude>
     <ClInclude Include="WaterAniView.h">
       <Filter>01. View\02.WaterAniView</Filter>
     </ClInclude>
@@ -247,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="WaterAniView.cpp">
       <Filter>01. View\02.WaterAniView</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeMgr.cpp">
+      <Filter>03. Manager\02. Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

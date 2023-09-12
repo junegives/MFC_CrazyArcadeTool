@@ -26,7 +26,7 @@ HRESULT CStage::Ready_Scene()
 
 	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt")))
 	{
-		ERR_MSG(L"메모장에 문제있다고");
+		ERR_MSG(L"Notepad Error");
 		return E_FAIL;
 	}
 	
