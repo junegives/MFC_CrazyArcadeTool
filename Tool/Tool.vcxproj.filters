@@ -94,6 +94,9 @@
     <Filter Include="04. Etc\01. Dialog\06. PathFinder">
       <UniqueIdentifier>{442cfb38-1f79-454d-9fa7-1a194c868ec5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. View\02.WaterAniView">
+      <UniqueIdentifier>{812cbef6-c0c4-42b1-a218-c398c774d6b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -171,6 +174,9 @@
     <ClInclude Include="PathFinderTool.h">
       <Filter>04. Etc\01. Dialog\06. PathFinder</Filter>
     </ClInclude>
+    <ClInclude Include="WaterAniView.h">
+      <Filter>01. View\02.WaterAniView</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tool.cpp">
@@ -238,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="PathFinderTool.cpp">
       <Filter>04. Etc\01. Dialog\06. PathFinder</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterAniView.cpp">
+      <Filter>01. View\02.WaterAniView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -223,6 +223,7 @@
     <ClInclude Include="ToolDoc.h" />
     <ClInclude Include="ToolView.h" />
     <ClInclude Include="UnitTool.h" />
+    <ClInclude Include="WaterAniView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimTool.cpp" />
@@ -252,6 +253,7 @@
     <ClCompile Include="ToolDoc.cpp" />
     <ClCompile Include="ToolView.cpp" />
     <ClCompile Include="UnitTool.cpp" />
+    <ClCompile Include="WaterAniView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Tool.rc" />
