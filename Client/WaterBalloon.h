@@ -14,6 +14,9 @@ public:
 	void Render(void) override;
 	void Release(void) override;
 
+public:
+	void Set_Balloon(wstring _szBalloon);
+
 	void Set_Length(int _Length) { m_iLength = _Length; }
 private:
 	float m_Timer = 0.f;

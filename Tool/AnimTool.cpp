@@ -32,6 +32,7 @@ void CAnimTool::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDITFRAMESPEED, m_EditFrameSpeed);
 	DDX_Control(pDX, IDC_SLIDERFRAMESPEED, m_SlideFrameSpeed);
 	DDX_Control(pDX, IDC_LISTANIM, m_ListAnim);
+	DDX_Control(pDX, IDC_IMGCOLLIDERMOVE, m_ImgColliderMove);
 }
 
 
@@ -50,6 +51,8 @@ BEGIN_MESSAGE_MAP(CAnimTool, CDialog)
 	ON_BN_CLICKED(IDC_BTNANIMLOAD, &CAnimTool::OnBtnLoad)
 	ON_BN_CLICKED(IDC_BTNCREATEANIM, &CAnimTool::OnBtnCreate)
 	ON_LBN_SELCHANGE(IDC_LISTANIM, &CAnimTool::OnAnimList)
+	ON_BN_CLICKED(IDC_BTNCCOLLIDER, &CAnimTool::OnBtnCollider)
+	ON_BN_CLICKED(IDC_BTNSPEED, &CAnimTool::OnBtnSpeed)
 END_MESSAGE_MAP()
 
 
@@ -686,6 +689,8 @@ void CAnimTool::OnBtnCreate()
 	tAnimInfo->iFrameCnt = m_FileList.GetCount();
 
 	m_vecAnim.push_back(tAnimInfo);
+
+	m_ListAnim.SetCurSel(m_ListAnim.GetCount() - 1);
 }
 
 
@@ -758,4 +763,33 @@ void CAnimTool::OnAnimList()
 	//		}
 	//	}
 	//}
+}
+
+
+void CAnimTool::OnBtnCollider()
+{
+	//CString		strFindName;
+	//CString		strFindNameCopy;
+
+	//if (LB_ERR == iIndex)
+	//	return;
+
+	//m_FileList.GetText(iIndex, strFindName);
+
+	//if (m_objKey != L"WaterBallon")
+	//	strFindName = m_objKey + strFindName;
+
+	//auto	iter = m_MapPngImg.find(strFindName);
+
+	//if (iter == m_MapPngImg.end())
+	//	return;
+
+	//m_FileImage.SetBitmap(*(iter->second));
+	//m_ImgColliderMove
+}
+
+
+void CAnimTool::OnBtnSpeed()
+{
+	m_vecAnim[m_ListAnim.GetCurSel()]->iFrameSpeed = GetDlgItemInt(IDC_EDITFRAMESPEED);
 }

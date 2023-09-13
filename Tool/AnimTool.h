@@ -73,4 +73,6 @@ public:
 	afx_msg void OnBtnCreate();
 	virtual void OnCancel();
 	afx_msg void OnAnimList();
+	afx_msg void OnBtnCollider();
+	afx_msg void OnBtnSpeed();
 };

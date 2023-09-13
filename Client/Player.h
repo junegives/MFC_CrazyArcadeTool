@@ -30,6 +30,9 @@ public:
 	void Change_State();
 	void Change_Anim();
 
+	void Change_Character(wstring _szCharacter);
+	void Change_Balloon(wstring _szBalloon);
+
 	bool ReDefine_vPos(const D3DXVECTOR3& vPos, const int& iIndex);
 	//get_tileIndex�� ���� ����
 	int Get_PosTileIndex(const D3DXVECTOR3& vPos);
@@ -46,6 +49,7 @@ private:
 	int		m_iPreDir = 2;
 	ePlayerState m_eState = ePlayerState::STAND;
 	wstring	m_wstrPreStateKey = L"";
+	wstring m_wstrWaterBalloon = L"";
 
 	vector<ANIMINFO*> m_vecAnim;
 	vector<wstring> m_vecImgPath;

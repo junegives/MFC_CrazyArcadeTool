@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ì—ì„œ ìƒì„±í•œ í¬í•¨ íŒŒì¼ì…ë‹ˆë‹¤.
-// Tool.rcì—ì„œ ì‚¬ìš©ë˜ê³  ìˆìŠµë‹ˆë‹¤.
+// Microsoft Visual C++¿¡¼­ »ı¼ºÇÑ Æ÷ÇÔ ÆÄÀÏÀÔ´Ï´Ù.
+// Tool.rc¿¡¼­ »ç¿ëµÇ°í ÀÖ½À´Ï´Ù.
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -115,6 +115,10 @@
 #define IDC_LISTANIM                    1102
 #define IDC_BTNCREATEANIM               1103
 #define IDC_FILEIMAGE                   1104
+#define IDC_BTNCCOLLIDER                1105
+#define IDC_BTNSPEED                    1106
+#define IDC_FILEIMAGE2                  1107
+#define IDC_IMGCOLLIDERMOVE             1107
 #define IDC_ListPath                    1150
 #define IDC_BTNPATHSAVE                 1151
 #define IDC_BTNPATHLOAD                 1152
@@ -138,11 +142,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        322
 #define _APS_NEXT_COMMAND_VALUE         32787
-<<<<<<< Updated upstream
-#define _APS_NEXT_CONTROL_VALUE         1047
-=======
 #define _APS_NEXT_CONTROL_VALUE         1046
->>>>>>> Stashed changes
 #define _APS_NEXT_SYMED_VALUE           315
 #endif
 #endif

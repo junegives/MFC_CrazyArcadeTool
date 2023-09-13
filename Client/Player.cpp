@@ -22,6 +22,7 @@ HRESULT CPlayer::Initialize(void)
 	m_tInfo.vPos = { 400.f, 300.f, 0.f };
 	m_wstrObjKey = L"Bazzi";
 	m_wstrStateKey = L"Bazzi_Stand";
+	m_wstrWaterBalloon = L"Redblock";
 	m_iDir = 2;
 
 	m_tFrame = { 0.f, 0.f };
@@ -250,6 +251,7 @@ void CPlayer::Key_Input()
 			pWater->Initialize();
 			pWater->Set_Pos(WaterBalloonvPos);
 			dynamic_cast<CWaterBalloon*>(pWater)->Set_Length(m_iLength);
+			dynamic_cast<CWaterBalloon*>(pWater)->Set_Balloon(m_wstrWaterBalloon);
 
 			CObjMgr::Get_Instance()->Add_Object(CObjMgr::WATERBALLOON, pWater);
 		}
@@ -323,6 +325,73 @@ void CPlayer::Change_Anim()
 			}
 		}
 	}
+}
+
+void CPlayer::Change_Character(wstring _szCharacter)
+{
+	m_wstrObjKey = _szCharacter;
+
+	HANDLE		hFileAnimation = CreateFile(L"../Data/Animation.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+
+	if (INVALID_HANDLE_VALUE == hFileAnimation)
+		return;
+
+	DWORD	dwByte(0), dwStrByte(0);
+
+	ANIMINFO tDataAnim{};
+
+	while (true)
+	{
+		ReadFile(hFileAnimation, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
+
+		TCHAR* pObjKey = new TCHAR[dwStrByte];
+		ReadFile(hFileAnimation, pObjKey, dwStrByte, &dwByte, nullptr);
+
+		ReadFile(hFileAnimation, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
+
+		TCHAR* pStateKey = new TCHAR[dwStrByte];
+		ReadFile(hFileAnimation, pStateKey, dwStrByte, &dwByte, nullptr);
+
+		ReadFile(hFileAnimation, &(tDataAnim.iFrameSpeed), sizeof(int), &dwByte, nullptr);
+		ReadFile(hFileAnimation, &(tDataAnim.isLoop), sizeof(BOOL), &dwByte, nullptr);
+		ReadFile(hFileAnimation, &(tDataAnim.vPos), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+		ReadFile(hFileAnimation, &(tDataAnim.iFrameCnt), sizeof(int), &dwByte, nullptr);
+
+
+		if (0 == dwByte)
+		{
+			delete[]pObjKey;
+			delete[]pStateKey;
+			break;
+		}
+
+		if (pObjKey != _szCharacter)
+		{
+			delete[]pObjKey;
+			delete[]pStateKey;
+			continue;
+		}
+
+		ANIMINFO* pData = new ANIMINFO;
+		pData->wstrObjectKey = pObjKey;
+		pData->wstrStateKey = pStateKey;
+		pData->iFrameSpeed = tDataAnim.iFrameSpeed;
+		pData->isLoop = tDataAnim.isLoop;
+		pData->vPos = tDataAnim.vPos;
+		pData->iFrameCnt = tDataAnim.iFrameCnt;
+
+		m_vecAnim.push_back(pData);
+
+		delete[]pObjKey;
+		delete[]pStateKey;
+	}
+
+	CloseHandle(hFileAnimation);
+}
+
+void CPlayer::Change_Balloon(wstring _szBalloon)
+{
+	m_wstrWaterBalloon = _szBalloon;
 }
 
 int CPlayer::Get_PosTileIndex(const D3DXVECTOR3& vPos)

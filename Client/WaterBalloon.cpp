@@ -119,3 +119,8 @@ void CWaterBalloon::Release(void)
 
 }
 
+void CWaterBalloon::Set_Balloon(wstring _szBalloon)
+{
+	m_wstrStateKey = _szBalloon;
+}
+
