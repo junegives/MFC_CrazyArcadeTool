@@ -7,6 +7,7 @@
 #include "BlockTool.h"
 #include "FileInfo.h"
 
+#include "TextureMgr.h"
 
 // CBlockTool 대화 상자
 
@@ -121,9 +122,7 @@ void CBlockTool::OnDropFiles(HDROP hDropInfo)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CDialog::OnDropFiles(hDropInfo);
 
-
-
-	CDialog::OnDropFiles(hDropInfo);
+	//CDialog::OnDropFiles(hDropInfo);
 
 	TCHAR		szFilePath[MAX_PATH] = L"";
 	TCHAR		szFileName[MIN_STR] = L"";
@@ -347,4 +346,52 @@ void CBlockTool::OnBlockLoad()
 
 		CloseHandle(hFile);
 	}
+}
+
+
+BOOL CBlockTool::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+
+	// TODO:  여기에 추가 초기화 작업을 추가합니다.
+	UpdateData(TRUE);
+
+	vector<CString> vecImgPath;
+
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", L"Image");
+
+	if (vecImgPath.size() == 0)
+		return false;
+
+	for (auto& iter : vecImgPath)
+	{
+		TCHAR		szFileName[MIN_STR] = L"";
+		CString		strFileName = PathFindFileName(iter);
+		CString		strFilePath = iter;
+
+
+		lstrcpy(szFileName, strFileName);
+
+		// 파일의 확장자 명을 제거하는 함수
+		PathRemoveExtension(szFileName);
+
+		strFileName = szFileName;
+
+		auto	iter = m_MapPngImg.find(strFileName);
+
+		if (iter == m_MapPngImg.end())
+		{
+			CImage* pImage = new CImage;
+
+			pImage->Load(strFilePath);
+
+			m_MapPngImg.insert({ strFileName, pImage });
+			m_ListBox.AddString(szFileName);
+		}
+	}
+
+	UpdateData(FALSE);
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }

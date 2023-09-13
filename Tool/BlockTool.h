@@ -63,4 +63,5 @@ public:
 
 	vector<TILE*>*		m_vecTile;
 
+	virtual BOOL OnInitDialog();
 };
