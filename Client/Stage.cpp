@@ -44,14 +44,14 @@ HRESULT CStage::Ready_Scene()
 	pBlockObj->Initialize();
 	CObjMgr::Get_Instance()->Add_Object(CObjMgr::BLOCK, /*GAMEOBJECT,*/ pBlockObj);
 
-	if (nullptr == pObj)
+	if (nullptr == pBlockObj)
 		return E_FAIL;
 
 
-	CObj* block = CObjMgr::Get_Instance()->Get_Block();
+	//CObj* block = CObjMgr::Get_Instance()->Get_Block();
 	
 	// 플레이어
-	dynamic_cast<CPlayer*>((CObjMgr::Get_Instance()->Get_Player()))->Set_BlockTile(&(dynamic_cast<CBlockTerrain*>(block)->Get_Block()));
+	//dynamic_cast<CPlayer*>((CObjMgr::Get_Instance()->Get_Player()))->Set_BlockTile(&(dynamic_cast<CBlockTerrain*>(block)->Get_BlockTile()));
 
 
 

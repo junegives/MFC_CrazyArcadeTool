@@ -14,7 +14,7 @@ public:
 	virtual void Release(void) override;
 
 public:
-	vector<TILE*> Get_Block() { return m_vecTile; }
+	vector<TILE*> Get_BlockTile() { return m_vecTile; }
 
 private:
 	HRESULT		Load_Tile(const TCHAR* pTilePath);

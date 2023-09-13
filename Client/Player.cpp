@@ -6,6 +6,7 @@
 
 #include "ObjMgr.h"
 #include "WaterBalloon.h"
+#include "BlockTerrain.h"
 
 CPlayer::CPlayer()
 {
@@ -30,6 +31,13 @@ HRESULT CPlayer::Initialize(void)
 
 int CPlayer::Update(void)
 {
+	if (CObjMgr::Get_Instance()->Get_Block() != nullptr)
+	{
+		CObj* block = CObjMgr::Get_Instance()->Get_Block();
+		m_vecTile = (dynamic_cast<CBlockTerrain*>(block)->Get_BlockTile());
+	}
+
+
 	Key_Input();
 
 	D3DXMATRIX		matTrans;
@@ -225,11 +233,11 @@ void CPlayer::Key_Input()
 
 		D3DXVECTOR3 WaterBalloonvPos;
 
-		WaterBalloonvPos = (*m_vecTile)[iIndex]->vPos;
+		WaterBalloonvPos = (m_vecTile)[iIndex]->vPos;
 		// 물풍선 생성
 		CObj* pWater = new CWaterBalloon;
 		pWater->Initialize();
-		pWater->Set_Pos(m_tInfo.vPos);
+		pWater->Set_Pos(WaterBalloonvPos);
 
 		CObjMgr::Get_Instance()->Add_Object(CObjMgr::WATERBALLOON, pWater);
 	}
@@ -281,7 +289,7 @@ void CPlayer::Change_Anim()
 
 int CPlayer::Get_PosTileIndex(const D3DXVECTOR3& vPos)
 {
-	for (size_t index = 0; index < (*m_vecTile).size(); ++index)
+	for (size_t index = 0; index < (m_vecTile).size(); ++index)
 	{
 		if (ReDefine_vPos(vPos, index))
 		{
@@ -297,7 +305,7 @@ bool CPlayer::ReDefine_vPos(const D3DXVECTOR3& vPos, const int& iIndex)
 {
 	bool bCheck[4]{ false };
 
-	vector<TILE*> vecTile = (*m_vecTile);
+	vector<TILE*> vecTile = (m_vecTile);
 
 	if ((vecTile[iIndex]->vPos.x - TILECX / 2.f) <= vPos.x)
 	{

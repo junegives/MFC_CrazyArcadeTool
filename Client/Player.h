@@ -33,7 +33,7 @@ public:
 	//get_tileIndex와 같은 역할
 	int Get_PosTileIndex(const D3DXVECTOR3& vPos);
 
-	void Set_BlockTile(vector<TILE*>* _vecTile) { m_vecTile = _vecTile; }
+	void Set_BlockTile(vector<TILE*> _vecTile) { m_vecTile = _vecTile; }
 
 private:
 	wstring m_strNickName;
@@ -46,6 +46,6 @@ private:
 
 	vector<ANIMINFO*> m_vecAnim;
 
-	vector<TILE*>* m_vecTile;
+	vector<TILE*> m_vecTile;
 };
 
