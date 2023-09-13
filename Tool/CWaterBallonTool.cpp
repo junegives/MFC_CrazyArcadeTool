@@ -240,7 +240,7 @@ BOOL CCWaterBallonTool::OnInitDialog()
 	m_ListCtrl.InsertItem(7, L"Redheart", 7);
 
 	TCHAR szPath8[MAX_PATH] = L"../Image/WaterBalloon/Redstreak/Redstreak0.png";
-
+	
 	CImage pngImage8;
 
 	CBitmap bit8;
