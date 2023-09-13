@@ -60,3 +60,8 @@ WaterBalloon|Redblock|3|..\Image\WaterBalloon\Redblock\Redblock%d.png
 WaterBalloon|Redheart|3|..\Image\WaterBalloon\Redheart\Redheart%d.png
 WaterBalloon|Redstreak|3|..\Image\WaterBalloon\Redstreak\Redstreak%d.png
 WaterBomb|Flow|37|..\Image\WaterBomb\Flow\flow (%d).png
+WaterBomb|FlowUp|4|..\Image\WaterBomb\FlowUp\flow (%d).png
+WaterBomb|FlowDown|4|..\Image\WaterBomb\FlowDown\flow (%d).png
+WaterBomb|FlowLeft|4|..\Image\WaterBomb\FlowLeft\flow (%d).png
+WaterBomb|FlowRight|4|..\Image\WaterBomb\FlowRight\flow (%d).png
+WaterBomb|FlowStay|4|..\Image\WaterBomb\FlowStay\flow (%d).png
