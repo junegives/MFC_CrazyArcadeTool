@@ -265,21 +265,23 @@ void CAnimTool::OnShowWindow(BOOL bShow, UINT nStatus)
 	GetImg(L"WaterBallon", hRoot3);
 
 	// 프레임 속도
-	m_iTimer = 300;
+	m_iSpeed = 5;
+	m_iTimer = (11 - m_iSpeed) * 30;
+
 	CString strSpeed;
-	strSpeed.Format(L"%d", m_iTimer);
+	strSpeed.Format(L"%d", m_iSpeed);
 	m_EditFrameSpeed.SetWindowTextW(strSpeed);
 	SetTimer(1, m_iTimer, NULL);
 
 	// 프레임 슬라이더 설정
-	m_SlideFrameSpeed.SetRange(10, 500);
-	m_SlideFrameSpeed.SetRangeMin(0);
-	m_SlideFrameSpeed.SetRangeMax(500);
-	m_SlideFrameSpeed.SetPos(m_iTimer);
+	m_SlideFrameSpeed.SetRange(1, 10);
+	m_SlideFrameSpeed.SetRangeMin(1);
+	m_SlideFrameSpeed.SetRangeMax(10);
+	m_SlideFrameSpeed.SetPos(5);
 	//눈금 설정
-	m_SlideFrameSpeed.SetTicFreq(100);
+	m_SlideFrameSpeed.SetTicFreq(1);
 	//키보드 값으로 움직일 크기 지정
-	m_SlideFrameSpeed.SetLineSize(10);
+	m_SlideFrameSpeed.SetLineSize(1);
 
 
 	UpdateData(TRUE);
@@ -481,15 +483,15 @@ void CAnimTool::OnEditFameSpeedUpdate()
 	UpdateData(TRUE);
 
 	CString strEdit;
-	m_iTimer = GetDlgItemInt(IDC_EDITFRAMESPEED);
-	m_SlideFrameSpeed.SetPos(m_iTimer);
+	m_iSpeed = GetDlgItemInt(IDC_EDITFRAMESPEED);
+	m_SlideFrameSpeed.SetPos(m_iSpeed);
 
 	// 전체를 선택
 	m_EditFrameSpeed.SetSel(0, -1);
 
 	// 현재의 데이터로 다시 치환
 	CString strSpeed;
-	strSpeed.Format(L"%d", m_iTimer);
+	strSpeed.Format(L"%d", m_iSpeed);
 	m_EditFrameSpeed.ReplaceSel(strSpeed);
 
 	//--> 포커스를 에디트 박스로 설정
@@ -503,10 +505,11 @@ void CAnimTool::OnNMCustomdrawSliderframespeed(NMHDR* pNMHDR, LRESULT* pResult)
 	LPNMCUSTOMDRAW pNMCD = reinterpret_cast<LPNMCUSTOMDRAW>(pNMHDR);
 
 	UpdateData(TRUE);
-	m_iTimer = m_SlideFrameSpeed.GetPos();
+	m_iSpeed = m_SlideFrameSpeed.GetPos();
+	m_iTimer = (11 - m_iSpeed) * 30;
 
 	CString strSpeed;
-	strSpeed.Format(L"%d", m_iTimer);
+	strSpeed.Format(L"%d", m_iSpeed);
 	m_EditFrameSpeed.SetWindowTextW(strSpeed);
 	UpdateData(FALSE);
 
@@ -569,6 +572,7 @@ void CAnimTool::OnBtnSave()
 			WriteFile(hFile, &(iter->iFrameSpeed), sizeof(int), &dwByte, nullptr);
 			WriteFile(hFile, &(iter->isLoop), sizeof(BOOL), &dwByte, nullptr);
 			WriteFile(hFile, &(iter->vPos), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+			WriteFile(hFile, &(iter->iFrameCnt), sizeof(int), &dwByte, nullptr);
 		}
 
 
@@ -633,6 +637,7 @@ void CAnimTool::OnBtnLoad()
 			ReadFile(hFile, &(tData.iFrameSpeed), sizeof(int), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.isLoop), sizeof(BOOL), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.vPos), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+			ReadFile(hFile, &(tData.iFrameCnt), sizeof(int), &dwByte, nullptr);
 
 
 			if (0 == dwByte)
@@ -648,6 +653,7 @@ void CAnimTool::OnBtnLoad()
 			pData->iFrameSpeed = tData.iFrameSpeed;
 			pData->isLoop = tData.isLoop;
 			pData->vPos = tData.vPos;
+			pData->iFrameCnt = tData.iFrameCnt;
 
 			m_vecAnim.push_back(pData);
 
@@ -677,6 +683,7 @@ void CAnimTool::OnBtnCreate()
 	tAnimInfo->wstrObjectKey = m_objKey;
 	tAnimInfo->wstrStateKey = m_stateKey;
 	tAnimInfo->iFrameSpeed = GetDlgItemInt(IDC_EDITFRAMESPEED);
+	tAnimInfo->iFrameCnt = m_FileList.GetCount();
 
 	m_vecAnim.push_back(tAnimInfo);
 }

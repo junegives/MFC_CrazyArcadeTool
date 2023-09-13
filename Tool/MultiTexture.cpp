@@ -24,7 +24,7 @@ const TEXINFO * CMultiTexture::Get_Texture(const TCHAR * pStateKey, const int & 
 
 	if (iter == m_mapMultiTex.end())
 		return nullptr;
-
+	
 	return iter->second[iCnt];
 }
 

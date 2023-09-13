@@ -86,6 +86,57 @@ void CBlockTerrain::Release(void)
 	m_vecTile.shrink_to_fit();
 }
 
+void CBlockTerrain::RenderBlock(float fPlayerY, bool isFirst)
+{
+	D3DXMATRIX	matWorld, matScale, matTrans;
+
+	for (int i = 0; i < m_vecTile.size(); ++i)
+	{
+		D3DXMatrixIdentity(&matWorld);
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+		D3DXMatrixTranslation(&matTrans,
+			m_vecTile[i]->vPos.x,
+			m_vecTile[i]->vPos.y,
+			m_vecTile[i]->vPos.z);
+
+		if (isFirst)
+		{
+			if (m_vecTile[i]->vPos.y > fPlayerY)
+				return;
+		}
+		else
+		{
+			if (m_vecTile[i]->vPos.y <= fPlayerY)
+			{
+				continue;
+			}
+		}
+
+		matWorld = matScale * matTrans;
+
+		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Block", L"Block", m_vecTile[i]->byDrawID);
+
+		float fCenterX = m_vecTile[i]->vImageCenter.x;
+		float fCenterY = m_vecTile[i]->vImageCenter.y;
+
+
+		//RECT rectTile = { (float)m_vecTile[i]->byDrawID * TILECX, 0, (float)m_vecTile[i]->byDrawID * TILECX + TILECX, TILECY };
+		//RECT rectTile = { (float)m_vecTile[i]->byDrawID * TILECX, 0, -((float)(m_vecTile[i]->byDrawID * TILECX) + (TILECX * iblockX)), TILECY * iblockY};
+
+		//RECT rectTile = { ((float)(m_vecTile[i]->byDrawID * TILECX) - (TILECX * iblockX)), 0, (float)(m_vecTile[i]->byDrawID * TILECX), TILECY * iblockY };
+
+		RECT rectTile = { (float)m_vecTile[i]->byDrawID * m_vecTile[i]->vSize.x, 0, (float)m_vecTile[i]->byDrawID * m_vecTile[i]->vSize.x + m_vecTile[i]->vSize.x, m_vecTile[i]->vSize.y };
+
+		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
+			nullptr,
+			&D3DXVECTOR3(fCenterX, fCenterY, 0.f),
+			nullptr,
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+}
+
 HRESULT CBlockTerrain::Load_Tile(const TCHAR* pTilePath)
 {
 	HANDLE		hFile = CreateFile(pTilePath, GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);

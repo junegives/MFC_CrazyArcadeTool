@@ -62,6 +62,7 @@ public:
 	CListBox m_ListAnim;
 	bool	m_isLoop = true;
 	bool	m_isPlay = false;
+	int		m_iSpeed = 5;
 
 	vector<ANIMINFO*>	m_vecAnim;
 

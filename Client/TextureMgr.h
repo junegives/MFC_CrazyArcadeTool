@@ -16,6 +16,7 @@ public:
 
 public:
 	HRESULT		ReadImgPath(const wstring& wstrPath);
+	vector<wstring>		GetImgPath(const wstring& wstrPath, const wstring& pObjKey);
 	HRESULT		Insert_Texture(TEXTYPE eType, const TCHAR* pFilePath, const TCHAR* pObjKey, const TCHAR* pStateKey = L"", const int& iCnt = 0);
 	void		Release();
 

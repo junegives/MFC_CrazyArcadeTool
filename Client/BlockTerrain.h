@@ -14,6 +14,9 @@ public:
 	virtual void Release(void) override;
 
 public:
+	void		RenderBlock(float fPlayerY, bool isFirst);
+
+public:
 	vector<TILE*> Get_BlockTile() { return m_vecTile; }
 
 private:

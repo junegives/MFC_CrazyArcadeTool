@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "ObjMgr.h"
 #include "Obj.h"
+#include "BlockTerrain.h"
+#include "Player.h"
 
 IMPLEMENT_SINGLETON(CObjMgr)
 
@@ -11,38 +13,36 @@ CObjMgr::CObjMgr()
 
 CObjMgr::~CObjMgr()
 {
-	Release(); 
+	Release();
 }
 
-void CObjMgr::Add_Object(ID eID,/* RENDERID renderID,*/ CObj * pObject)
+void CObjMgr::Add_Object(ID eID, CObj* pObject)
 {
 	if (nullptr == pObject || END <= eID)
-		return; 
+		return;
 
-	//if (nullptr == pObject || RENDER_END <= renderID)
-	//	return;
-
-	m_listObject[eID].emplace_back(pObject); 
-	//m_RenderList[renderID].emplace_back(pObject);
+	m_listObject[eID].emplace_back(pObject);
 }
 
 bool CObjMgr::ExistPlayer()
 {
 	if (m_listObject[PLAYER].size() > 0)
 		return true;
+
+	return false;
 }
 
 void CObjMgr::Update()
 {
-	for (int i = 0 ; i < END; ++i)
+	for (int i = 0; i < END; ++i)
 	{
-		for (auto& iter = m_listObject[i].begin() ; iter != m_listObject[i].end(); )
+		for (auto& iter = m_listObject[i].begin(); iter != m_listObject[i].end(); )
 		{
 			int iEvent = (*iter)->Update();
 
 			if (OBJ_DEAD == iEvent)
 			{
-				if(i != EFFECT)
+				if (i != EFFECT)
 					Safe_Delete(*iter);
 
 				iter = m_listObject[i].erase(iter);
@@ -55,7 +55,7 @@ void CObjMgr::Update()
 
 void CObjMgr::Late_Update()
 {
-	for (int i = 0 ; i < END ; ++i)
+	for (int i = 0; i < END; ++i)
 	{
 		for (auto& pObject : m_listObject[i])
 			pObject->Late_Update();
@@ -64,26 +64,37 @@ void CObjMgr::Late_Update()
 
 void CObjMgr::Render()
 {
+	float fPlayerY = (*m_listObject[PLAYER].begin())->Get_Info().vPos.y;
+	bool	isFirst = true;
+
 	for (int i = 0; i < END; ++i)
 	{
-		for (auto& pObject : m_listObject[i])
-			pObject->Render();
+		if (i == BLOCK)
+		{
+			for (auto& pObject : m_listObject[i])
+			{
+				dynamic_cast<CBlockTerrain*>(pObject)->RenderBlock(fPlayerY, isFirst);
+			}
+			if (!isFirst)
+				i = PLAYER;
+			isFirst = false;
+		}
+		else if (i == PLAYER)
+		{
+			for (auto& pObject : m_listObject[i])
+			{
+				pObject->Render();
+			}
+			i = BLOCK - 1;
+		}
+		else
+		{
+			for (auto& pObject : m_listObject[i])
+			{
+				pObject->Render();
+			}
+		}
 	}
-
-	//for (size_t i = 0; i < RENDER_END; ++i)
-	//{
-	//	 
-
-	//	//m_RenderList[i].sort([](CObj* pDst, CObj* pSrc) ->bool
-	//	//	{
-	//	//		return pDst->Get_Info().fY < pSrc->Get_Info().fY;
-	//	//	});
-
-	//	for (auto& iter : m_RenderList[i])
-	//		iter->Render();
-
-	//	m_RenderList[i].clear();
-	//}
 }
 
 void CObjMgr::Release()
@@ -91,7 +102,7 @@ void CObjMgr::Release()
 	for (int i = 0; i < END; ++i)
 	{
 		for (auto& pObject : m_listObject[i])
-			Safe_Delete(pObject); 
+			Safe_Delete(pObject);
 
 		m_listObject[i].clear();
 	}

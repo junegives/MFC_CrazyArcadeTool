@@ -40,6 +40,8 @@ int CPlayer::Update(void)
 
 	Key_Input();
 
+	m_wstrPreStateKey = m_wstrStateKey;
+
 	D3DXMATRIX		matTrans;
 
 	D3DXMatrixTranslation(&matTrans,
@@ -54,9 +56,16 @@ int CPlayer::Update(void)
 
 void CPlayer::Late_Update(void)
 {
-	Change_Anim();
+	Change_State();
 
-	__super::Move_Frame();
+	if (m_wstrStateKey != m_wstrPreStateKey || m_iDir != m_iPreDir)
+		Change_Anim();
+
+	m_wstrPreStateKey = m_wstrStateKey;
+	m_iPreDir = m_iDir;
+
+	if (m_eState != ePlayerState::STAND)
+		__super::Move_Frame();
 }
 
 void CPlayer::Render(void)
@@ -119,7 +128,7 @@ void CPlayer::Load_Player(wstring _szID, wstring _szCharacter)
 			delete[]pName;
 
 			m_iSpeed = tData.iSpeed;
-			m_iSpeed /= 3;
+			m_iSpeed /= 4;
 			m_iWaterLength = tData.iWaterLength;
 			m_iWaterCount = tData.iWaterCount;
 
@@ -156,7 +165,7 @@ void CPlayer::Load_Player(wstring _szID, wstring _szCharacter)
 		ReadFile(hFileAnimation, &(tDataAnim.iFrameSpeed), sizeof(int), &dwByte, nullptr);
 		ReadFile(hFileAnimation, &(tDataAnim.isLoop), sizeof(BOOL), &dwByte, nullptr);
 		ReadFile(hFileAnimation, &(tDataAnim.vPos), sizeof(D3DXVECTOR3), &dwByte, nullptr);
-
+		ReadFile(hFileAnimation, &(tDataAnim.iFrameCnt), sizeof(int), &dwByte, nullptr);
 
 
 		if (0 == dwByte)
@@ -179,6 +188,7 @@ void CPlayer::Load_Player(wstring _szID, wstring _szCharacter)
 		pData->iFrameSpeed = tDataAnim.iFrameSpeed;
 		pData->isLoop = tDataAnim.isLoop;
 		pData->vPos = tDataAnim.vPos;
+		pData->iFrameCnt = tDataAnim.iFrameCnt;
 
 		m_vecAnim.push_back(pData);
 
@@ -191,7 +201,7 @@ void CPlayer::Load_Player(wstring _szID, wstring _szCharacter)
 
 void CPlayer::Key_Input()
 {
-	if(CKeyMgr::Get_Instance()->Key_Pressing(VK_UP))
+	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP))
 	{
 		m_tInfo.vPos.y -= m_iSpeed;
 		m_iDir = 0;
@@ -243,7 +253,7 @@ void CPlayer::Key_Input()
 	}
 }
 
-void CPlayer::Change_Anim()
+void CPlayer::Change_State()
 {
 	switch (m_eState)
 	{
@@ -287,6 +297,30 @@ void CPlayer::Change_Anim()
 	}
 }
 
+void CPlayer::Change_Anim()
+{
+	// 애니메이션 데이터 불러와서 정보 다 가져오기
+	for (auto& iter : m_vecAnim)
+	{
+		if (m_wstrStateKey == iter->wstrStateKey)
+		{
+			m_tFrame.fSpeed = (float)iter->iFrameSpeed;
+			m_tFrame.isLoop = iter->isLoop;
+
+			if (m_eState == ePlayerState::STAND)
+			{
+				m_tFrame.fFrame = (float)m_iDir;
+				m_tFrame.fMax = (float)m_iDir;
+			}
+			else
+			{
+				m_tFrame.fFrame = 0.f;
+				m_tFrame.fMax = (float)iter->iFrameCnt;
+			}
+		}
+	}
+}
+
 int CPlayer::Get_PosTileIndex(const D3DXVECTOR3& vPos)
 {
 	for (size_t index = 0; index < (m_vecTile).size(); ++index)
@@ -327,4 +361,3 @@ bool CPlayer::ReDefine_vPos(const D3DXVECTOR3& vPos, const int& iIndex)
 	return bCheck[0] && bCheck[1] && bCheck[2] && bCheck[3];
 
 }
-

@@ -27,10 +27,11 @@ public:
 public:
 	void Load_Player(wstring _szID, wstring _szCharacter);
 	void Key_Input();
+	void Change_State();
 	void Change_Anim();
 
 	bool ReDefine_vPos(const D3DXVECTOR3& vPos, const int& iIndex);
-	//get_tileIndex와 같은 역할
+	//get_tileIndex�� ���� ����
 	int Get_PosTileIndex(const D3DXVECTOR3& vPos);
 
 	void Set_BlockTile(vector<TILE*> _vecTile) { m_vecTile = _vecTile; }
@@ -42,9 +43,12 @@ private:
 	int		m_iSpeed;
 
 	int		m_iDir = 2;
+	int		m_iPreDir = 2;
 	ePlayerState m_eState = ePlayerState::STAND;
+	wstring	m_wstrPreStateKey = L"";
 
 	vector<ANIMINFO*> m_vecAnim;
+	vector<wstring> m_vecImgPath;
 
 	vector<TILE*> m_vecTile;
 };

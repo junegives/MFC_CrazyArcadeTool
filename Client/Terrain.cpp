@@ -18,7 +18,7 @@ CTerrain::~CTerrain()
 
 HRESULT CTerrain::Initialize(void)
 {
-	if (FAILED(Load_Tile(L"../Data/TestMap.dat")))
+	if (FAILED(Load_Tile(L"../Data/HeartMap.dat")))
 	{
 		ERR_MSG(L"Load_Tile Failed");
 		return E_FAIL;

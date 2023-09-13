@@ -15,7 +15,8 @@ typedef	struct tagFrame
 {
 	float		fFrame; // 프레임을 세기 위한 변수
 	float		fMax;	// 최대 이미지의 프레임 수
-
+	float		fSpeed; // 프레임 변경 속도
+	bool		isLoop; // 프레임 루프인지
 }FRAME;
 
 typedef struct tagTexture
@@ -79,6 +80,7 @@ typedef struct tagAnim
 	D3DXVECTOR3		vPos = { 0.f, 0.f, 0.f };
 	BOOL			isLoop = true;
 	int				iFrameSpeed;
+	int				iFrameCnt;
 } ANIMINFO;
 
 static D3DXVECTOR3		Get_Mouse()

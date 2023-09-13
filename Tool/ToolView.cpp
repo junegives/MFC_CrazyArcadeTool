@@ -284,7 +284,7 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 
 	CView::OnMouseMove(nFlags, point);
 
-	if (GetAsyncKeyState(VK_LBUTTON))
+	if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
 	{
 		// AfxGetApp : 메인 스레드를 갖고 있는 현재 메인 app을 반환
 		CMainFrame* pMain = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
