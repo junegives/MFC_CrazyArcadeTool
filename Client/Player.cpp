@@ -32,8 +32,8 @@ int CPlayer::Update(void)
 	D3DXMATRIX		matTrans;
 
 	D3DXMatrixTranslation(&matTrans,
-		m_tInfo.vPos.x + m_vScroll.x,
-		m_tInfo.vPos.y + m_vScroll.y,
+		m_tInfo.vPos.x,
+		m_tInfo.vPos.y,
 		0.f);
 
 	m_tInfo.matWorld = matTrans;

@@ -15,16 +15,16 @@ CDevice::~CDevice()
 
 HRESULT CDevice::Init_Device(void)
 {
-	//  1. ÀåÄ¡(±×·¡ÇÈ Ä«µå)¸¦ Á¶»çÇÒ °´Ã¼ »ý¼º
+	//  1. ìž¥ì¹˜(ê·¸ëž˜í”½ ì¹´ë“œ)ë¥¼ ì¡°ì‚¬í•  ê°ì²´ ìƒì„±
 	m_pSDK = Direct3DCreate9(D3D_SDK_VERSION);
 
-	// 2. ÀåÄ¡ Á¶»ç
+	// 2. ìž¥ì¹˜ ì¡°ì‚¬
 
 	D3DCAPS9			DeviceCaps;
 	ZeroMemory(&DeviceCaps, sizeof(D3DCAPS9));
 
-	// GetDeviceCaps      : ÀåÄ¡¿¡ ´ëÇÑ Áö¿ø ¼öÁØÀ» ÆÄ¾ÇÇÏ¿© DeviceCaps °ªÀ» Ã¤¿öÁÖ´Â ÇÔ¼ö
-	// D3DADAPTER_DEFAULT : Á¤º¸¸¦ ¾òÀ¸·Á´Â ±âº» ±×·¡ÇÈ Ä«µå¸¦ ÀÇ¹Ì
+	// GetDeviceCaps      : ìž¥ì¹˜ì— ëŒ€í•œ ì§€ì› ìˆ˜ì¤€ì„ íŒŒì•…í•˜ì—¬ DeviceCaps ê°’ì„ ì±„ì›Œì£¼ëŠ” í•¨ìˆ˜
+	// D3DADAPTER_DEFAULT : ì •ë³´ë¥¼ ì–»ìœ¼ë ¤ëŠ” ê¸°ë³¸ ê·¸ëž˜í”½ ì¹´ë“œë¥¼ ì˜ë¯¸
 	if (FAILED(m_pSDK->GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &DeviceCaps)))
 	{
 		ERR_MSG(L"GetDeviceCaps Failed");
@@ -45,14 +45,14 @@ HRESULT CDevice::Init_Device(void)
 
 	Set_Parameters(d3dpp);
 
-	// CreateDevice: ÀåÄ¡¸¦ Á¦¾îÇÒ °´Ã¼ »ý¼º(¾î¶² ±×·¡ÇÈ Ä«µå¸¦ Á¦¾îÇÒ °ÍÀÎ°¡, ¾î¶² Á¤º¸·Î ÀåÄ¡¿¡ Á¢±ÙÇÒ °ÍÀÎ°¡, ÀåÄ¡¸¦ »ç¿ëÇÒ À©µµ¿ì ÇÚµé, µ¿ÀÛ ¹æ½Ä, »ç¿ëÈ¯°æ, °á°ú°ª)
+	// CreateDevice: ìž¥ì¹˜ë¥¼ ì œì–´í•  ê°ì²´ ìƒì„±(ì–´ë–¤ ê·¸ëž˜í”½ ì¹´ë“œë¥¼ ì œì–´í•  ê²ƒì¸ê°€, ì–´ë–¤ ì •ë³´ë¡œ ìž¥ì¹˜ì— ì ‘ê·¼í•  ê²ƒì¸ê°€, ìž¥ì¹˜ë¥¼ ì‚¬ìš©í•  ìœˆë„ìš° í•¸ë“¤, ë™ìž‘ ë°©ì‹, ì‚¬ìš©í™˜ê²½, ê²°ê³¼ê°’)
 	if (FAILED(m_pSDK->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_hWnd, vp, &d3dpp, &m_pDevice)))
 	{
 		ERR_MSG(L"CreateDevice Failed");
 		return E_FAIL;
 	}
 
-	// ½ºÇÁ¶óÀÌÆ® ÄÄ°´Ã¼ »ý¼º
+	// ìŠ¤í”„ë¼ì´íŠ¸ ì»´ê°ì²´ ìƒì„±
 
 	if (FAILED(D3DXCreateSprite(m_pDevice, &m_pSprite)))
 	{
@@ -60,7 +60,7 @@ HRESULT CDevice::Init_Device(void)
 		return E_FAIL;
 	}
 
-	// ÆùÆ® °´Ã¼ »ý¼º
+	// í°íŠ¸ ê°ì²´ ìƒì„±
 
 	D3DXFONT_DESCW			tFontInfo;
 	ZeroMemory(&tFontInfo, sizeof(D3DXFONT_DESCW));
@@ -69,7 +69,7 @@ HRESULT CDevice::Init_Device(void)
 	tFontInfo.Width = 10;
 	tFontInfo.Weight = FW_HEAVY;
 	tFontInfo.CharSet = HANGEUL_CHARSET;
-	lstrcpy(tFontInfo.FaceName, L"±Ã¼­");
+	lstrcpy(tFontInfo.FaceName, L"ê¶ì„œ");
 
 	if (FAILED(D3DXCreateFontIndirect(m_pDevice, &tFontInfo, &m_pFont)))
 	{
@@ -79,18 +79,18 @@ HRESULT CDevice::Init_Device(void)
 
 	return S_OK;
 }
-// ÈÄ¸é ¹öÆÛÀÇ µ¿ÀÛ ¿ø¸®
+// í›„ë©´ ë²„í¼ì˜ ë™ìž‘ ì›ë¦¬
 
 void CDevice::Render_Begin()
 {
-	m_pDevice->Clear(0,			// ·ºÆ®ÀÇ °³¼ö	
-					nullptr,	// ·ºÆ®ÀÇ Ã¹ ¹øÂ° ÁÖ¼Ò	
-					D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET,	// Áö¿ï ¹öÆÛ Á¾·ù
-					D3DCOLOR_ARGB(255, 0, 0, 255), // ¹é¹öÆÛ »ö»ó
-					1.f,	// ±íÀÌ ¹öÆÛ ÃÊ±âÈ­ °ª
-					0);		// ½ºÅÙ½Ç ¹öÆÛ ÃÊ±âÈ­ °ª
+	m_pDevice->Clear(0,			// ë ‰íŠ¸ì˜ ê°œìˆ˜	
+					nullptr,	// ë ‰íŠ¸ì˜ ì²« ë²ˆì§¸ ì£¼ì†Œ	
+					D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET,	// ì§€ìš¸ ë²„í¼ ì¢…ë¥˜
+					D3DCOLOR_ARGB(0, 0, 0, 0), // ë°±ë²„í¼ ìƒ‰ìƒ
+					1.f,	// ê¹Šì´ ë²„í¼ ì´ˆê¸°í™” ê°’
+					0);		// ìŠ¤í…ì‹¤ ë²„í¼ ì´ˆê¸°í™” ê°’
 
-	// ¿©±â¼­ºÎÅÍ ÈÄ¸é ¹öÆÛ¿¡ ±×¸®±â¸¦ ½ÃÀÛ
+	// ì—¬ê¸°ì„œë¶€í„° í›„ë©´ ë²„í¼ì— ê·¸ë¦¬ê¸°ë¥¼ ì‹œìž‘
 	m_pDevice->BeginScene();
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
@@ -102,7 +102,7 @@ void CDevice::Render_End(HWND hWnd)
 	m_pDevice->EndScene();
 	m_pDevice->Present(nullptr, nullptr, hWnd, nullptr);
 
-	// D3DSWAPEFFECT_COPYÀÏ ¶§, 1, 2, 4 ¸Å°³ º¯¼ö°¡ °ªÀ» »ç¿ë °¡´É
+	// D3DSWAPEFFECT_COPYì¼ ë•Œ, 1, 2, 4 ë§¤ê°œ ë³€ìˆ˜ê°€ ê°’ì„ ì‚¬ìš© ê°€ëŠ¥
 }
 
 void CDevice::Release()
@@ -125,24 +125,24 @@ void CDevice::Set_Parameters(D3DPRESENT_PARAMETERS & d3dpp)
 	d3dpp.MultiSampleQuality = 0;
 
 
-	//D3DSWAPEFFECT_DISCARD : ½º¿Ò Ã¼ÀÎ ¹æ½Ä
-	//D3DSWAPEFFECT_FLIP : ¹öÆÛ ÇÏ³ª¸¦ µÚÁýÀ¸¸é¼­ »ç¿ëÇÏ´Â ¹æ½Ä
-	//D3DSWAPEFFECT_COPY : ´õºí ¹öÆÛ¸µ°ú À¯»çÇÑ º¹»ç ¹æ½Ä
+	//D3DSWAPEFFECT_DISCARD : ìŠ¤ì™‘ ì²´ì¸ ë°©ì‹
+	//D3DSWAPEFFECT_FLIP : ë²„í¼ í•˜ë‚˜ë¥¼ ë’¤ì§‘ìœ¼ë©´ì„œ ì‚¬ìš©í•˜ëŠ” ë°©ì‹
+	//D3DSWAPEFFECT_COPY : ë”ë¸” ë²„í¼ë§ê³¼ ìœ ì‚¬í•œ ë³µì‚¬ ë°©ì‹
 
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 
 	d3dpp.hDeviceWindow = g_hWnd;
 
-	d3dpp.Windowed = TRUE;		// Ã¢ ¸ðµå ½ÇÇà(FALSE ÀÎ °æ¿ì, ÀüÃ¼È­¸é ¸ðµå ½ÇÇà)
+	d3dpp.Windowed = TRUE;		// ì°½ ëª¨ë“œ ì‹¤í–‰(FALSE ì¸ ê²½ìš°, ì „ì²´í™”ë©´ ëª¨ë“œ ì‹¤í–‰)
 
 	d3dpp.EnableAutoDepthStencil = TRUE;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
 	
-	// ÀüÃ¼È­¸é ¸ðµåÀÏ °æ¿ì ¼³Á¤ÇÏ´Â ¸â¹ö º¯¼ö
+	// ì „ì²´í™”ë©´ ëª¨ë“œì¼ ê²½ìš° ì„¤ì •í•˜ëŠ” ë©¤ë²„ ë³€ìˆ˜
 
-	// ¸ð´ÏÅÍ Àç»ý·üÀ» Åä´ë·Î °»½Å ÁÖ±â¸¦ ¼³Á¤
+	// ëª¨ë‹ˆí„° ìž¬ìƒë¥ ì„ í† ëŒ€ë¡œ ê°±ì‹  ì£¼ê¸°ë¥¼ ì„¤ì •
 	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 
-	// Àç»ý·ü°ú ½Ã¿¬ÀÇ °£°Ý ¼³Á¤
+	// ìž¬ìƒë¥ ê³¼ ì‹œì—°ì˜ ê°„ê²© ì„¤ì •
 	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 }
