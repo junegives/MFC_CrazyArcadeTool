@@ -24,6 +24,7 @@ protected:
 	afx_msg void OnItemchangedListCtrlwater(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnDestroy();
+	afx_msg void OnClickedSelect();
 
 	DECLARE_MESSAGE_MAP()
 public:

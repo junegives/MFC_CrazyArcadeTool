@@ -238,12 +238,14 @@ void CBlockTool::OnBlockSave()
 
 		for (auto& iter : (*m_vecTile))
 		{
+
+
 			//dwStrByte = sizeof(TCHAR) * (Mypair.first.GetLength() + 1);
-			dwStrByte = sizeof(TCHAR) * (iter->wstrStateKey.GetLength() + 1);
+			dwStrByte = sizeof(TCHAR) * (iter->wstrStateKey.length() + 1);
 
 			//스테이트 키
 			WriteFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
-			WriteFile(hFile, iter->wstrStateKey.GetString(), dwStrByte, &dwByte, nullptr);
+			WriteFile(hFile, iter->wstrStateKey.c_str(), dwStrByte, &dwByte, nullptr);
 
 			//선택되었는지
 			WriteFile(hFile, (&iter->bPick), sizeof(bool), &dwByte, nullptr);

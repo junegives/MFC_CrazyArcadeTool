@@ -235,11 +235,33 @@ void CMapTool::OnSaveData()
 		if (vecTile.empty())
 			return;
 		
-		DWORD	dwByte(0);
+		DWORD	dwByte(0), dwStrByte(0);
 
+		//for (auto& iter : vecTile)
+		//	WriteFile(hFile, iter, sizeof(TILE), &dwByte, nullptr);
+		
 		for (auto& iter : vecTile)
-			WriteFile(hFile, iter, sizeof(TILE), &dwByte, nullptr);
-			
+		{
+			dwStrByte = sizeof(TCHAR) * ((iter->wstrStateKey).length() + 1);
+
+			WriteFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
+			WriteFile(hFile, iter->wstrStateKey.c_str(), dwStrByte, &dwByte, nullptr);
+
+			//선택되었는지
+			WriteFile(hFile, (&iter->bPick), sizeof(bool), &dwByte, nullptr);
+			//출력 이미지
+			WriteFile(hFile, (&iter->byDrawID), sizeof(BYTE), &dwByte, nullptr);
+			//옵션 값
+			WriteFile(hFile, (&iter->byOption), sizeof(BYTE), &dwByte, nullptr);
+			//터지는지 옵션
+			WriteFile(hFile, (&iter->byOption_Burst), sizeof(BYTE), &dwByte, nullptr);
+			//움직이는지
+			WriteFile(hFile, (&iter->byOption_Move), sizeof(BYTE), &dwByte, nullptr);
+			//중점, 사이즈, 이미지의 중점
+			WriteFile(hFile, (&iter->vPos), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+			WriteFile(hFile, (&iter->vSize), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+			WriteFile(hFile, (&iter->vImageCenter), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+		}
 
 		CloseHandle(hFile);
 	}

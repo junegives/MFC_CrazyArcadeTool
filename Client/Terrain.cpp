@@ -18,9 +18,17 @@ CTerrain::~CTerrain()
 
 HRESULT CTerrain::Initialize(void)
 {
-	if (FAILED(Load_Tile(L"../Data/Test.dat")))
+	if (FAILED(Load_Tile(L"../Data/TestMap.dat")))
 	{
 		ERR_MSG(L"Load_Tile Failed");
+		return E_FAIL;
+	}
+
+	//CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"Tile", (m_vecTile[0]->wstrStateKey).c_str(), 6);
+
+	if (CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt"))
+	{
+		ERR_MSG(L"Load Img Failed");
 		return E_FAIL;
 	}
 
@@ -42,7 +50,6 @@ void CTerrain::Render(void)
 
 	for (int i = 0; i < m_vecTile.size(); ++i)
 	{
-
 		D3DXMatrixIdentity(&matWorld);
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 		D3DXMatrixTranslation(&matTrans,
@@ -54,7 +61,7 @@ void CTerrain::Render(void)
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", m_vecTile[i]->byDrawID);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", (m_vecTile[i]->wstrStateKey).c_str(), m_vecTile[i]->byDrawID);
 
 		float	fCenterX = TILECX / 2.f;
 		float	fCenterY = TILECX / 2.f;
@@ -84,22 +91,69 @@ HRESULT CTerrain::Load_Tile(const TCHAR* pTilePath)
 	if (INVALID_HANDLE_VALUE == hFile)
 		return E_FAIL;
 
-	DWORD	dwByte(0);
-	TILE* pTile = nullptr;
+	//DWORD	dwByte(0);
+	//TILE* pTile = nullptr;
+	//
+	//while (true)
+	//{
+	//	pTile = new TILE;
+	//
+	//	ReadFile(hFile, pTile, sizeof(TILE), &dwByte, nullptr);
+	//
+	//	if (0 == dwByte)
+	//	{
+	//		Safe_Delete(pTile);
+	//		break;
+	//	}
+	//
+	//	m_vecTile.push_back(pTile);
+	//}
+	//
+	//CloseHandle(hFile);
+	//
+	//return S_OK;
+
+	DWORD	dwByte(0), dwstrByte(0);
+	TILE pTile = {};
 
 	while (true)
 	{
-		pTile = new TILE;
+		ReadFile(hFile, &dwstrByte, sizeof(DWORD), &dwByte, nullptr);
 
-		ReadFile(hFile, pTile, sizeof(TILE), &dwByte, nullptr);
+		TCHAR* pName = new TCHAR[dwstrByte];
+		ReadFile(hFile, pName, dwstrByte, &dwByte, nullptr);
+
+		ReadFile(hFile, &(pTile.bPick), sizeof(bool), &dwByte, nullptr);
+		ReadFile(hFile, &(pTile.byDrawID), sizeof(BYTE), &dwByte, nullptr);
+		ReadFile(hFile, &(pTile.byOption), sizeof(BYTE), &dwByte, nullptr);
+		ReadFile(hFile, &(pTile.byOption_Burst), sizeof(BYTE), &dwByte, nullptr);
+		ReadFile(hFile, &(pTile.byOption_Move), sizeof(BYTE), &dwByte, nullptr);
+		ReadFile(hFile, &(pTile.vPos), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+		ReadFile(hFile, &(pTile.vSize), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+		ReadFile(hFile, &(pTile.vImageCenter), sizeof(D3DXVECTOR3), &dwByte, nullptr);
+
 
 		if (0 == dwByte)
 		{
-			Safe_Delete(pTile);
+			delete[]pName;
 			break;
 		}
 
-		m_vecTile.push_back(pTile);
+		TILE* pData = new TILE;
+
+		pData->wstrStateKey = pName;
+		delete[]pName;
+
+		pData->bPick = pTile.bPick;
+		pData->byDrawID = pTile.byDrawID;
+		pData->byOption = pTile.byOption;
+		pData->byOption_Burst = pTile.byOption_Burst;
+		pData->byOption_Move = pTile.byOption_Move;
+		pData->vPos = pTile.vPos;
+		pData->vSize = pTile.vSize;
+		pData->vImageCenter = pTile.vImageCenter;
+
+		m_vecTile.push_back(pData);
 	}
 
 	CloseHandle(hFile);

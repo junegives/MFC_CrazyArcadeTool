@@ -216,7 +216,7 @@ void CMyTerrain::Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 			
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", iter->wstrStateKey, iter->byDrawID);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", (iter->wstrStateKey).c_str(), iter->byDrawID);
 		const TEXINFO* pDebugTex = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", L"Debug", 0);
 
 		float	fCenterX = TILECX / 2.f;
@@ -270,7 +270,7 @@ void CMyTerrain::Mini_Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", iter->wstrStateKey, iter->byDrawID);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", (iter->wstrStateKey).c_str(), iter->byDrawID);
 
 		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
 		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
@@ -318,7 +318,7 @@ void CMyTerrain::Mouse_Render()
 
 			CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-			const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", m_pPreviewTile->wstrStateKey, m_pPreviewTile->byDrawID);
+			const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Tile", (m_pPreviewTile->wstrStateKey).c_str(), m_pPreviewTile->byDrawID);
 
 			float	fCenterX = TILECX / 2.f;
 			float	fCenterY = TILECY / 2.f;

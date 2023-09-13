@@ -35,11 +35,7 @@ typedef struct tagTile
 	BYTE		byDrawID;		// 몇 번 타일 이미지
 
 	// 추가
-#ifdef _AFX
-	CString	wstrStateKey = L"";	// 타일 키 (맵별로 구별)
-#else
 	wstring wstrStateKey = L"";	// 타일 키 (맵별로 구별)
-#endif
 
 	//추가한 부분
 	BYTE		byOption_Move;   //움직이는지 안움직이는지

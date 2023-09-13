@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CCWaterBallonTool, CDialog)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_CTRLWATER, &CCWaterBallonTool::OnItemchangedListCtrlwater)
 	ON_WM_TIMER()
 	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_BUTTON_WATER, &CCWaterBallonTool::OnClickedSelect)
 END_MESSAGE_MAP()
 
 
@@ -388,16 +389,16 @@ void CCWaterBallonTool::Update_Image()
 	//	{
 	//		m_bFrame = true;
 	//	}
-
+	//
 	//}
-
+	//
 	//if (m_iImageCount <= 3 && m_bFrame == true)
 	//{
 	//	m_iImageCount--;
 	//	if (m_iImageCount == 0)
 	//		m_bFrame = false;
 	//}
-
+	//
 	//m_strFind = L"";
 
 	UpdateData(FALSE);
@@ -415,4 +416,22 @@ void CCWaterBallonTool::Udate_Count()
 	//{
 	//	m_iImageCount = 0;
 	//}
+}
+
+
+void CCWaterBallonTool::OnClickedSelect()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	if (m_strFind != L"")
+	{
+		//data 폴더에 키값을 저장시키자
+
+	}
+	else
+	{
+		//선택 된 게 없다고 메시지 박스 뜨게
+
+	}
+
 }
