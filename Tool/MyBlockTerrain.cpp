@@ -331,7 +331,7 @@ bool CMyBlockTerrain::CanInstall(int _iIdenx, int _iBlockX, int _iBlockY)
 
 HRESULT CMyBlockTerrain::Initialize()
 {
-	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Block/Obj (%d).png", L"Image", L"Block", 31)))
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Block/Obj (%d).png", L"Image", L"Block", 45)))
 	{
 		AfxMessageBox(L"Tile Texture Insert Failed");
 		return E_FAIL;
