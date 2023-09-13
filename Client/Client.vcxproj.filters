@@ -64,6 +64,9 @@
     <Filter Include="06.KeyMgr">
       <UniqueIdentifier>{13470ec6-24cd-40e2-a3e9-2fb0376b8250}</UniqueIdentifier>
     </Filter>
+    <Filter Include="99. GameObject\02.BlockTerrain">
+      <UniqueIdentifier>{b1c90d9c-22af-4ce9-a8c2-cd374089e7a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -126,6 +129,9 @@
     <ClInclude Include="KeyMgr.h">
       <Filter>06.KeyMgr</Filter>
     </ClInclude>
+    <ClInclude Include="BlockTerrain.h">
+      <Filter>99. GameObject\02.BlockTerrain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -178,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="KeyMgr.cpp">
       <Filter>06.KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockTerrain.cpp">
+      <Filter>99. GameObject\02.BlockTerrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -331,7 +331,7 @@ bool CMyBlockTerrain::CanInstall(int _iIdenx, int _iBlockX, int _iBlockY)
 
 HRESULT CMyBlockTerrain::Initialize()
 {
-	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Block/Obj (%d).png", L"Image", L"Block", 45)))
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"../Image/Block/Block/Obj (%d).png", L"Block", L"Block", 45)))
 	{
 		AfxMessageBox(L"Tile Texture Insert Failed");
 		return E_FAIL;
@@ -411,7 +411,7 @@ void CMyBlockTerrain::Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Image", L"Block", iter->byDrawID);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Block", L"Block", iter->byDrawID);
 
 		RECT rectTile = { (float)iter->byDrawID * iter->vSize.x, 0, (float)iter->byDrawID * iter->vSize.x + iter->vSize.x, iter->vSize.y };
 
@@ -468,7 +468,7 @@ void CMyBlockTerrain::Render()
 				float	fCenterX = TILECX / 2.f;
 				float	fCenterY = TILECY / 2.f;
 
-				const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Image", L"Block", 30);
+				const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Block", L"Block", 45);
 
 				CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
 					nullptr,
@@ -501,7 +501,7 @@ void CMyBlockTerrain::Mini_Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Image", L"Block", iter->byDrawID);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Block", L"Block", iter->byDrawID);
 
 		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
 		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
@@ -565,7 +565,7 @@ void CMyBlockTerrain::Mouse_Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Image", L"Block", m_Tile->byDrawID);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Block", L"Block", m_Tile->byDrawID);
 
 		float	fCenterX = (TILECX / 2.f);
 		float	fCenterY = m_vImageSize.y - (TILECY / 2.f);

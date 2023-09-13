@@ -238,8 +238,6 @@ void CBlockTool::OnBlockSave()
 
 		for (auto& iter : (*m_vecTile))
 		{
-
-
 			//dwStrByte = sizeof(TCHAR) * (Mypair.first.GetLength() + 1);
 			dwStrByte = sizeof(TCHAR) * (iter->wstrStateKey.length() + 1);
 
@@ -360,7 +358,7 @@ BOOL CBlockTool::OnInitDialog()
 
 	vector<CString> vecImgPath;
 
-	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", L"Image");
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", L"Block");
 
 	if (vecImgPath.size() == 0)
 		return false;

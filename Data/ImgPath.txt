@@ -1,4 +1,4 @@
-Image|Block|45|..\Image\Block\Obj (%d).png
+Block|Block|45|..\Image\Block\Block\Obj (%d).png
 Angry|Angry_Die|4|..\Image\Monster\Angry\Angry_Die\AngryDie%d.png
 Angry|Angry_WalkDown|2|..\Image\Monster\Angry\Angry_WalkDown\AngryWalkDown%d.png
 Angry|Angry_WalkLeft|2|..\Image\Monster\Angry\Angry_WalkLeft\AngryWalkLeft%d.png

@@ -426,12 +426,50 @@ void CCWaterBallonTool::OnClickedSelect()
 	if (m_strFind != L"")
 	{
 		//data 폴더에 키값을 저장시키자
+		CFileDialog Dig(FALSE,
+			L"dat",
+			L"*.dat",
+			OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+			L"Data File(*.dat) | *.dat ||",
+			this);
 
+		TCHAR szPath[MAX_PATH] = L"";
+
+		GetCurrentDirectory(MAX_PATH, szPath);
+
+		PathRemoveFileSpec(szPath);
+
+		lstrcat(szPath, L"Data");
+
+		Dig.m_ofn.lpstrInitialDir = szPath;
+
+		if (IDOK == Dig.DoModal())
+		{
+			CString str = Dig.GetPathName().GetString();
+
+			const TCHAR* pGetPath = str.GetString();
+
+			HANDLE hFile = CreateFile(pGetPath, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+
+			if (INVALID_HANDLE_VALUE == hFile)
+				return;
+
+			DWORD dwByte(0), dwStrByte(0);
+			
+			wstring wstr = m_strFind.operator LPCWSTR();
+
+			dwStrByte = sizeof(TCHAR) *( wstr.length() + 1);
+
+			WriteFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
+			WriteFile(hFile, wstr.c_str(), dwStrByte, &dwByte, nullptr);
+
+			CloseHandle(hFile);
+		}
 	}
 	else
 	{
 		//선택 된 게 없다고 메시지 박스 뜨게
-
+		MessageBox(_T("NOT SELECTED."), _T("NO"), MB_OK);
 	}
 
 }

@@ -4,6 +4,7 @@
 #include "ObjMgr.h"
 #include "Terrain.h"
 #include "Player.h"
+#include "BlockTerrain.h"
 
 CStage::CStage()
 {
@@ -37,6 +38,15 @@ HRESULT CStage::Ready_Scene()
 
 	pObj->Initialize();	
 	CObjMgr::Get_Instance()->Add_Object(CObjMgr::TERRAIN, pObj);
+
+	//블럭 오브젝트
+	pObj = new CBlockTerrain;
+
+	pObj->Initialize();
+	CObjMgr::Get_Instance()->Add_Object(CObjMgr::BLOCK, pObj);
+
+	if (nullptr == pObj)
+		return E_FAIL;
 
 	// 플레이어
 	pObj = new CPlayer;
