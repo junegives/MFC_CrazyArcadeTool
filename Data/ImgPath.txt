@@ -59,3 +59,4 @@ WaterBalloon|Orangeblock|3|..\Image\WaterBalloon\Orangeblock\Orangeblock%d.png
 WaterBalloon|Redblock|3|..\Image\WaterBalloon\Redblock\Redblock%d.png
 WaterBalloon|Redheart|3|..\Image\WaterBalloon\Redheart\Redheart%d.png
 WaterBalloon|Redstreak|3|..\Image\WaterBalloon\Redstreak\Redstreak%d.png
+WaterBomb|Flow|37|..\Image\WaterBomb\Flow\flow (%d).png

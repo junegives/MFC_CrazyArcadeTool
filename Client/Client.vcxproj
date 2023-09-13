@@ -156,6 +156,7 @@
     <ClInclude Include="BlockTerrain.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="Flow.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Login.h" />
     <ClInclude Include="MainGame.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="BlockTerrain.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Flow.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />

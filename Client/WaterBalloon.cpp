@@ -4,6 +4,8 @@
 #include "TimeMgr.h"
 #include "Device.h"
 #include "TextureMgr.h"
+#include "ObjMgr.h"
+#include "Flow.h"
 
 CWaterBalloon::CWaterBalloon()
 {
@@ -22,7 +24,7 @@ HRESULT CWaterBalloon::Initialize(void)
 
 	m_wstrStateKey = L"Redblock";
 
-	m_tFrame = { 0.f, 3.f };
+	m_tFrame = { 0.f, 3.f , 1.5f, false};
 	return S_OK;
 }
 
@@ -31,6 +33,34 @@ int CWaterBalloon::Update(void)
 {
 	//if (5 * CTimeMgr::Get_Instance()->Get_TimeDelta())
 	//	return OBJ_DEAD;
+
+	m_Timer += CTimeMgr::Get_Instance()->Get_TimeDelta();
+
+	if (m_Timer > m_LimitTime)
+	{
+		CObj* pFlow = new CFlow;
+
+		pFlow->Initialize();
+		pFlow->Set_Pos({ m_tInfo.vPos.x - TILECX, m_tInfo.vPos.y, 0.f });
+		CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow);
+
+		CObj* pFlow2 = new CFlow;
+		pFlow2->Initialize();
+		pFlow2->Set_Pos({ m_tInfo.vPos.x + TILECX, m_tInfo.vPos.y, 0.f });
+		CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow2);
+
+		CObj* pFlow3 = new CFlow;
+		pFlow3->Initialize();
+		pFlow3->Set_Pos({ m_tInfo.vPos.x, m_tInfo.vPos.y - TILECY, 0.f });
+		CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow3);
+
+		CObj* pFlow4 = new CFlow;
+		pFlow4->Initialize();
+		pFlow4->Set_Pos({ m_tInfo.vPos.x, m_tInfo.vPos.y + TILECY, 0.f });
+		CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow4);
+
+		return OBJ_DEAD;
+	}
 
 	D3DXMATRIX		matTrans, matScale;
 
@@ -72,13 +102,6 @@ void CWaterBalloon::Render(void)
 
 void CWaterBalloon::Release(void)
 {
+
 }
 
-//bool CWaterBalloon::ReDefine_vPos(D3DXVECTOR3& vPos, const int& iIndex)
-//{
-//	return false;
-//}
-//
-//void CWaterBalloon::Get_PosTileIndex(const D3DXVECTOR3& vPos)
-//{
-//}

@@ -1,10 +1,10 @@
 #pragma once
 #include "Obj.h"
-class CWaterBalloon : public CObj
+class CFlow : public CObj
 {
 public:
-	CWaterBalloon();
-	virtual~CWaterBalloon();
+	CFlow();
+	virtual~CFlow();
 
 public:
 	// CObj을(를) 통해 상속됨
@@ -15,7 +15,7 @@ public:
 	void Release(void) override;
 
 private:
-	float m_Timer = 0.f;
+	float m_fTimer = 0.f;
 	float m_LimitTime = 2.3f;
 };
 

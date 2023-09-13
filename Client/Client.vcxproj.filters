@@ -70,6 +70,9 @@
     <Filter Include="99. GameObject\03.WaterBalloon">
       <UniqueIdentifier>{d30e0a1c-d796-469d-a0b0-cce059c2b668}</UniqueIdentifier>
     </Filter>
+    <Filter Include="99. GameObject\04.Flow">
+      <UniqueIdentifier>{bc4198a1-3ddd-45b8-a81d-dcb31e26d570}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -141,6 +144,9 @@
     <ClInclude Include="WaterBalloon.h">
       <Filter>99. GameObject\03.WaterBalloon</Filter>
     </ClInclude>
+    <ClInclude Include="Flow.h">
+      <Filter>99. GameObject\04.Flow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="WaterBalloon.cpp">
       <Filter>99. GameObject\03.WaterBalloon</Filter>
+    </ClCompile>
+    <ClCompile Include="Flow.cpp">
+      <Filter>99. GameObject\04.Flow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
