@@ -17,14 +17,6 @@ CStage::~CStage()
 
 HRESULT CStage::Ready_Scene()
 {
-	//if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(TEX_SINGLE,
-	//	L"../Texture/Stage/Tile/test.png", 
-	//	 L"Terrain", L"Tile", 1)))
-	//{
-	//	//ERR_MSG("Stage Tile Image Insert failed");
-	//	return E_FAIL;
-	//}	
-
 	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt")))
 	{
 		ERR_MSG(L"Notepad Error");
@@ -49,13 +41,18 @@ HRESULT CStage::Ready_Scene()
 		return E_FAIL;
 
 	// 플레이어
-	pObj = new CPlayer;
-	if (nullptr == pObj)
-		return E_FAIL;
 
-	pObj->Initialize();
+	if (!CObjMgr::Get_Instance()->ExistPlayer())
+	{
+		CObj* pObj = new CPlayer;
+		if (nullptr == pObj)
+			return E_FAIL;
 
-	CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, pObj);
+		pObj->Initialize();
+		dynamic_cast<CPlayer*>(pObj)->Load_Player(L"dubi", L"Bazzi");
+
+		CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, pObj);
+	}
 	
 	return S_OK;
 }

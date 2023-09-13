@@ -18,7 +18,8 @@ public:
 	CObj*		Get_Terrain() { return m_listObject[TERRAIN].front(); }
 
 public:
-	void Add_Object(ID eID, CObj* pObject); 
+	void Add_Object(ID eID, CObj* pObject);
+	bool ExistPlayer();
 
 public:
 	void Update(); 

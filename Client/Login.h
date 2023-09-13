@@ -1,12 +1,13 @@
 #pragma once
 #include "Scene.h"
-#include "MyTerrain.h"
+#include "Include.h"
 
-class CStage :	public CScene
+class CLogin :
+	public CScene
 {
 public:
-	CStage();
-	virtual ~CStage();
+	CLogin();
+	virtual ~CLogin();
 
 public:
 	virtual HRESULT Ready_Scene() override;
@@ -14,5 +15,7 @@ public:
 	virtual void Late_Update_Scene() override;
 	virtual void Render_Scene() override;
 	virtual void Release_Scene() override;
-};
 
+public:
+	wstring szID = L"";
+};

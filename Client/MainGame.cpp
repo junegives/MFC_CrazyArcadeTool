@@ -28,7 +28,7 @@ HRESULT CMainGame::Initialize(void)
 	}
 
 	CTimeMgr::Get_Instance()->Initialize();
-	CSceneMgr::Get_Instance()->Change_SceneMgr(CSceneMgr::STAGE);
+	CSceneMgr::Get_Instance()->Change_SceneMgr(CSceneMgr::LOGIN);
 
 /*
 #ifdef _DEBUG

@@ -31,9 +31,6 @@
     <Filter Include="03. Device">
       <UniqueIdentifier>{a807f762-6acf-44ea-b266-22fef4ee2711}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. SceneMgr\Scene\00. Logo">
-      <UniqueIdentifier>{d1101fb6-7537-4b95-86ac-e7323055590f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. SceneMgr\Scene\01. Stage">
       <UniqueIdentifier>{a144779c-e7ac-417e-aa01-f3db49d52635}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,9 @@
     </Filter>
     <Filter Include="99. GameObject\01. Player">
       <UniqueIdentifier>{7cd5d675-62ea-40ef-ac2c-607db028fce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. SceneMgr\Scene\00. Login">
+      <UniqueIdentifier>{d1101fb6-7537-4b95-86ac-e7323055590f}</UniqueIdentifier>
     </Filter>
     <Filter Include="06.KeyMgr">
       <UniqueIdentifier>{13470ec6-24cd-40e2-a3e9-2fb0376b8250}</UniqueIdentifier>
@@ -126,6 +126,9 @@
     <ClInclude Include="Player.h">
       <Filter>99. GameObject\01. Player</Filter>
     </ClInclude>
+    <ClInclude Include="Login.h">
+      <Filter>02. SceneMgr\Scene\00. Login</Filter>
+    </ClInclude>
     <ClInclude Include="KeyMgr.h">
       <Filter>06.KeyMgr</Filter>
     </ClInclude>
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>99. GameObject\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>02. SceneMgr\Scene\00. Login</Filter>
     </ClCompile>
     <ClCompile Include="KeyMgr.cpp">
       <Filter>06.KeyMgr</Filter>

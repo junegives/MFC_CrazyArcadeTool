@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneMgr.h"
 #include "Stage.h"
+#include "Login.h"
 
 IMPLEMENT_SINGLETON(CSceneMgr)
 
@@ -28,6 +29,10 @@ HRESULT CSceneMgr::Change_SceneMgr(ID eID)
 		switch (m_eNextScene)
 		{
 		case CSceneMgr::LOADING:
+			break;
+
+		case CSceneMgr::LOGIN:
+			m_pScene = new CLogin;
 			break;
 
 		case CSceneMgr::STAGE:

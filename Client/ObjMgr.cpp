@@ -22,6 +22,12 @@ void CObjMgr::Add_Object(ID eID, CObj * pObject)
 	m_listObject[eID].emplace_back(pObject); 
 }
 
+bool CObjMgr::ExistPlayer()
+{
+	if (m_listObject[PLAYER].size() > 0)
+		return true;
+}
+
 void CObjMgr::Update()
 {
 	for (int i = 0 ; i < END; ++i)

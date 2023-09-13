@@ -9,7 +9,7 @@ class CSceneMgr final
 	DECLARE_SINGLETON(CSceneMgr)
 
 public:
-	enum ID {LOADING, STAGE, END};
+	enum ID {LOADING, LOGIN, STAGE, END};
 
 private:
 	CSceneMgr();
