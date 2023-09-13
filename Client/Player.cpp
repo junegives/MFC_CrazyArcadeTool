@@ -4,6 +4,9 @@
 #include "TextureMgr.h"
 #include "KeyMgr.h"
 
+#include "ObjMgr.h"
+#include "WaterBalloon.h"
+
 CPlayer::CPlayer()
 {
 }
@@ -215,7 +218,20 @@ void CPlayer::Key_Input()
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
+		int  iIndex = Get_PosTileIndex(m_tInfo.vPos);
+
+		if (-1 == iIndex)
+			return;
+
+		D3DXVECTOR3 WaterBalloonvPos;
+
+		WaterBalloonvPos = (*m_vecTile)[iIndex]->vPos;
 		// 물풍선 생성
+		CObj* pWater = new CWaterBalloon;
+		pWater->Initialize();
+		pWater->Set_Pos(m_tInfo.vPos);
+
+		CObjMgr::Get_Instance()->Add_Object(CObjMgr::WATERBALLOON, pWater);
 	}
 }
 
@@ -262,3 +278,45 @@ void CPlayer::Change_Anim()
 		break;
 	}
 }
+
+int CPlayer::Get_PosTileIndex(const D3DXVECTOR3& vPos)
+{
+	for (size_t index = 0; index < (*m_vecTile).size(); ++index)
+	{
+		if (ReDefine_vPos(vPos, index))
+		{
+			return index;
+		}
+	}
+
+	return -1;
+}
+
+
+bool CPlayer::ReDefine_vPos(const D3DXVECTOR3& vPos, const int& iIndex)
+{
+	bool bCheck[4]{ false };
+
+	vector<TILE*> vecTile = (*m_vecTile);
+
+	if ((vecTile[iIndex]->vPos.x - TILECX / 2.f) <= vPos.x)
+	{
+		bCheck[0] = true;
+	}
+	if ((vecTile[iIndex]->vPos.x + TILECX / 2.f) > vPos.x)
+	{
+		bCheck[1] = true;
+	}
+	if ((vecTile[iIndex]->vPos.y - TILECY / 2.f) <= vPos.y)
+	{
+		bCheck[2] = true;
+	}
+	if ((vecTile[iIndex]->vPos.y + TILECY / 2.f) > vPos.y)
+	{
+		bCheck[3] = true;
+	}
+
+	return bCheck[0] && bCheck[1] && bCheck[2] && bCheck[3];
+
+}
+

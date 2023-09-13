@@ -67,6 +67,9 @@
     <Filter Include="99. GameObject\02.BlockTerrain">
       <UniqueIdentifier>{b1c90d9c-22af-4ce9-a8c2-cd374089e7a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="99. GameObject\03.WaterBalloon">
+      <UniqueIdentifier>{d30e0a1c-d796-469d-a0b0-cce059c2b668}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -135,6 +138,9 @@
     <ClInclude Include="BlockTerrain.h">
       <Filter>99. GameObject\02.BlockTerrain</Filter>
     </ClInclude>
+    <ClInclude Include="WaterBalloon.h">
+      <Filter>99. GameObject\03.WaterBalloon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -193,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="BlockTerrain.cpp">
       <Filter>99. GameObject\02.BlockTerrain</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterBalloon.cpp">
+      <Filter>99. GameObject\03.WaterBalloon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -14,12 +14,16 @@ CObjMgr::~CObjMgr()
 	Release(); 
 }
 
-void CObjMgr::Add_Object(ID eID, CObj * pObject)
+void CObjMgr::Add_Object(ID eID,/* RENDERID renderID,*/ CObj * pObject)
 {
 	if (nullptr == pObject || END <= eID)
 		return; 
 
+	//if (nullptr == pObject || RENDER_END <= renderID)
+	//	return;
+
 	m_listObject[eID].emplace_back(pObject); 
+	//m_RenderList[renderID].emplace_back(pObject);
 }
 
 bool CObjMgr::ExistPlayer()
@@ -65,6 +69,21 @@ void CObjMgr::Render()
 		for (auto& pObject : m_listObject[i])
 			pObject->Render();
 	}
+
+	//for (size_t i = 0; i < RENDER_END; ++i)
+	//{
+	//	 
+
+	//	//m_RenderList[i].sort([](CObj* pDst, CObj* pSrc) ->bool
+	//	//	{
+	//	//		return pDst->Get_Info().fY < pSrc->Get_Info().fY;
+	//	//	});
+
+	//	for (auto& iter : m_RenderList[i])
+	//		iter->Render();
+
+	//	m_RenderList[i].clear();
+	//}
 }
 
 void CObjMgr::Release()

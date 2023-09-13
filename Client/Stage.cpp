@@ -36,18 +36,24 @@ HRESULT CStage::Ready_Scene()
 		return E_FAIL;
 
 	pObj->Initialize();	
-	CObjMgr::Get_Instance()->Add_Object(CObjMgr::TERRAIN, pObj);
+	CObjMgr::Get_Instance()->Add_Object(CObjMgr::TERRAIN, /*BACKGROUND,*/ pObj);
 
 	//블럭 오브젝트
-	pObj = new CBlockTerrain;
+	CObj* pBlockObj = new CBlockTerrain;
 
-	pObj->Initialize();
-	CObjMgr::Get_Instance()->Add_Object(CObjMgr::BLOCK, pObj);
+	pBlockObj->Initialize();
+	CObjMgr::Get_Instance()->Add_Object(CObjMgr::BLOCK, /*GAMEOBJECT,*/ pBlockObj);
 
 	if (nullptr == pObj)
 		return E_FAIL;
 
+
+	CObj* block = CObjMgr::Get_Instance()->Get_Block();
+	
 	// 플레이어
+	dynamic_cast<CPlayer*>((CObjMgr::Get_Instance()->Get_Player()))->Set_BlockTile(&(dynamic_cast<CBlockTerrain*>(block)->Get_Block()));
+
+
 
 	if (!CObjMgr::Get_Instance()->ExistPlayer())
 	{
@@ -58,7 +64,7 @@ HRESULT CStage::Ready_Scene()
 		pObj->Initialize();
 		dynamic_cast<CPlayer*>(pObj)->Load_Player(L"dubi", L"Bazzi");
 
-		CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, pObj);
+		CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, /*GAMEOBJECT,*/ pObj);
 	}
 	
 	return S_OK;
@@ -76,6 +82,14 @@ void CStage::Late_Update_Scene()
 
 void CStage::Render_Scene()
 {
+	D3DXMATRIX	matWorld, matTrans;
+	D3DXMatrixIdentity(&matWorld);
+	D3DXMatrixTranslation(&matTrans, 400.f, 300.f, 0.f);
+
+	matWorld = matTrans;
+
+	CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+
 	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"InGame", L"Select", 1);
 
 	if (pTexInfo)

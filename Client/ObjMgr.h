@@ -8,7 +8,10 @@ class CObjMgr final
 	DECLARE_SINGLETON(CObjMgr)
 
 public:
-	enum ID {TERRAIN, BLOCK, MONSTER, PLAYER, EFFECT, UI, END };
+	enum ID {TERRAIN, BLOCK, MONSTER, WATERBALLOON, PLAYER, EFFECT, UI, END };
+
+
+
 
 private:
 	CObjMgr();
@@ -16,9 +19,11 @@ private:
 
 public:
 	CObj*		Get_Terrain() { return m_listObject[TERRAIN].front(); }
+	CObj* Get_Player() { return m_listObject[PLAYER].front(); }
+	CObj* Get_Block() { return m_listObject[BLOCK].front(); }
 
 public:
-	void Add_Object(ID eID, CObj* pObject);
+	void Add_Object(ID eID,/* RENDERID renderID,*/ CObj* pObject);
 	bool ExistPlayer();
 
 public:
@@ -29,5 +34,6 @@ public:
 
 private:
 	list<CObj*>		m_listObject[END];
+	list<CObj*>		m_RenderList[RENDER_END];
 };
 

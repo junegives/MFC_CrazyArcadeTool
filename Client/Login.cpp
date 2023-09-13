@@ -81,7 +81,7 @@ void CLogin::Update_Scene()
 		pObj->Initialize();
 		dynamic_cast<CPlayer*>(pObj)->Load_Player(szID, L"Bazzi");
 
-		CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, pObj);
+		CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, /*GAMEOBJECT, */pObj);
 
 		CSceneMgr::Get_Instance()->Change_SceneMgr(CSceneMgr::STAGE);
 	}

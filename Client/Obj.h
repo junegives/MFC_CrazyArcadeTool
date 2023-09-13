@@ -21,6 +21,10 @@ public:
 		D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 	}
 
+	//추가
+	void Set_ObjKey(wstring _objkey) { m_wstrObjKey = _objkey; }
+	void Set_StateKey(wstring _statekey) { m_wstrStateKey = _statekey; }
+
 public:
 	virtual HRESULT		Initialize(void)PURE;
 	virtual int			Update(void)PURE;
@@ -39,6 +43,7 @@ protected:
 
 	wstring					m_wstrObjKey = L"";
 	wstring					m_wstrStateKey = L"";
-
+	
+	RENDERID				m_eRender;
 };
 
