@@ -37,7 +37,6 @@ int CPlayer::Update(void)
 		m_vecTile = (dynamic_cast<CBlockTerrain*>(block)->Get_BlockTile());
 	}
 
-
 	Key_Input();
 
 	m_wstrPreStateKey = m_wstrStateKey;

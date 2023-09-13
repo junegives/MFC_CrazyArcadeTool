@@ -26,8 +26,8 @@ HRESULT CStage::Ready_Scene()
 	}
 
 	CTextureMgr::Get_Instance()->Insert_Texture(TEX_SINGLE,
-		L"../Image/BackGround/InGame/Select.png",
-		L"InGame", L"Select", 1);
+		L"../Image/BackGround/InGame/InGame.png",
+		L"InGame", L"InGame", 1);
 
 
 	CObj*	pObj = new CTerrain;
@@ -90,7 +90,7 @@ void CStage::Render_Scene()
 
 	CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"InGame", L"Select", 1);
+	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"InGame", L"InGame", 1);
 
 	if (pTexInfo)
 	{
