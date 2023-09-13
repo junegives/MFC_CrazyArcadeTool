@@ -82,6 +82,8 @@ void CStage::Late_Update_Scene()
 
 void CStage::Render_Scene()
 {
+	CObjMgr::Get_Instance()->Render();
+
 	D3DXMATRIX	matWorld, matTrans;
 	D3DXMatrixIdentity(&matWorld);
 	D3DXMatrixTranslation(&matTrans, 400.f, 300.f, 0.f);
@@ -100,8 +102,6 @@ void CStage::Render_Scene()
 			nullptr,
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-
-	CObjMgr::Get_Instance()->Render();
 }
 
 void CStage::Release_Scene()

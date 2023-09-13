@@ -62,17 +62,6 @@ int CWaterBalloon::Update(void)
 		return OBJ_DEAD;
 	}
 
-	D3DXMATRIX		matTrans, matScale;
-
-	//d3dxsca
-	D3DXMatrixScaling(&matScale, 0.7f, 0.7f, 0.7f);
-	D3DXMatrixTranslation(&matTrans,
-		m_tInfo.vPos.x,
-		m_tInfo.vPos.y,
-		0.f);
-
-	m_tInfo.matWorld = matScale * matTrans;
-
 	return OBJ_NOEVENT;
 }
 
@@ -83,6 +72,18 @@ void CWaterBalloon::Late_Update(void)
 
 void CWaterBalloon::Render(void)
 {
+
+	D3DXMATRIX		matTrans, matScale;
+
+	//d3dxsca
+	D3DXMatrixScaling(&matScale, 0.7f, 0.7f, 0.7f);
+	D3DXMatrixTranslation(&matTrans,
+		m_tInfo.vPos.x + 20,
+		m_tInfo.vPos.y + 40,
+		0.f);
+
+	m_tInfo.matWorld = matScale * matTrans;
+
 	CDevice::Get_Instance()->Get_Sprite()->SetTransform(&m_tInfo.matWorld);
 
 	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(m_wstrObjKey.c_str(), m_wstrStateKey.c_str(), (int)m_tFrame.fFrame);

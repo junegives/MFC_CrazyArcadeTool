@@ -48,8 +48,8 @@ void CFlow::Render(void)
 	//d3dxsca
 	D3DXMatrixScaling(&matScale, 0.7f, 0.7f, 0.7f);
 	D3DXMatrixTranslation(&matTrans,
-		m_tInfo.vPos.x,
-		m_tInfo.vPos.y,
+		m_tInfo.vPos.x + 20,
+		m_tInfo.vPos.y + 40,
 		0.f);
 
 	m_tInfo.matWorld = matScale * matTrans;
