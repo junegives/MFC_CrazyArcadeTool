@@ -51,5 +51,8 @@ private:
 	vector<wstring> m_vecImgPath;
 
 	vector<TILE*> m_vecTile;
+
+	int m_iLength = 3;
+	int m_iCount = 3;
 };
 

@@ -38,26 +38,29 @@ int CWaterBalloon::Update(void)
 
 	if (m_Timer > m_LimitTime)
 	{
-		CObj* pFlow = new CFlow;
+		for (int i = 1; i <= m_iLength; i++)
+		{
+			CObj* pFlow = new CFlow;
+			pFlow->Initialize();
+			pFlow->Set_Pos({ m_tInfo.vPos.x - TILECX * i, m_tInfo.vPos.y, 0.f });
+			CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow);
 
-		pFlow->Initialize();
-		pFlow->Set_Pos({ m_tInfo.vPos.x - TILECX, m_tInfo.vPos.y, 0.f });
-		CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow);
+			CObj* pFlow2 = new CFlow;
+			pFlow2->Initialize();
+			pFlow2->Set_Pos({ m_tInfo.vPos.x + TILECX * i, m_tInfo.vPos.y, 0.f });
+			CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow2);
 
-		CObj* pFlow2 = new CFlow;
-		pFlow2->Initialize();
-		pFlow2->Set_Pos({ m_tInfo.vPos.x + TILECX, m_tInfo.vPos.y, 0.f });
-		CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow2);
+			CObj* pFlow3 = new CFlow;
+			pFlow3->Initialize();
+			pFlow3->Set_Pos({ m_tInfo.vPos.x, m_tInfo.vPos.y - TILECY * i, 0.f });
+			CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow3);
 
-		CObj* pFlow3 = new CFlow;
-		pFlow3->Initialize();
-		pFlow3->Set_Pos({ m_tInfo.vPos.x, m_tInfo.vPos.y - TILECY, 0.f });
-		CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow3);
+			CObj* pFlow4 = new CFlow;
+			pFlow4->Initialize();
+			pFlow4->Set_Pos({ m_tInfo.vPos.x, m_tInfo.vPos.y + TILECY * i, 0.f });
+			CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow4);
+		}
 
-		CObj* pFlow4 = new CFlow;
-		pFlow4->Initialize();
-		pFlow4->Set_Pos({ m_tInfo.vPos.x, m_tInfo.vPos.y + TILECY, 0.f });
-		CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow4);
 
 		return OBJ_DEAD;
 	}

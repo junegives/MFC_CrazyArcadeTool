@@ -14,8 +14,11 @@ public:
 	void Render(void) override;
 	void Release(void) override;
 
+	void Set_Length(int _Length) { m_iLength = _Length; }
 private:
 	float m_Timer = 0.f;
 	float m_LimitTime = 2.3f;
+
+	int m_iLength = 2;
 };
 

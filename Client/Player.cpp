@@ -235,20 +235,25 @@ void CPlayer::Key_Input()
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		int  iIndex = Get_PosTileIndex(m_tInfo.vPos);
+		if (CObjMgr::Get_Instance()->Get_WaterBalloon().size() < m_iCount)
+		{
+			int  iIndex = Get_PosTileIndex(m_tInfo.vPos);
 
-		if (-1 == iIndex)
-			return;
+			if (-1 == iIndex)
+				return;
 
-		D3DXVECTOR3 WaterBalloonvPos;
+			D3DXVECTOR3 WaterBalloonvPos;
 
-		WaterBalloonvPos = (m_vecTile)[iIndex]->vPos;
-		// 물풍선 생성
-		CObj* pWater = new CWaterBalloon;
-		pWater->Initialize();
-		pWater->Set_Pos(WaterBalloonvPos);
+			WaterBalloonvPos = (m_vecTile)[iIndex]->vPos;
+			// 물풍선 생성
+			CObj* pWater = new CWaterBalloon;
+			pWater->Initialize();
+			pWater->Set_Pos(WaterBalloonvPos);
+			dynamic_cast<CWaterBalloon*>(pWater)->Set_Length(m_iLength);
 
-		CObjMgr::Get_Instance()->Add_Object(CObjMgr::WATERBALLOON, pWater);
+			CObjMgr::Get_Instance()->Add_Object(CObjMgr::WATERBALLOON, pWater);
+		}
+
 	}
 }
 

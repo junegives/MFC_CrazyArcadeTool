@@ -21,6 +21,7 @@ public:
 	CObj*		Get_Terrain() { return m_listObject[TERRAIN].front(); }
 	CObj* Get_Player() { return m_listObject[PLAYER].front(); }
 	CObj* Get_Block() { return m_listObject[BLOCK].front(); }
+	list<CObj*> Get_WaterBalloon() { return m_listObject[WATERBALLOON]; }
 
 public:
 	void Add_Object(ID eID,/* RENDERID renderID,*/ CObj* pObject);
