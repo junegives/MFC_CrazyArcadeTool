@@ -27,8 +27,16 @@ public:
 public:
 	void Load_Player(wstring _szID, wstring _szCharacter);
 	void Key_Input();
+
 	void Change_State();
 	void Change_Anim();
+
+	void InBubble(wstring _szBubbleState)
+	{
+		m_wstrStateKey = _szBubbleState;
+		m_eState = ePlayerState::BUBBLE;
+		m_iDir = 2;
+	}
 
 	void Change_Character(wstring _szCharacter);
 	void Change_Balloon(wstring _szBalloon);
@@ -58,4 +66,9 @@ private:
 
 	int		m_iWidthGap = 10;
 	int		m_iHeightGap = 20;
+
+	int		m_iCount = 0;
+
+	bool	m_isLoop = true;
+	bool	m_isVisible = true;
 };

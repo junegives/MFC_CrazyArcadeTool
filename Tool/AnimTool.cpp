@@ -76,8 +76,8 @@ BOOL CAnimTool::OnInitDialog()
 void CAnimTool::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
-	dc.MoveTo(700, 50);
-	dc.LineTo(700, 630);
+	dc.MoveTo(560, 50);
+	dc.LineTo(560, 450);
 }
 
 void CAnimTool::SetFont()
@@ -142,32 +142,32 @@ void CAnimTool::SetFont()
 	GetDlgItem(IDC_TEXTSTATE)->SetFont(&fontLarge);
 	GetDlgItem(IDC_TEXTLIST)->SetFont(&fontLarge);
 
-	GetDlgItem(IDC_TEXTCOLLIDER)->SetFont(&fontLarge);
+	//GetDlgItem(IDC_TEXTCOLLIDER)->SetFont(&fontLarge);
 
-	GetDlgItem(IDC_GROUPCOLLIDER1)->SetFont(&fontMedium);
-	GetDlgItem(IDC_GROUPCOLLIDER2)->SetFont(&fontMedium);
+	//GetDlgItem(IDC_GROUPCOLLIDER1)->SetFont(&fontMedium);
+	//GetDlgItem(IDC_GROUPCOLLIDER2)->SetFont(&fontMedium);
 
-	GetDlgItem(IDC_TEXTCENTER1)->SetFont(&fontMedium);
-	GetDlgItem(IDC_TEXTCENTER2)->SetFont(&fontMedium);
-	GetDlgItem(IDC_TEXTSIZE1)->SetFont(&fontMedium);
-	GetDlgItem(IDC_TEXTSIZE2)->SetFont(&fontMedium);
+	//GetDlgItem(IDC_TEXTCENTER1)->SetFont(&fontMedium);
+	//GetDlgItem(IDC_TEXTCENTER2)->SetFont(&fontMedium);
+	//GetDlgItem(IDC_TEXTSIZE1)->SetFont(&fontMedium);
+	//GetDlgItem(IDC_TEXTSIZE2)->SetFont(&fontMedium);
 
-	GetDlgItem(IDC_TEXTCENTERX1)->SetFont(&fontSmall);
-	GetDlgItem(IDC_TEXTCENTERX2)->SetFont(&fontSmall);
-	GetDlgItem(IDC_TEXTSIZEX1)->SetFont(&fontSmall);
-	GetDlgItem(IDC_TEXTSIZEX2)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_TEXTCENTERX1)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_TEXTCENTERX2)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_TEXTSIZEX1)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_TEXTSIZEX2)->SetFont(&fontSmall);
 
-	GetDlgItem(IDC_TEXTCENTERY1)->SetFont(&fontSmall);
-	GetDlgItem(IDC_TEXTCENTERY2)->SetFont(&fontSmall);
-	GetDlgItem(IDC_TEXTSIZEY1)->SetFont(&fontSmall);
-	GetDlgItem(IDC_TEXTSIZEY2)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_TEXTCENTERY1)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_TEXTCENTERY2)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_TEXTSIZEY1)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_TEXTSIZEY2)->SetFont(&fontSmall);
 
 	GetDlgItem(IDC_TEXTANMIATION)->SetFont(&fontLarge);
 
 	GetDlgItem(IDC_TEXTFRAMESPEED)->SetFont(&fontMedium);
 
-	GetDlgItem(IDC_CHECKSHOWCOLLIDER1)->SetFont(&fontSmall);
-	GetDlgItem(IDC_CHECKSHOWCOLLIDER2)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_CHECKSHOWCOLLIDER1)->SetFont(&fontSmall);
+	//GetDlgItem(IDC_CHECKSHOWCOLLIDER2)->SetFont(&fontSmall);
 
 
 	fontLarge.Detach();
@@ -181,7 +181,7 @@ void CAnimTool::GetImg(const wstring& pObjKey, HTREEITEM hRoot)
 
 	vector<CString> vecImgPath;
 
-	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", pObjKey);
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath2.txt", pObjKey);
 	if (vecImgPath.size() == 0)
 		return;
 
@@ -328,7 +328,7 @@ void CAnimTool::OnSelObject(NMHDR* pNMHDR, LRESULT* pResult)
 
 	vector<CString> vecImgPath;
 
-	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", sSel.GetString());
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath2.txt", sSel.GetString());
 	if (vecImgPath.size() == 0)
 		return;
 

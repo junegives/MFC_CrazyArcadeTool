@@ -20,7 +20,7 @@ CStage::~CStage()
 
 HRESULT CStage::Ready_Scene()
 {
-	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt")))
+	if (FAILED(CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath2.txt")))
 	{
 		ERR_MSG(L"Notepad Error");
 		return E_FAIL;
@@ -167,25 +167,6 @@ void CStage::Late_Update_Scene()
 void CStage::Render_Scene()
 {
 	CObjMgr::Get_Instance()->Render();
-
-	D3DXMATRIX	matWorld, matTrans;
-	D3DXMatrixIdentity(&matWorld);
-	D3DXMatrixTranslation(&matTrans, 400.f, 300.f, 0.f);
-
-	matWorld = matTrans;
-
-	CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
-
-	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"InGame", L"InGame", 1);
-
-	if (pTexInfo)
-	{
-		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
-			nullptr,
-			&D3DXVECTOR3(400, 300, 0.f),
-			nullptr,
-			D3DCOLOR_ARGB(255, 255, 255, 255));
-	}
 }
 
 void CStage::Release_Scene()

@@ -97,11 +97,7 @@ static D3DXVECTOR3		Get_Mouse()
 //새로 추가
 typedef	struct tagCharacterData
 {
-#ifdef _AFX
-	CString	strName;			//이름
-#else
 	wstring strName;
-#endif
 
 	int		iSpeed;				//스피드
 	int		iWaterLength;		//물풍선 길이

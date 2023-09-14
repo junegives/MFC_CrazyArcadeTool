@@ -50,7 +50,7 @@ public:
 	CListBox m_ListBox;
 	CString m_Nickname;
 
-	map<CString, CHARACTERDATA*> m_mapCharacterData;
+	map<wstring, CHARACTERDATA*> m_mapCharacterData;
 
 	CSpinButtonCtrl m_CtrlSpeed;
 	int m_Speed;

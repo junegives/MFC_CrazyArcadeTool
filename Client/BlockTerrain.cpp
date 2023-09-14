@@ -16,7 +16,7 @@ CBlockTerrain::~CBlockTerrain()
 
 HRESULT CBlockTerrain::Initialize(void)
 {
-	if (FAILED(Load_Tile(L"../Data/Imsi.dat")))
+	if (FAILED(Load_Tile(L"../Data/BlockCemetery.dat")))
 	{
 		ERR_MSG(L"Load_Block Tile Failed");
 		return E_FAIL;

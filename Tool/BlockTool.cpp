@@ -358,7 +358,7 @@ BOOL CBlockTool::OnInitDialog()
 
 	vector<CString> vecImgPath;
 
-	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", L"Block");
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath2.txt", L"Block");
 
 	if (vecImgPath.size() == 0)
 		return false;

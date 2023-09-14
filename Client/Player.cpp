@@ -19,11 +19,12 @@ CPlayer::~CPlayer()
 
 HRESULT CPlayer::Initialize(void)
 {
-	m_tInfo.vPos = { 400.f, 300.f, 0.f };
+	m_tInfo.vPos = { 350.f, 280.f, 0.f };
 	m_wstrObjKey = L"Bazzi";
 	m_wstrStateKey = L"Bazzi_Stand";
 	m_wstrWaterBalloon = L"Redblock";
 	m_iDir = 2;
+	m_iSpeed = 3/4;
 
 	m_tFrame = { 0.f, 0.f };
 
@@ -38,6 +39,7 @@ int CPlayer::Update(void)
 		m_vecTile = (dynamic_cast<CBlockTerrain*>(block)->Get_BlockTile());
 	}
 
+	m_iSpeed = 1;
 	Key_Input();
 
 	m_wstrPreStateKey = m_wstrStateKey;
@@ -59,13 +61,55 @@ void CPlayer::Late_Update(void)
 	Change_State();
 
 	if (m_wstrStateKey != m_wstrPreStateKey || m_iDir != m_iPreDir)
+	{
+		m_isLoop = true;
 		Change_Anim();
+	}
 
 	m_wstrPreStateKey = m_wstrStateKey;
 	m_iPreDir = m_iDir;
 
-	if (m_eState != ePlayerState::STAND)
+	if (m_eState == ePlayerState::BUBBLE)
+	{
+		int a = 0;
+	}
+	if(m_isLoop)
 		__super::Move_Frame();
+
+	if (m_eState == ePlayerState::BUBBLE)
+	{
+	}
+	else if (m_eState == ePlayerState::REVIVAL)
+	{
+		if (m_tFrame.fFrame == 0.f)
+		{
+			if (m_iCount < 100)
+			{
+				m_iCount++;
+			}
+			else
+			{
+				m_eState = ePlayerState::STAND;
+				m_iDir = 2;
+				m_iCount = 0;
+			}
+		}
+	}
+	else if (m_eState == ePlayerState::DIE)
+	{
+		if (m_tFrame.fFrame == 0.f)
+		{
+			if (m_iCount < 100)
+			{
+				m_iCount++;
+			}
+			else
+			{
+				m_isVisible = false;
+				m_iCount = 0;
+			}
+		}
+	}
 }
 
 void CPlayer::Render(void)
@@ -74,7 +118,7 @@ void CPlayer::Render(void)
 
 	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(m_wstrObjKey.c_str(), m_wstrStateKey.c_str(), (int)m_tFrame.fFrame);
 
-	if (pTexInfo)
+	if (pTexInfo && m_isVisible)
 	{
 		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
 		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
@@ -127,7 +171,7 @@ void CPlayer::Load_Player(wstring _szID, wstring _szCharacter)
 
 			delete[]pName;
 
-			m_iSpeed = tData.iSpeed;
+			m_iSpeed = 3;
 			m_iSpeed /= 4;
 			m_iWaterLength = tData.iWaterLength;
 			m_iWaterCount = tData.iWaterCount;
@@ -140,7 +184,7 @@ void CPlayer::Load_Player(wstring _szID, wstring _szCharacter)
 
 	m_wstrObjKey = _szCharacter;
 
-	HANDLE		hFileAnimation = CreateFile(L"../Data/Animation.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	HANDLE		hFileAnimation = CreateFile(L"../Data/Animation2.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 
 	if (INVALID_HANDLE_VALUE == hFileAnimation)
 		return;
@@ -201,97 +245,118 @@ void CPlayer::Load_Player(wstring _szID, wstring _szCharacter)
 
 void CPlayer::Key_Input()
 {
-	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP))
+	if (m_eState == ePlayerState::BUBBLE)
 	{
-		m_iDir = 0;
-		m_eState = ePlayerState::WALK;
+		if (CKeyMgr::Get_Instance()->Key_Down('A'))
+		{
+			m_wstrStateKey = m_wstrObjKey + L"_Revival";
+			m_eState = ePlayerState::REVIVAL;
+		}
 
-		int  iIndex = Get_PosTileIndex({m_tInfo.vPos.x, m_tInfo.vPos.y - m_iSpeed, 0.f});
-
-		if (-1 == iIndex)
-			return;
-
-		if (m_vecTile[iIndex]->bPick == true)
-			return;
-
-		m_tInfo.vPos.y -= m_iSpeed;
+		else if (CKeyMgr::Get_Instance()->Key_Down('S'))
+		{
+			m_wstrStateKey = m_wstrObjKey + L"_Die";
+			m_eState = ePlayerState::DIE;
+		}
 	}
-
-	else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
-	{
-		m_iDir = 1;
-		m_eState = ePlayerState::WALK;
-
-		int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x + m_iSpeed + m_iWidthGap, m_tInfo.vPos.y, 0.f });
-
-		if (-1 == iIndex)
-			return;
-
-		if (m_vecTile[iIndex]->bPick == true)
-			return;
-
-		m_tInfo.vPos.x += m_iSpeed;
-	}
-
-	else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
-	{
-		m_iDir = 2;
-		m_eState = ePlayerState::WALK;
-
-		int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x, m_tInfo.vPos.y + m_iSpeed + m_iHeightGap, 0.f });
-
-		if (-1 == iIndex)
-			return;
-
-		if (m_vecTile[iIndex]->bPick == true)
-			return;
-
-		m_tInfo.vPos.y += m_iSpeed;
-	}
-
-	else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
-	{
-		m_iDir = 3;
-		m_eState = ePlayerState::WALK;
-
-		int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x - m_iSpeed - m_iWidthGap, m_tInfo.vPos.y, 0.f });
-
-		if (-1 == iIndex)
-			return;
-
-		if (m_vecTile[iIndex]->bPick == true)
-			return;
-
-		m_tInfo.vPos.x -= m_iSpeed;
-	}
-
 	else
 	{
-		m_eState = ePlayerState::STAND;
-	}
-
-	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
-	{
-		if (CObjMgr::Get_Instance()->Get_WaterBalloon().size() < m_iWaterCount)
+		if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP))
 		{
-			int  iIndex = Get_PosTileIndex(m_tInfo.vPos);
+			m_iDir = 0;
+			m_eState = ePlayerState::WALK;
+
+			int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x, m_tInfo.vPos.y - 0.8f, 0.f });
 
 			if (-1 == iIndex)
 				return;
 
-			D3DXVECTOR3 WaterBalloonvPos;
+			if (m_vecTile[iIndex]->bPick == true)
+				return;
 
-			WaterBalloonvPos = (m_vecTile)[iIndex]->vPos;
-			// 물풍선 생성
-			CObj* pWater = new CWaterBalloon;
-			pWater->Initialize();
-			pWater->Set_Pos(WaterBalloonvPos);
-			dynamic_cast<CWaterBalloon*>(pWater)->Set_Length(m_iWaterLength);
-			dynamic_cast<CWaterBalloon*>(pWater)->Set_Balloon(m_wstrWaterBalloon);
-
-			CObjMgr::Get_Instance()->Add_Object(CObjMgr::WATERBALLOON, pWater);
+			m_tInfo.vPos.y -= 0.8f;
 		}
 
+		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
+		{
+			m_iDir = 1;
+			m_eState = ePlayerState::WALK;
+
+			int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x + 0.8f + m_iWidthGap, m_tInfo.vPos.y, 0.f });
+
+			if (-1 == iIndex)
+				return;
+
+			if (m_vecTile[iIndex]->bPick == true)
+				return;
+
+			m_tInfo.vPos.x += 0.8f;
+		}
+
+		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
+		{
+			m_iDir = 2;
+			m_eState = ePlayerState::WALK;
+
+			int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x, m_tInfo.vPos.y + 0.8f + m_iHeightGap, 0.f });
+
+			if (-1 == iIndex)
+				return;
+
+			if (m_vecTile[iIndex]->bPick == true)
+				return;
+
+			m_tInfo.vPos.y += 0.8f;
+		}
+
+		else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
+		{
+			m_iDir = 3;
+			m_eState = ePlayerState::WALK;
+
+			int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x - 0.8f - m_iWidthGap, m_tInfo.vPos.y, 0.f });
+
+			if (-1 == iIndex)
+				return;
+
+			if (m_vecTile[iIndex]->bPick == true)
+				return;
+
+			m_tInfo.vPos.x -= 0.8f;
+		}
+
+		else
+		{
+			if (m_eState != ePlayerState::BUBBLE &&
+				m_eState != ePlayerState::DIE &&
+				m_eState != ePlayerState::REVIVAL &&
+				m_eState != ePlayerState::JUMP)
+				m_eState = ePlayerState::STAND;
+		}
+
+		if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
+		{
+			if (CObjMgr::Get_Instance()->Get_WaterBalloon().size() < m_iWaterCount)
+			{
+				int  iIndex = Get_PosTileIndex(m_tInfo.vPos);
+
+				if (-1 == iIndex)
+					return;
+
+				D3DXVECTOR3 WaterBalloonvPos;
+
+				WaterBalloonvPos = (m_vecTile)[iIndex]->vPos;
+				// 물풍선 생성
+				CObj* pWater = new CWaterBalloon;
+				pWater->Initialize();
+				pWater->Set_Pos(WaterBalloonvPos);
+				dynamic_cast<CWaterBalloon*>(pWater)->Set_Length(m_iWaterLength);
+				dynamic_cast<CWaterBalloon*>(pWater)->Set_Balloon(m_wstrWaterBalloon);
+
+				CObjMgr::Get_Instance()->Add_Object(CObjMgr::WATERBALLOON, pWater);
+			}
+
+		}
 	}
 }
 
@@ -301,6 +366,8 @@ void CPlayer::Change_State()
 	{
 	case CPlayer::ePlayerState::STAND:
 		m_wstrStateKey = m_wstrObjKey + L"_Stand";
+		m_isLoop = false;
+		m_isVisible = true;
 		break;
 	case CPlayer::ePlayerState::WALK:
 		switch (m_iDir)
@@ -320,21 +387,31 @@ void CPlayer::Change_State()
 		default:
 			break;
 		}
+		m_isLoop = true;
+		m_isVisible = true;
 		break;
 	case CPlayer::ePlayerState::BUBBLE:
 		m_wstrStateKey = m_wstrObjKey + L"_Bubble";
+		m_isVisible = true;
 		break;
 	case CPlayer::ePlayerState::REVIVAL:
 		m_wstrStateKey = m_wstrObjKey + L"_Revival";
+		m_isLoop = true;
+		m_isVisible = true;
 		break;
 	case CPlayer::ePlayerState::DIE:
 		m_wstrStateKey = m_wstrObjKey + L"_Die";
+		m_isLoop = true;
 		break;
 	case CPlayer::ePlayerState::JUMP:
 		m_wstrStateKey = m_wstrObjKey + L"_Jump";
+		m_isLoop = true;
+		m_isVisible = true;
 		break;
 	default:
 		m_wstrStateKey = m_wstrObjKey + L"_Stand";
+		m_isLoop = false;
+		m_isVisible = true;
 		break;
 	}
 }
@@ -347,12 +424,12 @@ void CPlayer::Change_Anim()
 		if (m_wstrStateKey == iter->wstrStateKey)
 		{
 			m_tFrame.fSpeed = (float)iter->iFrameSpeed;
-			m_tFrame.isLoop = iter->isLoop;
 
 			if (m_eState == ePlayerState::STAND)
 			{
-				m_tFrame.fFrame = (float)m_iDir;
+  				m_tFrame.fFrame = (float)m_iDir;
 				m_tFrame.fMax = (float)m_iDir;
+				m_isLoop = false;
 			}
 			else
 			{
@@ -367,7 +444,7 @@ void CPlayer::Change_Character(wstring _szCharacter)
 {
 	m_wstrObjKey = _szCharacter;
 
-	HANDLE		hFileAnimation = CreateFile(L"../Data/Animation.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	HANDLE		hFileAnimation = CreateFile(L"../Data/Animation2.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 
 	if (INVALID_HANDLE_VALUE == hFileAnimation)
 		return;

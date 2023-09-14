@@ -16,7 +16,7 @@ public:
 
 private:
 	float m_fTimer = 0.f;
-	float m_LimitTime = 2.3f;
+	float m_LimitTime = 0.5f;
 
 };
 

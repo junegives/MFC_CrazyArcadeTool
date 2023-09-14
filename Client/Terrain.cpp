@@ -18,7 +18,7 @@ CTerrain::~CTerrain()
 
 HRESULT CTerrain::Initialize(void)
 {
-	if (FAILED(Load_Tile(L"../Data/HeartMap.dat")))
+	if (FAILED(Load_Tile(L"../Data/Cemetery.dat")))
 	{
 		ERR_MSG(L"Load_Tile Failed");
 		return E_FAIL;
@@ -26,7 +26,7 @@ HRESULT CTerrain::Initialize(void)
 
 	//CTextureMgr::Get_Instance()->Insert_Texture(TEX_MULTI, L"Tile", (m_vecTile[0]->wstrStateKey).c_str(), 6);
 
-	if (CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath.txt"))
+	if (CTextureMgr::Get_Instance()->ReadImgPath(L"../Data/ImgPath2.txt"))
 	{
 		ERR_MSG(L"Load Img Failed");
 		return E_FAIL;

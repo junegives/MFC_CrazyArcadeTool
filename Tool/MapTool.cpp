@@ -275,7 +275,7 @@ BOOL CMapTool::OnInitDialog()
 	vector<CString> vecImgPath;
 
 	// TODO:  여기에 특수화된 작성 코드를 추가합니다.
-	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", L"Tile");
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath2.txt", L"Tile");
 	if (vecImgPath.size() == 0)
 		return true;
 

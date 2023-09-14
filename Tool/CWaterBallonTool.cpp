@@ -50,7 +50,7 @@ BOOL CCWaterBallonTool::OnInitDialog()
 
 	vector<CString> vecImgPath;
 
-	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath.txt", L"WaterBalloon");
+	vecImgPath = CTextureMgr::Get_Instance()->GetImgPath(L"../Data/ImgPath2.txt", L"WaterBalloon");
 
 	if (vecImgPath.size() == 0)
 		return false;

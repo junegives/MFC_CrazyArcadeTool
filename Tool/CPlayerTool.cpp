@@ -219,6 +219,7 @@ void CCPlayerTool::OnListBox()
 	UpdateData(TRUE);
 
 	CString szFindname;
+	wstring wstrFindname;
 
 	int iIndex = m_ListBox.GetCurSel();
 
@@ -226,13 +227,14 @@ void CCPlayerTool::OnListBox()
 		return;
 
 	m_ListBox.GetText(iIndex, szFindname);
+	wstrFindname = szFindname;
 
-	auto iter = m_mapCharacterData.find(szFindname);
+	auto iter = m_mapCharacterData.find(wstrFindname);
 
 	if (iter == m_mapCharacterData.end())
 		return;
 
-	m_Nickname = iter->second->strName;
+	m_Nickname = iter->second->strName.c_str();
 	m_EditwaterLength = iter->second->iWaterLength;
 	m_EditwaterCount = iter->second->iWaterCount;
 	m_Speed = iter->second->iSpeed;
@@ -263,7 +265,7 @@ void CCPlayerTool::OnAddPlayer()
 
 		pData->iSpeed = m_Speed;
 
-		m_ListBox.AddString(pData->strName);
+		m_ListBox.AddString(pData->strName.c_str());
 
 		m_mapCharacterData.insert({ pData->strName, pData });
 	}
@@ -323,10 +325,10 @@ void CCPlayerTool::OnSaveData()
 
 		for (auto& Mypair : m_mapCharacterData)
 		{
-			dwStrByte = sizeof(TCHAR) * (Mypair.first.GetLength() + 1);
+			dwStrByte = sizeof(TCHAR) * (Mypair.first.length() + 1);
 
 			WriteFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
-			WriteFile(hFile, Mypair.first.GetString(), dwStrByte, &dwByte, nullptr);
+			WriteFile(hFile, Mypair.first.c_str(), dwStrByte, &dwByte, nullptr);
 
 			WriteFile(hFile, &(Mypair.second->iSpeed), sizeof(int), &dwByte, nullptr);
 			WriteFile(hFile, &(Mypair.second->iWaterLength), sizeof(int), &dwByte, nullptr);
@@ -420,7 +422,7 @@ void CCPlayerTool::OnLoadData()
 
 			m_mapCharacterData.insert({ pData->strName, pData });
 
-			m_ListBox.AddString(pData->strName);
+			m_ListBox.AddString(pData->strName.c_str());
 
 		}
 

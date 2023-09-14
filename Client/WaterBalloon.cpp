@@ -6,6 +6,7 @@
 #include "TextureMgr.h"
 #include "ObjMgr.h"
 #include "Flow.h"
+#include "Player.h"
 
 CWaterBalloon::CWaterBalloon()
 {
@@ -69,6 +70,33 @@ int CWaterBalloon::Update(void)
 			pFlow4->Set_Pos({ m_tInfo.vPos.x, m_tInfo.vPos.y + TILECY * i, 0.f });
 			pFlow4->Set_StateKey(L"FlowDown");
 			CObjMgr::Get_Instance()->Add_Object(CObjMgr::FLOW, pFlow4);
+
+			/*if (i == m_iLength)
+			{*/
+				D3DXVECTOR3 curPlayerPos = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos;
+
+				if (curPlayerPos.x > pFlow3->Get_Info().vPos.x - (TILECX / 2)
+					&& curPlayerPos.x < pFlow3->Get_Info().vPos.x + (TILECX / 2))
+				{
+					if (curPlayerPos.y > pFlow3->Get_Info().vPos.y - (TILECY / 2)
+						&& curPlayerPos.y < pFlow4->Get_Info().vPos.y + (TILECY / 2))
+					{
+						wstring curObjKey = CObjMgr::Get_Instance()->Get_Player()->Get_ObjKey();
+						dynamic_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->InBubble(curObjKey + L"_Bubble");
+					}
+				}
+
+				else if (curPlayerPos.y > pFlow->Get_Info().vPos.y - (TILECY / 2)
+					&& curPlayerPos.y < pFlow->Get_Info().vPos.y + (TILECY / 2))
+				{
+					if (curPlayerPos.x > pFlow->Get_Info().vPos.x - (TILECX / 2)
+						&& curPlayerPos.x < pFlow2->Get_Info().vPos.x + (TILECX / 2))
+					{
+						wstring curObjKey = CObjMgr::Get_Instance()->Get_Player()->Get_ObjKey();
+						dynamic_cast<CPlayer*>(CObjMgr::Get_Instance()->Get_Player())->InBubble(curObjKey + L"_Bubble");
+					}
+				}
+			//}
 		}
 
 
@@ -92,7 +120,7 @@ void CWaterBalloon::Render(void)
 	D3DXMatrixScaling(&matScale, 0.7f, 0.7f, 0.7f);
 	D3DXMatrixTranslation(&matTrans,
 		m_tInfo.vPos.x + 20,
-		m_tInfo.vPos.y + 40,
+		m_tInfo.vPos.y + 30,
 		0.f);
 
 	m_tInfo.matWorld = matScale * matTrans;

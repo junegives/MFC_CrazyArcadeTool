@@ -468,7 +468,7 @@ void CMyBlockTerrain::Render()
 				float	fCenterX = TILECX / 2.f;
 				float	fCenterY = TILECY / 2.f;
 
-				const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Block", L"Block", 45);
+				const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Block", L"Block", 30);
 
 				CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
 					nullptr,

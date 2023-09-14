@@ -1,8 +1,4 @@
-BackGround|InGame|2|..\Image\BackGround\InGame\InGam%d.png
-BackGround|Login|2|..\Image\BackGround\Login\Logi%d.png
-Block|Block|45|..\Image\Block\Block\Obj (0%d.png
-Debug|Blank|1|..\Image\Debug\Blank\Blank%d.png
-Debug|Collider|2|..\Image\Debug\Collider\ColliderHit%d.png
+Block|Block|45|..\Image\Block\Block\Obj (%d).png
 Angry|Angry_Die|4|..\Image\Monster\Angry\Angry_Die\AngryDie%d.png
 Angry|Angry_WalkDown|2|..\Image\Monster\Angry\Angry_WalkDown\AngryWalkDown%d.png
 Angry|Angry_WalkLeft|2|..\Image\Monster\Angry\Angry_WalkLeft\AngryWalkLeft%d.png
@@ -33,9 +29,9 @@ Bazzi|Bazzi_WalkDown|4|..\Image\Player\Bazzi\Bazzi_WalkDown\BazziWalkDown%d.png
 Bazzi|Bazzi_WalkLeft|4|..\Image\Player\Bazzi\Bazzi_WalkLeft\BazziWalkLeft%d.png
 Bazzi|Bazzi_WalkRight|4|..\Image\Player\Bazzi\Bazzi_WalkRight\BazziWalkRight%d.png
 Bazzi|Bazzi_WalkUp|4|..\Image\Player\Bazzi\Bazzi_WalkUp\BazziWalkUp%d.png
-Cappi|Cappi_Bubble|5|..\Image\Player\Cappi\Cappi_Bubble\CappiBubble%d.png
 Cappi|Cappi_Revival|4|..\Image\Player\Cappi\Cappi_Revival\CappiRevival%d.png
 Cappi|Cappi_Stand|4|..\Image\Player\Cappi\Cappi_Stand\CappiStand%d.png
+Cappi|Cappi_Bubble|5|..\Image\Player\Cappi\Cappi_Bubble\CappiBubble%d.png
 Cappi|Cappi_WalkDown|4|..\Image\Player\Cappi\Cappi_WalkDown\CappiWalkDown%d.png
 Cappi|Cappi_WalkLeft|4|..\Image\Player\Cappi\Cappi_WalkLeft\CappiWalkLeft%d.png
 Cappi|Cappi_WalkRight|4|..\Image\Player\Cappi\Cappi_WalkRight\CappiWalkRight%d.png
@@ -63,12 +59,9 @@ WaterBalloon|Orangeblock|3|..\Image\WaterBalloon\Orangeblock\Orangeblock%d.png
 WaterBalloon|Redblock|3|..\Image\WaterBalloon\Redblock\Redblock%d.png
 WaterBalloon|Redheart|3|..\Image\WaterBalloon\Redheart\Redheart%d.png
 WaterBalloon|Redstreak|3|..\Image\WaterBalloon\Redstreak\Redstreak%d.png
-WaterBomb|Basic|3|..\Image\WaterBomb\Basic\Idle (0%d.png
-WaterBomb|Cloud|1|..\Image\WaterBomb\Cloud\BlueBu%d.png
-WaterBomb|Flow|37|..\Image\WaterBomb\Flow\flow (0%d.png
-WaterBomb|FlowDown|4|..\Image\WaterBomb\FlowDown\flow (0%d.png
-WaterBomb|FlowLeft|4|..\Image\WaterBomb\FlowLeft\flow (0%d.png
-WaterBomb|FlowRight|4|..\Image\WaterBomb\FlowRight\flow (0%d.png
-WaterBomb|FlowStay|4|..\Image\WaterBomb\FlowStay\flow (0%d.png
-WaterBomb|FlowUp|4|..\Image\WaterBomb\FlowUp\flow (0%d.png
-WaterBomb|Idle|3|..\Image\WaterBomb\Idle\Idle (0%d.png
+WaterBomb|Flow|37|..\Image\WaterBomb\Flow\flow (%d).png
+WaterBomb|FlowUp|4|..\Image\WaterBomb\FlowUp\flow (%d).png
+WaterBomb|FlowDown|4|..\Image\WaterBomb\FlowDown\flow (%d).png
+WaterBomb|FlowLeft|4|..\Image\WaterBomb\FlowLeft\flow (%d).png
+WaterBomb|FlowRight|4|..\Image\WaterBomb\FlowRight\flow (%d).png
+WaterBomb|FlowStay|4|..\Image\WaterBomb\FlowStay\flow (%d).png
