@@ -32,7 +32,7 @@ void CAnimTool::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDITFRAMESPEED, m_EditFrameSpeed);
 	DDX_Control(pDX, IDC_SLIDERFRAMESPEED, m_SlideFrameSpeed);
 	DDX_Control(pDX, IDC_LISTANIM, m_ListAnim);
-	DDX_Control(pDX, IDC_IMGCOLLIDERMOVE, m_ImgColliderMove);
+	//DDX_Control(pDX, IDC_IMGCOLLIDERMOVE, m_ImgColliderMove);
 }
 
 
