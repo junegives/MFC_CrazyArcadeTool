@@ -203,30 +203,66 @@ void CPlayer::Key_Input()
 {
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_UP))
 	{
-		m_tInfo.vPos.y -= m_iSpeed;
 		m_iDir = 0;
 		m_eState = ePlayerState::WALK;
+
+		int  iIndex = Get_PosTileIndex({m_tInfo.vPos.x, m_tInfo.vPos.y - m_iSpeed, 0.f});
+
+		if (-1 == iIndex)
+			return;
+
+		if (m_vecTile[iIndex]->bPick == true)
+			return;
+
+		m_tInfo.vPos.y -= m_iSpeed;
 	}
 
 	else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
 	{
-		m_tInfo.vPos.x += m_iSpeed;
 		m_iDir = 1;
 		m_eState = ePlayerState::WALK;
+
+		int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x + m_iSpeed + m_iWidthGap, m_tInfo.vPos.y, 0.f });
+
+		if (-1 == iIndex)
+			return;
+
+		if (m_vecTile[iIndex]->bPick == true)
+			return;
+
+		m_tInfo.vPos.x += m_iSpeed;
 	}
 
 	else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
 	{
-		m_tInfo.vPos.y += m_iSpeed;
 		m_iDir = 2;
 		m_eState = ePlayerState::WALK;
+
+		int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x, m_tInfo.vPos.y + m_iSpeed + m_iHeightGap, 0.f });
+
+		if (-1 == iIndex)
+			return;
+
+		if (m_vecTile[iIndex]->bPick == true)
+			return;
+
+		m_tInfo.vPos.y += m_iSpeed;
 	}
 
 	else if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
 	{
-		m_tInfo.vPos.x -= m_iSpeed;
 		m_iDir = 3;
 		m_eState = ePlayerState::WALK;
+
+		int  iIndex = Get_PosTileIndex({ m_tInfo.vPos.x - m_iSpeed - m_iWidthGap, m_tInfo.vPos.y, 0.f });
+
+		if (-1 == iIndex)
+			return;
+
+		if (m_vecTile[iIndex]->bPick == true)
+			return;
+
+		m_tInfo.vPos.x -= m_iSpeed;
 	}
 
 	else
@@ -236,7 +272,7 @@ void CPlayer::Key_Input()
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
-		if (CObjMgr::Get_Instance()->Get_WaterBalloon().size() < m_iCount)
+		if (CObjMgr::Get_Instance()->Get_WaterBalloon().size() < m_iWaterCount)
 		{
 			int  iIndex = Get_PosTileIndex(m_tInfo.vPos);
 
@@ -250,7 +286,7 @@ void CPlayer::Key_Input()
 			CObj* pWater = new CWaterBalloon;
 			pWater->Initialize();
 			pWater->Set_Pos(WaterBalloonvPos);
-			dynamic_cast<CWaterBalloon*>(pWater)->Set_Length(m_iLength);
+			dynamic_cast<CWaterBalloon*>(pWater)->Set_Length(m_iWaterLength);
 			dynamic_cast<CWaterBalloon*>(pWater)->Set_Balloon(m_wstrWaterBalloon);
 
 			CObjMgr::Get_Instance()->Add_Object(CObjMgr::WATERBALLOON, pWater);
@@ -406,7 +442,6 @@ int CPlayer::Get_PosTileIndex(const D3DXVECTOR3& vPos)
 
 	return -1;
 }
-
 
 bool CPlayer::ReDefine_vPos(const D3DXVECTOR3& vPos, const int& iIndex)
 {

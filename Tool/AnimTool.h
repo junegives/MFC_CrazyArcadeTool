@@ -60,9 +60,15 @@ public:
 	CEdit m_EditFrameSpeed;
 	CSliderCtrl m_SlideFrameSpeed;
 	CListBox m_ListAnim;
+	CStatic m_ImgColliderMove;
 	bool	m_isLoop = true;
 	bool	m_isPlay = false;
 	int		m_iSpeed = 5;
+
+	bool	m_isShow = false;
+
+	CImage* m_ImgFileColliderMove;
+	CImage* m_ImgFileColliderHit;
 
 	vector<ANIMINFO*>	m_vecAnim;
 

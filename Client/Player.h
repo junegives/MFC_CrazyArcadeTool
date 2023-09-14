@@ -56,7 +56,6 @@ private:
 
 	vector<TILE*> m_vecTile;
 
-	int m_iLength = 3;
-	int m_iCount = 3;
+	int		m_iWidthGap = 10;
+	int		m_iHeightGap = 20;
 };
-

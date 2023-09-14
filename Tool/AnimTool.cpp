@@ -241,6 +241,12 @@ void CAnimTool::OnDestroy()
 	m_MapPngImg.clear();
 	KillTimer(1);
 
+	if (m_isShow)
+	{
+		Safe_Delete(m_ImgFileColliderMove);
+		Safe_Delete(m_ImgFileColliderHit);
+	}
+
 	CDialog::OnDestroy();
 
 }
@@ -286,6 +292,13 @@ void CAnimTool::OnShowWindow(BOOL bShow, UINT nStatus)
 	//키보드 값으로 움직일 크기 지정
 	m_SlideFrameSpeed.SetLineSize(1);
 
+	m_ImgFileColliderMove = new CImage;
+	m_ImgFileColliderHit = new CImage;
+
+	m_ImgFileColliderMove->Load(L"../image/Debug/Collider/ColliderMove.png");
+	m_ImgFileColliderHit->Load(L"../image/Debug/Collider/ColliderHit.png");
+
+	m_isShow = true;
 
 	UpdateData(TRUE);
 	UpdateData(FALSE);
@@ -469,11 +482,12 @@ void CAnimTool::ChangeImage(int iIndex)
 		strFindName = m_objKey + strFindName;
 
 	auto	iter = m_MapPngImg.find(strFindName);
-
+	
 	if (iter == m_MapPngImg.end())
 		return;
 
 	m_FileImage.SetBitmap(*(iter->second));
+	//m_ImgColliderMove.SetBitmap(HBITMAP(m_ImgFileColliderHit));
 
 	UpdateData(FALSE);
 }
@@ -768,24 +782,7 @@ void CAnimTool::OnAnimList()
 
 void CAnimTool::OnBtnCollider()
 {
-	//CString		strFindName;
-	//CString		strFindNameCopy;
-
-	//if (LB_ERR == iIndex)
-	//	return;
-
-	//m_FileList.GetText(iIndex, strFindName);
-
-	//if (m_objKey != L"WaterBallon")
-	//	strFindName = m_objKey + strFindName;
-
-	//auto	iter = m_MapPngImg.find(strFindName);
-
-	//if (iter == m_MapPngImg.end())
-	//	return;
-
-	//m_FileImage.SetBitmap(*(iter->second));
-	//m_ImgColliderMove
+	m_ImgColliderMove.SetBitmap(HBITMAP(m_ImgFileColliderMove));
 }
 
 
